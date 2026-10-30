@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://b4xpws1gd8c1x"]
+
+[ext_resource type="Texture2D" uid="uid://7h4a6e1kd0di" path="res://Assets/Cyan Reactor Core Laboratory.png" id="1_e030w"]
+[ext_resource type="Texture2D" uid="uid://c6dig6mp15nfr" path="res://Assets/Neon_Space_Station_Platformer_Level-removebg-preview.png" id="2_e030w"]
+[ext_resource type="Texture2D" uid="uid://cfw2btj12kkrw" path="res://Assets/Sci-Fi Explorer Walk Cycle Sprite Sheet.png" id="3_qbeql"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5yss5"]
+size = Vector2(706.2001, 51.133358)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e030w"]
+size = Vector2(167.00006, 14.333324)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="BG" type="Sprite2D" parent="."]
+position = Vector2(3597.5005, -1506.5001)
+scale = Vector2(6.3116026, 5.7608924)
+texture = ExtResource("1_e030w")
+
+[node name="Gameplay" type="Sprite2D" parent="."]
+position = Vector2(3589, -1435)
+scale = Vector2(15, 15)
+texture = ExtResource("2_e030w")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Gameplay"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gameplay/StaticBody2D"]
+position = Vector2(-0.2999878, 150.83337)
+shape = SubResource("RectangleShape2D_5yss5")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Gameplay"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gameplay/StaticBody2D2"]
+position = Vector2(176.10008, 118.43335)
+shape = SubResource("RectangleShape2D_e030w")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(3458, -1502)
+zoom = Vector2(0.12, 0.12)
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("3_qbeql")
+hframes = 4
