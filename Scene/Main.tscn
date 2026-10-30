@@ -1,39 +1,14 @@
-[gd_scene load_steps=15 format=3 uid="uid://bss0kin55r0xe"]
+[gd_scene load_steps=8 format=3 uid="uid://bss0kin55r0xe"]
 
 [ext_resource type="Texture2D" uid="uid://7h4a6e1kd0di" path="res://Assets/Cyan Reactor Core Laboratory.png" id="1_djkur"]
 [ext_resource type="Texture2D" uid="uid://c6dig6mp15nfr" path="res://Assets/Neon_Space_Station_Platformer_Level-removebg-preview.png" id="2_h175a"]
 [ext_resource type="Script" uid="uid://d1500t1uybemj" path="res://Script/character_movement.gd" id="4_char_move"]
-[ext_resource type="Texture2D" uid="uid://bbjnoebt3mlpx" path="res://Assets/Characther/Walking_Cycle_spaced (1).png" id="4_h175a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5yss5"]
 size = Vector2(706.2001, 51.133358)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e030w"]
 size = Vector2(167.00006, 14.333324)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_togfq"]
-atlas = ExtResource("4_h175a")
-region = Rect2(0, 0, 338, 887)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_aan6j"]
-atlas = ExtResource("4_h175a")
-region = Rect2(338, 0, 338, 887)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h3nmf"]
-atlas = ExtResource("4_h175a")
-region = Rect2(676, 0, 338, 887)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hueuk"]
-atlas = ExtResource("4_h175a")
-region = Rect2(1014, 0, 338, 887)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6a8me"]
-atlas = ExtResource("4_h175a")
-region = Rect2(1352, 0, 338, 887)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yg4ot"]
-atlas = ExtResource("4_h175a")
-region = Rect2(1690, 0, 338, 887)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_djkur"]
 animations = [{
@@ -42,27 +17,9 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_togfq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_aan6j")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_h3nmf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hueuk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6a8me")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yg4ot")
-}],
+"frames": [],
 "loop": true,
-"name": &"walk_left",
+"name": &"walk",
 "speed": 6.0
 }]
 
@@ -98,13 +55,16 @@ position = Vector2(3576, -1506)
 zoom = Vector2(0.12, 0.12)
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(0, 33)
 script = ExtResource("4_char_move")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+scale = Vector2(1.75, 1.75)
 sprite_frames = SubResource("SpriteFrames_djkur")
-animation = &"walk_left"
-frame_progress = 0.14340381
+animation = &"walk"
+frame_progress = 0.64345926
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+visible = false
 position = Vector2(3.5, 1.5)
 shape = SubResource("RectangleShape2D_h175a")

@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 @export var speed: float = 300.0
 
+@onready var sprite: AnimatedSprite2D = $Sprite2D
+
 func _process(delta):
 	var direction = Vector2(0, 0)
 	
@@ -12,6 +14,11 @@ func _process(delta):
 	
 	if direction != Vector2(0, 0):
 		direction = direction.normalized()
+		# Ubah arah hadap sprite sesuai arah gerak (flip horizontal)
+		if direction.x > 0:
+			sprite.flip_h = false
+		elif direction.x < 0:
+			sprite.flip_h = true
 	
 	velocity = direction * speed
 	move_and_slide()

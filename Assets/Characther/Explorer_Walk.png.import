@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbjnoebt3mlpx"
-path="res://.godot/imported/Walking_Cycle_spaced (1).png-c623377a876067a51062938cb83bf193.ctex"
+uid="uid://dh7t7ftd618dg"
+path="res://.godot/imported/Explorer_Walk.png-17688283a1cc6e9d865146dd07c122d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Characther/Walking_Cycle_spaced (1).png"
-dest_files=["res://.godot/imported/Walking_Cycle_spaced (1).png-c623377a876067a51062938cb83bf193.ctex"]
+source_file="res://Assets/Characther/Explorer_Walk.png"
+dest_files=["res://.godot/imported/Explorer_Walk.png-17688283a1cc6e9d865146dd07c122d7.ctex"]
 
 [params]
 
