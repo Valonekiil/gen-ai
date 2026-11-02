@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxbunx86pks3y"
-path="res://.godot/imported/Neon Space Station Platformer Level.png-75f4fcf7bd804e1b996a61e4a35b5575.ctex"
+uid="uid://crfvuoehmoos0"
+path="res://.godot/imported/Tileset.png-17cb559e4b2564b835d39be4154d710f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Neon Space Station Platformer Level.png"
-dest_files=["res://.godot/imported/Neon Space Station Platformer Level.png-75f4fcf7bd804e1b996a61e4a35b5575.ctex"]
+source_file="res://Assets/Tileset.png"
+dest_files=["res://.godot/imported/Tileset.png-17cb559e4b2564b835d39be4154d710f.ctex"]
 
 [params]
 
