@@ -10,6 +10,19 @@ config_version=5
 
 [application]
 
-config/name="Gen_Ai"
+config/name="Splitbound"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+run/main_scene="res://Main.tscn"
+
+[autoload]
+SignalBus="res://autoload/SignalBus.gd"
+RoomManager="res://autoload/RoomManager.gd"
+AudioManager="res://autoload/AudioManager.gd"
+DebugConfig="res://autoload/DebugConfig.gd"
+
+[input]
+; Kosong — 7 aksi akan dikonfigurasi manual di Project Settings → Input Map
+; move_up, move_down, move_left, move_right, interact, switch_reality, reset
+; (tanpa jump)
+
