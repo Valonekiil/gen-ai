@@ -4,7 +4,6 @@
 # Semua test harus mencetak PASS.
 
 class_name GridTest
-
 extends Node
 
 func _ready() -> void:

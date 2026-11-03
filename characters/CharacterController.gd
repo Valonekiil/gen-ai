@@ -6,7 +6,7 @@
 class_name CharacterController
 extends CharacterBody2D
 
-const SPEED := 200.0
+const SPEED := 800.0
 
 enum State { ACTIVE_CONTROLLED, INACTIVE_FROZEN, INACTIVE_ON_MOVING_SURFACE, REPOSITIONING, DEAD }
 enum Facing { UP, DOWN, LEFT, RIGHT }
@@ -19,77 +19,88 @@ var input_enabled: bool = true
 var _last_axis: String = ""
 
 func _ready() -> void:
-    if not _has_sprite_child():
-        var sprite := Sprite2D.new()
-        sprite.name = "SpritePlaceholder"
-        var img := Image.create(24, 24, false, Image.FORMAT_RGBA8)
-        img.fill(Color(1, 1, 1, 1))
-        var tex := ImageTexture.create_from_image(img)
-        sprite.texture = tex
-        add_child(sprite)
+	if not _has_sprite_child():
+		var sprite := Sprite2D.new()
+		sprite.name = "SpritePlaceholder"
+		var img := Image.create(24, 24, false, Image.FORMAT_RGBA8)
+		img.fill(Color(1, 1, 1, 1))
+		var tex := ImageTexture.create_from_image(img)
+		sprite.texture = tex
+		add_child(sprite)
 
 func _input(event: InputEvent) -> void:
-    if not input_enabled or state != State.ACTIVE_CONTROLLED:
-        return
-    if event is InputEventKey and event.pressed:
-        match event.keycode:
-            KEY_W, KEY_UP:    _last_axis = "y"
-            KEY_S, KEY_DOWN:  _last_axis = "y"
-            KEY_A, KEY_LEFT:  _last_axis = "x"
-            KEY_D, KEY_RIGHT: _last_axis = "x"
-            KEY_TAB, KEY_Q:
-                RealityManager.request_switch()
+	if not input_enabled or state != State.ACTIVE_CONTROLLED:
+		print("[CC] _input ignored: input_enabled=", input_enabled, " state=", state)
+		return
+	if event is InputEventKey and event.pressed:
+		print("[CC] key pressed: ", event.keycode)
+		match event.keycode:
+			KEY_W, KEY_UP:    _last_axis = "y"
+			KEY_S, KEY_DOWN:  _last_axis = "y"
+			KEY_A, KEY_LEFT:  _last_axis = "x"
+			KEY_D, KEY_RIGHT: _last_axis = "x"
+			KEY_TAB, KEY_Q:
+				print("[CC] requesting switch")
+				get_tree().current_scene.get_node("RealityManager").request_switch()
 
 func _physics_process(delta: float) -> void:
-    if state != State.ACTIVE_CONTROLLED or not input_enabled:
-        velocity = Vector2.ZERO
-        return
+	print("[CC] _physics_process: state=", state, " input_enabled=", input_enabled, " pos=", position)
+	if state != State.ACTIVE_CONTROLLED or not input_enabled:
+		velocity = Vector2.ZERO
+		return
 
-    var input_dir := _get_input_dir()
-    velocity = Vector2(input_dir.x, input_dir.y) * SPEED
-    move_and_slide()
+	var input_dir := _get_input_dir()
+	print("[CC] input_dir=", input_dir)
+	velocity = Vector2(input_dir.x, input_dir.y) * SPEED
+	move_and_slide()
+	print("[CC] after move_and_slide: pos=", position, " velocity=", velocity)
 
-    if input_dir != Vector2i.ZERO:
-        var new_facing := Grid.delta_to_facing(input_dir)
-        if new_facing != facing:
-            facing = new_facing
-            SignalBus.character_facing_changed.emit(reality, int(facing))
+	if input_dir != Vector2i.ZERO:
+		var new_facing := Grid.delta_to_facing(input_dir)
+		if new_facing != facing:
+			facing = new_facing
+			get_node("/root/SignalBus").character_facing_changed.emit(reality, int(facing))
 
 func _get_input_dir() -> Vector2i:
-    var dir := Vector2i.ZERO
-    var has_x := Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right")
-    var has_y := Input.is_action_pressed("move_up") or Input.is_action_pressed("move_down")
+	var dir := Vector2i.ZERO
+	var has_x := _action_pressed("move_left", "ui_left") or _action_pressed("move_right", "ui_right")
+	var has_y := _action_pressed("move_up", "ui_up") or _action_pressed("move_down", "ui_down")
 
-    if has_x and has_y:
-        if _last_axis == "x":
-            has_y = false
-        else:
-            has_x = false
+	if has_x and has_y:
+		if _last_axis == "x":
+			has_y = false
+		else:
+			has_x = false
 
-    if has_x:
-        if Input.is_action_pressed("move_right"):
-            dir.x = 1
-        elif Input.is_action_pressed("move_left"):
-            dir.x = -1
-    if has_y:
-        if Input.is_action_pressed("move_down"):
-            dir.y = 1
-        elif Input.is_action_pressed("move_up"):
-            dir.y = -1
+	if has_x:
+		if _action_pressed("move_right", "ui_right"):
+			dir.x = 1
+		elif _action_pressed("move_left", "ui_left"):
+			dir.x = -1
+	if has_y:
+		if _action_pressed("move_down", "ui_down"):
+			dir.y = 1
+		elif _action_pressed("move_up", "ui_up"):
+			dir.y = -1
 
-    return dir
+	return dir
+
+func _action_pressed(action: String, fallback: String) -> bool:
+	var res := Input.is_action_pressed(action) if InputMap.has_action(action) else Input.is_action_pressed(fallback)
+	print("[CC] action ", action, "/", fallback, " = ", res)
+	return res
 
 func set_input_enabled(enabled: bool) -> void:
-    input_enabled = enabled
-    if not enabled:
-        velocity = Vector2.ZERO
+	input_enabled = enabled
+	if not enabled:
+		velocity = Vector2.ZERO
 
 func is_position_valid() -> bool:
-    # Stub per S1-04 — validasi lengkap (wall, objek solid, spike) di S4-01
-    return true
+	# Stub per S1-04 — validasi lengkap (wall, objek solid, spike) di S4-01
+	return true
 
 func _has_sprite_child() -> bool:
-    for child in get_children():
-        if child is Sprite2D:
-            return true
-    return false
+	for child in get_children():
+		if child is Sprite2D:
+			return true
+	return false
