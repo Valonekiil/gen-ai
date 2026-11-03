@@ -21,8 +21,3 @@ SignalBus="res://autoload/SignalBus.gd"
 RoomManager="res://autoload/RoomManager.gd"
 AudioManager="res://autoload/AudioManager.gd"
 DebugConfig="res://autoload/DebugConfig.gd"
-
-[input]
-; Kosong — 7 aksi akan dikonfigurasi manual di Project Settings → Input Map
-; move_up, move_down, move_left, move_right, interact, switch_reality, reset
-; (tanpa jump)

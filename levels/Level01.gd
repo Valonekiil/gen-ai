@@ -1,7 +1,7 @@
 # Level01.gd
 # Greybox Level 1 — Room 1A (Reality A) + Room 1B (Reality B)
 # S1-05: Level 1 Design §3–4; Arsitektur §2, §11.1
-# Hanya greybox + kamera fixed. Tanpa Plate, Door, Link.
+# Dilengkapi Plate, Door, ExitZone, dan Mekanik Switch
 
 extends Node2D
 
@@ -74,6 +74,17 @@ var plate_node = InteractableBase.new()
 plate_node.link_id = "plate_1a"
 plate_node.position = Vector2(272, 240)
 get_node("RealityA").add_child(plate_node)
+
+# Spawn Door di Room 1B di posisi (3,8) - baris 3, kolom 8
+# Posisi tile (col=8, row=3) -> world = (8*32+16, 3*32+16) = (272, 64)
+var door_node = InteractableBase.new()
+door_node.link_id = "door_1b"
+door_node.position = Vector2(272, 64)
+get_node("RealityB").add_child(door_node)
+
+# Connect Plate ke Door melalui RealityManager
+reality_manager.plate = plate_node
+reality_manager.door = door_node
 
  func _create_tileset() -> TileSet:
 var tileset := TileSet.new()
