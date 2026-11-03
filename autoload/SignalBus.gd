@@ -10,4 +10,5 @@
 class_name SignalBus
 extends Node
 
+signal character_switched(new_active: String, previous_active: String)
 signal character_facing_changed(reality: String, direction: int)
