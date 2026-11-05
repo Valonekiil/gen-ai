@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=4 uid="uid://bnck7ys42pp22"]
+[gd_scene load_steps=11 format=4 uid="uid://bnck7ys42pp22"]
 
 [ext_resource type="Texture2D" uid="uid://crfvuoehmoos0" path="res://Assets/Tileset.png" id="1_3fg5n"]
 [ext_resource type="Texture2D" uid="uid://cwsgnxmxqa4n4" path="res://icon.svg" id="2_8so51"]
+[ext_resource type="Script" uid="uid://1bxlqm3gntw7" path="res://core/CameraDirector.gd" id="3_53xmq"]
 [ext_resource type="Script" uid="uid://c7x421fmesvdt" path="res://levels/LvlTest.gd" id="3_lvtst"]
+[ext_resource type="Script" uid="uid://btm5oehp1nc3m" path="res://core/UIDirector.gd" id="4_1gsn7"]
 [ext_resource type="Script" uid="uid://dmn1mcwsvvfmi" path="res://characters/CharacterController.gd" id="4_char"]
 [ext_resource type="Script" uid="uid://e2neyto34nqq" path="res://core/RealityManager.gd" id="5_rm"]
 
@@ -33,6 +35,15 @@ size = Vector2(120, 120)
 [node name="Level1" type="Node2D"]
 script = ExtResource("3_lvtst")
 
+[node name="RealityManager" type="Node" parent="."]
+script = ExtResource("5_rm")
+
+[node name="CameraDirector" type="Node" parent="."]
+script = ExtResource("3_53xmq")
+
+[node name="UIDirector" type="Node" parent="."]
+script = ExtResource("4_1gsn7")
+
 [node name="Spawn" type="Marker2D" parent="."]
 position = Vector2(-2267, 194)
 
@@ -58,9 +69,6 @@ texture = ExtResource("2_8so51")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Character"]
 shape = SubResource("RectangleShape2D_otyjw")
-
-[node name="RealityManager" type="Node" parent="."]
-script = ExtResource("5_rm")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1412, 206)

@@ -38,6 +38,11 @@ var LAYOUT_B: Array[String] = [
 	"################",
 ]
 
+@onready var reality_a: Node2D = $RealityA
+@onready var reality_b: Node2D = $RealityB
+@onready var character_a_node: CharacterBody2D = $RealityA/CharacterA
+@onready var character_b_node: CharacterBody2D = $RealityB/CharacterB
+
 func _ready() -> void:
 	var tileset := _create_tileset()
 
@@ -51,8 +56,8 @@ func _ready() -> void:
 
 	# Wiring @export references untuk RealityManager, CameraDirector, UIDirector
 	var reality_manager := get_node("RealityManager")
-	reality_manager.character_a = get_node("CharacterA")
-	reality_manager.character_b = get_node("CharacterB")
+	reality_manager.character_a = character_a_node
+	reality_manager.character_b = character_b_node
 	reality_manager.camera_a = get_node("RealityA/CameraA")
 	reality_manager.camera_b = get_node("RealityB/CameraB")
 
@@ -64,8 +69,8 @@ func _ready() -> void:
 	var ui_director := get_node("UIDirector")
 	ui_director.reality_label = get_node("UI/RealityIndicator")
 	ui_director.cooldown_bar = get_node("UI/SwitchCooldownBar")
-	ui_director.reality_a_root = get_node("RealityA")
-	ui_director.reality_b_root = get_node("RealityB")
+	ui_director.reality_a_root = reality_a
+	ui_director.reality_b_root = reality_b
 	ui_director.reality_manager = reality_manager
 	ui_director._update_ui("A")
 
@@ -75,6 +80,43 @@ func _ready() -> void:
 	plate_node.link_id = "plate_1a"
 	plate_node.position = Vector2(272, 240)
 	get_node("RealityA").add_child(plate_node)
+
+	# Connect switch handler
+	var sb := get_node_or_null("/root/SignalBus")
+	if sb:
+		sb.character_switched.connect(_on_character_switched)
+
+func _on_character_switched(new_active: String, _previous: String) -> void:
+	var a_active := new_active == "A"
+
+	# Toggle visibility reality
+	reality_a.visible = a_active
+	reality_b.visible = not a_active
+
+	# Toggle visibility karakter sesuai reality aktif
+	character_a_node.visible = a_active
+	character_b_node.visible = not a_active
+
+	# Switch kamera utama ke reality yang aktif
+	var cam_a := get_node_or_null("RealityA/CameraA")
+	var cam_b := get_node_or_null("RealityB/CameraB")
+	if a_active and cam_a:
+		cam_a.make_current()
+	elif not a_active and cam_b:
+		cam_b.make_current()
+
+	# Pindahkan karakter aktif ke spawn posisi reality tersebut
+	var active_char := _get_active_char(new_active)
+	if active_char:
+		var spawn_node := get_node_or_null("Reality" + new_active + "/Spawn" + new_active)
+		if spawn_node:
+			active_char.global_position = spawn_node.global_position
+		active_char.velocity = Vector2.ZERO
+
+func _get_active_char(reality: String) -> CharacterBody2D:
+	if reality == "A":
+		return character_a_node
+	return character_b_node
 
 func _create_tileset() -> TileSet:
 	var tileset := TileSet.new()

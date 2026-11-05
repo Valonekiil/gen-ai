@@ -9,14 +9,24 @@
 [node name="Level01" type="Node2D"]
 script = ExtResource("1")
 
-[node name="RealityManager" type="Node" parent="."]
+[node name="RealityManager" type="Node" parent="." node_paths=PackedStringArray("camera_a", "camera_b")]
 script = ExtResource("2")
+camera_a = NodePath("../RealityA/CameraA")
+camera_b = NodePath("../RealityB/CameraB")
 
-[node name="CameraDirector" type="Node" parent="."]
+[node name="CameraDirector" type="Node" parent="." node_paths=PackedStringArray("pip_camera", "camera_a", "camera_b")]
 script = ExtResource("3")
+pip_camera = NodePath("../PiPViewport_SubViewport#PiPCamera")
+camera_a = NodePath("../RealityA/CameraA")
+camera_b = NodePath("../RealityB/CameraB")
 
-[node name="UIDirector" type="Node" parent="."]
+[node name="UIDirector" type="Node" parent="." node_paths=PackedStringArray("reality_label", "cooldown_bar", "reality_a_root", "reality_b_root", "reality_manager")]
 script = ExtResource("4")
+reality_label = NodePath("../UI/RealityIndicator")
+cooldown_bar = NodePath("../UI/SwitchCooldownBar")
+reality_a_root = NodePath("../RealityA")
+reality_b_root = NodePath("../RealityB")
+reality_manager = NodePath("../RealityManager")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -75,38 +85,37 @@ limit_top = 0
 limit_right = 512
 limit_bottom = 384
 
+[node name="CharacterA" type="CharacterBody2D" parent="RealityA"]
+position = Vector2(48, 48)
+script = ExtResource("5")
+
 [node name="RealityB" type="Node2D" parent="."]
-position = Vector2(10000, 0)
 
 [node name="TerrainB" type="TileMapLayer" parent="RealityB"]
 
 [node name="SpawnB" type="Marker2D" parent="RealityB"]
-position = Vector2(10048, 48)
+position = Vector2(48, 48)
 
 [node name="SafeAnchorsB" type="Node2D" parent="RealityB"]
 
 [node name="AnchorB1" type="Marker2D" parent="RealityB/SafeAnchorsB"]
-position = Vector2(10048, 48)
+position = Vector2(48, 48)
 
 [node name="AnchorB2" type="Marker2D" parent="RealityB/SafeAnchorsB"]
-position = Vector2(10048, 464)
+position = Vector2(48, 464)
 
 [node name="ExitZoneB" type="Area2D" parent="RealityB"]
-position = Vector2(10464, 336)
+position = Vector2(464, 336)
 
 [node name="CameraB" type="Camera2D" parent="RealityB"]
-position = Vector2(10256, 192)
-limit_left = 10000
+position = Vector2(256, 192)
+limit_left = 0
 limit_top = 0
-limit_right = 10512
+limit_right = 512
 limit_bottom = 384
 
-[node name="CharacterA" type="CharacterBody2D" parent="."]
+[node name="CharacterB" type="CharacterBody2D" parent="RealityB"]
 position = Vector2(48, 48)
-script = ExtResource("5")
-
-[node name="CharacterB" type="CharacterBody2D" parent="."]
-position = Vector2(10048, 48)
 script = ExtResource("5")
 
 [node name="Links" type="Node" parent="."]

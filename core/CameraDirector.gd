@@ -23,7 +23,12 @@ func _on_character_switched(new_active: String, _previous: String) -> void:
 		pip_camera.limit_top = inactive_camera.limit_top
 		pip_camera.limit_bottom = inactive_camera.limit_bottom
 		pip_camera.zoom = inactive_camera.zoom
-		pip_camera.make_current()  # untuk SubViewport
+
+	# Set custom camera untuk SubViewport agar PiP tampil
+	var sub_viewport := get_node_or_null("../UI/PiPViewport/SubViewport")
+	if sub_viewport and pip_camera:
+		sub_viewport.use_custom_camera = true
+		sub_viewport.custom_camera = pip_camera
 
 
 func _get_inactive_camera(new_active: String) -> Camera2D:
