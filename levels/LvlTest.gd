@@ -17,10 +17,15 @@ func _ready() -> void:
 	# Wiring RealityManager
 	reality_manager.character_a = character
 	reality_manager.character_b = character
-	var cam := get_node_or_null("Camera2D")
-	if cam:
-		reality_manager.camera_a = cam
-		reality_manager.camera_b = cam
+	reality_manager.terrain_a = terrain_a
+	reality_manager.terrain_b = terrain_b
+
+	var cam_a := get_node_or_null("RealityA/CameraA")
+	if cam_a:
+		reality_manager.camera_a = cam_a
+	var cam_b := get_node_or_null("RealityB/CameraB")
+	if cam_b:
+		reality_manager.camera_b = cam_b
 
 	# Initial state: A aktif, B mati
 	_set_reality_active("A")
@@ -30,9 +35,9 @@ func _ready() -> void:
 	var sb := get_node_or_null("/root/SignalBus")
 	if sb:
 		sb.character_switched.connect(_on_character_switched)
-	pip_viewport.world_2d = get_viewport().world_2d  
-	pip_camera.global_position = phcam.global_position  
-	pip_camera.zoom = phcam.zoom              
+	pip_viewport.world_2d = get_viewport().world_2d
+	pip_camera.global_position = phcam.global_position
+	pip_camera.zoom = phcam.zoom
 
 func _on_character_switched(new_active: String, _previous: String) -> void:
 	_set_reality_active(new_active)
