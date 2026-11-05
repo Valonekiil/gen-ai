@@ -30,30 +30,24 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if not input_enabled or state != State.ACTIVE_CONTROLLED:
-		print("[CC] _input ignored: input_enabled=", input_enabled, " state=", state)
 		return
 	if event is InputEventKey and event.pressed:
-		print("[CC] key pressed: ", event.keycode)
 		match event.keycode:
 			KEY_W, KEY_UP:    _last_axis = "y"
 			KEY_S, KEY_DOWN:  _last_axis = "y"
 			KEY_A, KEY_LEFT:  _last_axis = "x"
 			KEY_D, KEY_RIGHT: _last_axis = "x"
 			KEY_TAB, KEY_Q:
-				print("[CC] requesting switch")
 				get_tree().current_scene.get_node("RealityManager").request_switch()
 
 func _physics_process(delta: float) -> void:
-	print("[CC] _physics_process: state=", state, " input_enabled=", input_enabled, " pos=", position)
 	if state != State.ACTIVE_CONTROLLED or not input_enabled:
 		velocity = Vector2.ZERO
 		return
 
 	var input_dir := _get_input_dir()
-	print("[CC] input_dir=", input_dir)
 	velocity = Vector2(input_dir.x, input_dir.y) * SPEED
 	move_and_slide()
-	print("[CC] after move_and_slide: pos=", position, " velocity=", velocity)
 
 	if input_dir != Vector2i.ZERO:
 		var new_facing := Grid.delta_to_facing(input_dir)
@@ -87,7 +81,6 @@ func _get_input_dir() -> Vector2i:
 
 func _action_pressed(action: String, fallback: String) -> bool:
 	var res := Input.is_action_pressed(action) if InputMap.has_action(action) else Input.is_action_pressed(fallback)
-	print("[CC] action ", action, "/", fallback, " = ", res)
 	return res
 
 func set_input_enabled(enabled: bool) -> void:

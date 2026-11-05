@@ -15,14 +15,16 @@ func _ready() -> void:
 func _on_character_switched(new_active: String, _previous: String) -> void:
 	var inactive_camera: Camera2D = _get_inactive_camera(new_active)
 
-	# Mirror kamera realita inactive ke PiP (bukan follow karakter)
-	pip_camera.global_position = inactive_camera.global_position
-	pip_camera.limit_left = inactive_camera.limit_left
-	pip_camera.limit_right = inactive_camera.limit_right
-	pip_camera.limit_top = inactive_camera.limit_top
-	pip_camera.limit_bottom = inactive_camera.limit_bottom
-	pip_camera.zoom = inactive_camera.zoom
-	pip_camera.make_current()  # untuk SubViewport
+	# Mirror kamera realita inactive ke PiP (hanya jika pip_camera sudah di-set)
+	if pip_camera and inactive_camera:
+		pip_camera.global_position = inactive_camera.global_position
+		pip_camera.limit_left = inactive_camera.limit_left
+		pip_camera.limit_right = inactive_camera.limit_right
+		pip_camera.limit_top = inactive_camera.limit_top
+		pip_camera.limit_bottom = inactive_camera.limit_bottom
+		pip_camera.zoom = inactive_camera.zoom
+		pip_camera.make_current()  # untuk SubViewport
+
 
 func _get_inactive_camera(new_active: String) -> Camera2D:
 	if new_active == "A":
