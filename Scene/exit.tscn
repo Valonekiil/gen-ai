@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bq76m7wcyf86r"]
+
+[ext_resource type="Texture2D" uid="uid://cu74mpr6j25mj" path="res://Assets/Game_Tile_Atlas_Fixed.png" id="1_4k3ld"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_began"]
+size = Vector2(170, 170)
+
+[node name="Exit" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_4k3ld")
+hframes = 4
+vframes = 6
+frame = 21
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_began")

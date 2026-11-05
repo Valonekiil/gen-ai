@@ -1,3 +1,6 @@
-[gd_scene load_steps=1 format=3]
+[gd_scene load_steps=2 format=3]
 
-[node name="GridTest" type="GridTest"]
+[ext_resource path="res://core/GridTest.gd" type="Script" id="1"]
+
+[node name="GridTest" type="Node"]
+script = ExtResource("1")

@@ -7,7 +7,6 @@
 # S1-01: script kosong, hanya header comment. Tanpa logika.
 # Sinyal dideklarasikan pada tahap lanjutan (S1-02).
 
-class_name SignalBus
 extends Node
 
 signal character_switched(new_active: String, previous_active: String)
