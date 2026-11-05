@@ -13,6 +13,8 @@ extends Node2D
 @onready var pip_camera: Camera2D = $UI/PiPViewport/SubViewport/PipCamera
 @onready var phcam: Camera2D = $phcam
 
+var _transitioning: bool = false
+
 func _ready() -> void:
 	# Wiring RealityManager
 	reality_manager.character_a = character
@@ -38,6 +40,40 @@ func _ready() -> void:
 	pip_viewport.world_2d = get_viewport().world_2d
 	pip_camera.global_position = phcam.global_position
 	pip_camera.zoom = phcam.zoom
+
+	# Wiring Button -> Door (Lvl 2)
+	var door_node := get_node_or_null("Door")
+	var button_node := get_node_or_null("RealityB/Button")
+	if button_node and door_node:
+		button_node.target_door_path = door_node.get_path()
+		button_node.reality_manager = reality_manager
+
+	# Exit transition
+	var exit_node := get_node_or_null("Exit")
+	if exit_node:
+		exit_node.body_entered.connect(_on_exit_entered)
+
+func _on_exit_entered(body: Node) -> void:
+	if _transitioning:
+		return
+	if not (body is CharacterController):
+		return
+	_transitioning = true
+	_go_to_next_level()
+
+func _go_to_next_level() -> void:
+	var current_path := scene_file_path
+	var next_path := ""
+	if current_path.ends_with("Lvl_1.tscn"):
+		next_path = "res://levels/Lvl_2.tscn"
+	elif current_path.ends_with("Lvl_2.tscn"):
+		next_path = "res://levels/Lvl_1.tscn"
+	if next_path == "":
+		print("[Level] Tidak ada level berikutnya")
+		_transitioning = false
+		return
+	print("[Level] Memuat: ", next_path)
+	get_tree().change_scene_to_file(next_path)
 
 func _on_character_switched(new_active: String, _previous: String) -> void:
 	_set_reality_active(new_active)
