@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdsre4yt3daux"]
+
+[ext_resource type="Texture2D" uid="uid://cu74mpr6j25mj" path="res://Assets/Game_Tile_Atlas_Fixed.png" id="1_d5ka1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t1p54"]
+size = Vector2(162, 256)
+
+[node name="Door" type="Node2D"]
+
+[node name="Close" type="Sprite2D" parent="."]
+position = Vector2(2, -4)
+texture = ExtResource("1_d5ka1")
+hframes = 4
+vframes = 6
+frame = 8
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Close"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Close/StaticBody2D"]
+shape = SubResource("RectangleShape2D_t1p54")
+
+[node name="Open" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(2, -4)
+texture = ExtResource("1_d5ka1")
+hframes = 4
+vframes = 6
+frame = 9

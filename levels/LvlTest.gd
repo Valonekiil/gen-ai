@@ -7,8 +7,11 @@ extends Node2D
 @onready var terrain_a: TileMapLayer = $RealityA/TerrainA
 @onready var terrain_b: TileMapLayer = $RealityB/TerrainB
 @onready var character: CharacterBody2D = $Character
-@onready var spawn: Marker2D = $Spawn
+@onready var spawn: Node2D = $Spawner
 @onready var reality_manager: Node = $RealityManager
+@onready var pip_viewport: SubViewport = $UI/PiPViewport/SubViewport
+@onready var pip_camera: Camera2D = $UI/PiPViewport/SubViewport/PipCamera
+@onready var phcam: Camera2D = $phcam
 
 func _ready() -> void:
 	# Wiring RealityManager
@@ -27,6 +30,9 @@ func _ready() -> void:
 	var sb := get_node_or_null("/root/SignalBus")
 	if sb:
 		sb.character_switched.connect(_on_character_switched)
+	pip_viewport.world_2d = get_viewport().world_2d  
+	pip_camera.global_position = phcam.global_position  
+	pip_camera.zoom = phcam.zoom              
 
 func _on_character_switched(new_active: String, _previous: String) -> void:
 	_set_reality_active(new_active)

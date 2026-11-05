@@ -6,7 +6,7 @@
 class_name CharacterController
 extends CharacterBody2D
 
-const SPEED := 800.0
+@export var SPEED := 800.0
 
 enum State { ACTIVE_CONTROLLED, INACTIVE_FROZEN, INACTIVE_ON_MOVING_SURFACE, REPOSITIONING, DEAD }
 enum Facing { UP, DOWN, LEFT, RIGHT }

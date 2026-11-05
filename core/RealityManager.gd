@@ -8,7 +8,7 @@ extends Node
 
 enum State { RunningA, RunningB, Switching, LevelReset }
 
-const SWITCH_COOLDOWN := 0.25
+const SWITCH_COOLDOWN := 2
 
 var state: State = State.RunningA
 var _cooldown_timer: float = 0.0

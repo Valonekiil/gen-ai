@@ -1,0 +1,1 @@
+Hanya gunakan dokumen dari guide/ sebagai refrensi mekanik saja, kamu boleh tidak menggunakan kode yang di gunakan di dalamnya jika terbukti error

@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvjd8dugdtkss"]
+
+[ext_resource type="Texture2D" uid="uid://cu74mpr6j25mj" path="res://Assets/Game_Tile_Atlas_Fixed.png" id="1_gwfd0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w4jke"]
+radius = 25.0
+
+[node name="Button" type="Area2D"]
+
+[node name="OFF" type="Sprite2D" parent="."]
+position = Vector2(2, -4)
+texture = ExtResource("1_gwfd0")
+hframes = 4
+vframes = 6
+frame = 16
+
+[node name="ON" type="Sprite2D" parent="."]
+position = Vector2(-1, -3)
+texture = ExtResource("1_gwfd0")
+hframes = 4
+vframes = 6
+frame = 17
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_w4jke")
