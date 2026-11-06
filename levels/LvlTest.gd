@@ -67,7 +67,7 @@ func _go_to_next_level() -> void:
 	if current_path.ends_with("Lvl_1.tscn"):
 		next_path = "res://levels/Lvl_2.tscn"
 	elif current_path.ends_with("Lvl_2.tscn"):
-		next_path = "res://levels/Lvl_1.tscn"
+		next_path = "res://levels/Lvl_3.tscn"
 	if next_path == "":
 		print("[Level] Tidak ada level berikutnya")
 		_transitioning = false

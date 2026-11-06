@@ -17,10 +17,10 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-SignalBus="res://autoload/SignalBus.gd"
-RoomManager="res://autoload/RoomManager.gd"
-AudioManager="res://autoload/AudioManager.gd"
-DebugConfig="res://autoload/DebugConfig.gd"
+SignalBus="*res://autoload/SignalBus.gd"
+RoomManager="*res://autoload/RoomManager.gd"
+AudioManager="*res://autoload/AudioManager.gd"
+DebugConfig="*res://autoload/DebugConfig.gd"
 
 [input]
 
