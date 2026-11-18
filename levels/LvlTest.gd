@@ -6,6 +6,8 @@ extends Node2D
 @onready var reality_b: Node2D = $RealityB
 @onready var terrain_a: TileMapLayer = $RealityA/TerrainA
 @onready var terrain_b: TileMapLayer = $RealityB/TerrainB
+@onready var walls_a: StaticBody2D = get_node_or_null("RealityA/WallsA")
+@onready var walls_b: StaticBody2D = get_node_or_null("RealityB/WallsB")
 @onready var character: CharacterBody2D = $Character
 @onready var spawn: Node2D = $Spawner
 @onready var reality_manager: Node = $RealityManager
@@ -86,6 +88,13 @@ func _set_reality_active(active: String) -> void:
 	# Matikan collision & proses realita non-aktif
 	terrain_a.collision_enabled = a_active
 	terrain_b.collision_enabled = not a_active
+
+	# StaticBody2D tembok tidak ikut tertoggle otomatis, jadi toggle manual.
+	# Opsional: scene tanpa WallsA/WallsB (level lain) dilewati.
+	if walls_a:
+		walls_a.collision_layer = 1 if a_active else 0
+	if walls_b:
+		walls_b.collision_layer = 0 if a_active else 1
 
 	reality_a.process_mode = Node.PROCESS_MODE_INHERIT if a_active else Node.PROCESS_MODE_DISABLED
 	reality_b.process_mode = Node.PROCESS_MODE_DISABLED if a_active else Node.PROCESS_MODE_INHERIT
