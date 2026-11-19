@@ -1,12 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://buhox54e6gwgn"]
+[gd_scene load_steps=10 format=3 uid="uid://buhox54e6gwgn"]
 
 [ext_resource type="Texture2D" uid="uid://dd54cj7a43eye" path="res://Assets/UI/Main_Menu_BG.jpg" id="1_rn8js"]
 [ext_resource type="Texture2D" uid="uid://cfwftn8afma5d" path="res://Assets/UI/Logo.png" id="2_nmrkx"]
-[ext_resource type="Texture2D" uid="uid://c6yixemgt5o3l" path="res://Assets/UI/Button/Main_Menu_Button_1_normal.png" id="3_nmrkx"]
-[ext_resource type="Texture2D" uid="uid://dd7ttyarvs2ut" path="res://Assets/UI/Button/Main_Menu_Button_1.png" id="4_uwsby"]
-[ext_resource type="Texture2D" uid="uid://bneo5kj1siiwo" path="res://Assets/UI/Button/Main_Menu_Button_4_normal.png" id="5_uvwf2"]
-[ext_resource type="Texture2D" uid="uid://bjg6edqppso0u" path="res://Assets/UI/Button/Main_Menu_Button_4.png" id="6_youui"]
+[ext_resource type="Texture2D" uid="uid://dgyxhleaeybpy" path="res://Assets/UI/Button/PlayButton_normal.png" id="3_nmrkx"]
+[ext_resource type="Texture2D" uid="uid://bcoyaaoixww" path="res://Assets/UI/Button/PlayButton.png" id="4_uwsby"]
+[ext_resource type="Texture2D" uid="uid://bkqqm07a8wy15" path="res://Assets/UI/Button/SettingButton_normal.png" id="5_uvwf2"]
+[ext_resource type="Texture2D" uid="uid://d1khlpuc08od" path="res://Assets/UI/Button/SettingButton.png" id="6_youui"]
 [ext_resource type="Texture2D" uid="uid://vcqol6s7w7bn" path="res://Assets/UI/Setting.jpeg" id="7_58pe3"]
+[ext_resource type="Texture2D" uid="uid://cuxi0368122pv" path="res://Assets/UI/Button/QuitButton_normal.png" id="7_uvwf2"]
 [ext_resource type="FontFile" uid="uid://r5kkxha2rdoa" path="res://Assets/TitanOne-Regular.ttf" id="8_g6r01"]
 
 [node name="Control" type="Control"]
@@ -48,10 +49,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -179.0
-offset_top = -5.0
-offset_right = 1241.0
-offset_bottom = 655.0
+offset_left = -271.0
+offset_top = 55.0
+offset_right = 1909.0
+offset_bottom = 715.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.25, 0.25)
@@ -69,7 +70,12 @@ texture_normal = ExtResource("5_uvwf2")
 texture_pressed = ExtResource("6_youui")
 texture_hover = ExtResource("6_youui")
 
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("7_uvwf2")
+
 [node name="Control" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
