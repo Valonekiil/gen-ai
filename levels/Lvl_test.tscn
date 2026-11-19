@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://bnck7ys42pp22"]
+[gd_scene load_steps=17 format=4 uid="uid://bnck7ys42pp22"]
 
 [ext_resource type="Texture2D" uid="uid://crfvuoehmoos0" path="res://Assets/Tileset.png" id="1_3fg5n"]
 [ext_resource type="Texture2D" uid="uid://cwsgnxmxqa4n4" path="res://icon.svg" id="2_8so51"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://04cibq4xjrbo" path="res://Assets/UI/Button/01_Frame_Besi.png" id="20_cdbar_a"]
 [ext_resource type="Texture2D" uid="uid://cuvdsyfy64yx5" path="res://Assets/UI/Button/02_Isi_Menyala.png" id="21_cdbar_b"]
 [ext_resource type="Texture2D" uid="uid://orpejqglantg" path="res://Assets/UI/Button/03_Isi_Gelap.png" id="22_cdbar_c"]
+[ext_resource type="FontFile" uid="uid://r5kkxha2rdoa" path="res://Assets/TitanOne-Regular.ttf" id="30_titan_one"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4hhoj"]
 texture = ExtResource("1_3fg5n")
@@ -113,7 +114,7 @@ offset_top = 20.0
 offset_right = 20.0
 offset_bottom = 20.0
 text = "REALITA A"
-
+theme_override_fonts/font = ExtResource("30_titan_one")
 [node name="SwitchCooldownBar" type="TextureProgressBar" parent="UI"]
 offset_left = 20.0
 offset_top = 50.000008
