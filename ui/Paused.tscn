@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cqxtxw3vbys6q"]
+[gd_scene load_steps=7 format=3 uid="uid://cqxtxw3vbys6q"]
 
 [ext_resource type="Texture2D" uid="uid://bxoxrgb0c007p" path="res://Assets/UI/PausePanel.png" id="1_bjo24"]
 [ext_resource type="FontFile" uid="uid://r5kkxha2rdoa" path="res://Assets/TitanOne-Regular.ttf" id="2_l8stq"]
 [ext_resource type="Texture2D" uid="uid://dgyxhleaeybpy" path="res://Assets/UI/Button/PlayButton_normal.png" id="3_cbifc"]
 [ext_resource type="Texture2D" uid="uid://b28wtvjm1f4kt" path="res://Assets/UI/Button/RetryButton_normal.png" id="4_yg08s"]
-[ext_resource type="Texture2D" uid="uid://lipk4ufh0pbf" path="res://Assets/UI/Button/LevelSelectionButton_normal.png" id="5_u864c"]
+[ext_resource type="Texture2D" uid="uid://dfto2qa22yxt4" path="res://Assets/UI/Button/LevelSelectionButton_normal.png" id="5_u864c"]
+[ext_resource type="Script" uid="uid://fsttml3pndr0" path="res://ui/Paused.gd" id="6_script"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -13,6 +14,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("6_script")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1

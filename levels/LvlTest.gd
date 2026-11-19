@@ -18,20 +18,24 @@ extends Node2D
 var _transitioning: bool = false
 
 # --- Timer & Bintang ---
-const LEVEL_TIME_LIMIT := 60.0
-const STAR_SCENE := "res://Scene/Star.tscn"
-const STAR_ICON_PATH := "res://Assets/sprites/Star.png"
-const FONT_PATH := "res://Assets/TitanOne-Regular.ttf"
+# Batas waktu (detik) sebelum bintang ke-3 hilang. Bisa diatur per level di Inspector.
+@export var level_time_limit: float = 60.0
+const STAR_ICON_FILLED := "res://Assets/UI/Component/GStar_UI.png"
+const STAR_ICON_EMPTY := "res://Assets/UI/Component/PStar_UI.png"
 
 var elapsed: float = 0.0
 var star_collected: bool = false
 var level_stars: int = 0
 var _finished: bool = false
-var _hud_timer: Label = null
-var _star_icons: Array[TextureRect] = []
+# Bintang langsung memakai node yang ada di scene level (UI/HBoxContainer)
+@onready var _star1: TextureRect = $UI/HBoxContainer/Star1
+@onready var _star2: TextureRect = $UI/HBoxContainer/Star2
+@onready var _star3_bar: TextureProgressBar = $UI/HBoxContainer/TextureProgressBar
+@onready var _pause_button: TextureButton = $UI/PauseButton
 
 # Urutan level siklik sekarang di SignalBus (dipakai juga LevelComplete)
 const LEVEL_COMPLETE := "res://ui/LevelComplete.tscn"
+const PAUSED_SCENE := "res://ui/Paused.tscn"
 
 func _ready() -> void:
 	# Wiring RealityManager
@@ -71,9 +75,10 @@ func _ready() -> void:
 	if exit_node:
 		exit_node.body_entered.connect(_on_exit_entered)
 
-	# Timer & bintang koleksi
-	_setup_hud()
-	_spawn_star()
+	# Timer & bintang
+	_update_hud()
+	if _pause_button:
+		_pause_button.pressed.connect(_pause)
 	if sb:
 		sb.star_collected.connect(_on_star_collected)
 
@@ -111,6 +116,20 @@ func _process(delta: float) -> void:
 	elapsed += delta
 	_update_hud()
 
+# --- Pause ---
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_P:
+		get_viewport().set_input_as_handled()
+		_pause()
+
+func _pause() -> void:
+	if _transitioning or get_tree().paused:
+		return
+	get_tree().paused = true
+	var paused: Control = load(PAUSED_SCENE).instantiate()
+	paused.process_mode = Node.PROCESS_MODE_ALWAYS
+	get_node("UI").add_child(paused)
+
 func _on_star_collected() -> void:
 	if star_collected:
 		return
@@ -124,7 +143,7 @@ func _compute_stars() -> int:
 		s += 1
 	if star_collected:
 		s += 1
-	if elapsed <= LEVEL_TIME_LIMIT:
+	if elapsed <= level_time_limit:
 		s += 1
 	return s
 
@@ -132,69 +151,19 @@ func _format_time(t: float) -> String:
 	var total := int(max(0.0, t))
 	return "%02d:%02d" % [total / 60, total % 60]
 
-func _setup_hud() -> void:
-	var ui := get_node_or_null("UI")
-	if not ui:
-		return
-	var font: Font = load(FONT_PATH)
-
-	_hud_timer = Label.new()
-	_hud_timer.name = "TimerLabel"
-	_hud_timer.position = Vector2(20, 150)
-	if font:
-		_hud_timer.add_theme_font_override("font", font)
-	_hud_timer.add_theme_font_size_override("font_size", 28)
-	ui.add_child(_hud_timer)
-
-	var row := HBoxContainer.new()
-	row.name = "StarsRow"
-	row.position = Vector2(20, 200)
-	row.add_theme_constant_override("separation", 6)
-	var tex: Texture2D = load(STAR_ICON_PATH)
-	for i in 3:
-		var tr := TextureRect.new()
-		tr.name = "Star%d" % (i + 1)
-		tr.texture = tex
-		tr.custom_minimum_size = Vector2(48, 48)
-		tr.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		tr.modulate = Color(0.35, 0.35, 0.35)
-		row.add_child(tr)
-		_star_icons.append(tr)
-	ui.add_child(row)
-	_update_hud()
-
 func _update_hud() -> void:
-	if _hud_timer:
-		var remaining: float = max(0.0, LEVEL_TIME_LIMIT - elapsed)
-		_hud_timer.text = "SISA WAKTU %s" % _format_time(remaining)
-	for i in _star_icons.size():
-		var lit := false
-		match i:
-			0: lit = _finished          # bintang 1: selesai level
-			1: lit = star_collected     # bintang 2: ambil bintang
-			2: lit = elapsed <= LEVEL_TIME_LIMIT  # bintang 3: dalam batas waktu
-		_star_icons[i].modulate = Color(1, 1, 1) if lit else Color(0.35, 0.35, 0.35)
-
-# Bintang dipasang acak di sel kosong milik RealityA atau RealityB
-func _spawn_star() -> void:
-	var reality: String = "A" if randi() % 2 == 0 else "B"
-	var terrain: TileMapLayer = terrain_a if reality == "A" else terrain_b
-	var parent: Node2D = reality_a if reality == "A" else reality_b
-	if not terrain or not parent:
-		return
-	var free: Array[Vector2i] = []
-	for cell in terrain.get_used_cells():
-		var td: TileData = terrain.get_cell_tile_data(cell)
-		if td == null or td.get_collision_polygons_count(0) == 0:
-			free.append(cell)
-	if free.is_empty():
-		return
-	var cell: Vector2i = free[randi() % free.size()]
-	var star: Area2D = load(STAR_SCENE).instantiate()
-	star.reality = reality
-	star.position = terrain.map_to_local(cell)
-	parent.add_child(star)
-	print("[Level] Bintang dipasang di realita ", reality, " cell ", cell)
+	var filled: Texture2D = load(STAR_ICON_FILLED)
+	var empty: Texture2D = load(STAR_ICON_EMPTY)
+	if _star1:
+		_star1.texture = filled if _finished else empty
+	if _star2:
+		_star2.texture = filled if star_collected else empty
+	if _star3_bar:
+		# Bintang 3 = progress bar: penuh saat mulai, kosong saat lewat batas waktu
+		var frac: float = 0.0
+		if level_time_limit > 0.0:
+			frac = clampf((level_time_limit - elapsed) / level_time_limit, 0.0, 1.0)
+		_star3_bar.value = frac * _star3_bar.max_value
 
 func _get_next_level_path() -> String:
 	return SignalBus.next_level_path(scene_file_path)
