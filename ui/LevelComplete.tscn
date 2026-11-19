@@ -1,18 +1,15 @@
-[gd_scene load_steps=14 format=3 uid="uid://b5dvwa7ef7hbv"]
+[gd_scene load_steps=11 format=3 uid="uid://b5dvwa7ef7hbv"]
 
-[ext_resource type="Script" uid="uid://bjhq22geydka1" path="res://ui/LevelComplete.gd" id="1_script"]
+[ext_resource type="Script" path="res://ui/LevelComplete.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://bxoxrgb0c007p" path="res://Assets/UI/PausePanel.png" id="2_panel"]
 [ext_resource type="FontFile" uid="uid://r5kkxha2rdoa" path="res://Assets/TitanOne-Regular.ttf" id="3_font"]
-[ext_resource type="Texture2D" uid="uid://dhe20qh6mrmdg" path="res://Assets/UI/Component/GStar.png" id="4_gstar"]
 [ext_resource type="Texture2D" uid="uid://co3umwpaxjaot" path="res://Assets/UI/Component/PStar.png" id="5_pstar"]
 [ext_resource type="Texture2D" uid="uid://b28wtvjm1f4kt" path="res://Assets/UI/Button/RetryButton_normal.png" id="6_retry_n"]
 [ext_resource type="Texture2D" uid="uid://dhxse8bt8438h" path="res://Assets/UI/Button/RetryButton.png" id="7_retry_h"]
 [ext_resource type="Texture2D" uid="uid://dgyxhleaeybpy" path="res://Assets/UI/Button/PlayButton_normal.png" id="8_play_n"]
 [ext_resource type="Texture2D" uid="uid://bcoyaaoixww" path="res://Assets/UI/Button/PlayButton.png" id="9_play_h"]
-[ext_resource type="Texture2D" uid="uid://dfto2qa22yxt4" path="res://Assets/UI/Button/LevelSelectionButton_normal.png" id="10_ls_n"]
-[ext_resource type="Texture2D" uid="uid://d1d5m14cbqpx1" path="res://Assets/UI/Button/LevelSelectionButton.png" id="11_ls_h"]
-[ext_resource type="Texture2D" uid="uid://bypguw2fnrhh8" path="res://Assets/UI/Button/HomeButton_normal.png" id="12_home_n"]
-[ext_resource type="Texture2D" uid="uid://y7v03d1rfovq" path="res://Assets/UI/Button/HomeButton.png" id="13_home_h"]
+[ext_resource type="Texture2D" uid="uid://lipk4ufh0pbf" path="res://Assets/UI/Button/LevelSelectionButton_normal.png" id="10_ls_n"]
+[ext_resource type="Texture2D" uid="uid://1ql73uuisowx" path="res://Assets/UI/Button/HomeButton_normal.png" id="12_home_n"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -38,15 +35,15 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -320.0
-offset_top = 45.0
-offset_right = 320.0
-offset_bottom = 125.0
+offset_left = -100.5
+offset_top = 67.0
+offset_right = 100.5
+offset_bottom = 152.0
 grow_horizontal = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("3_font")
-theme_override_font_sizes/font_size = 42
+theme_override_font_sizes/font_size = 28
 text = "Level
 Completed"
 horizontal_alignment = 1
@@ -59,12 +56,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -215.0
-offset_top = -184.0
-offset_right = 215.0
-offset_bottom = -54.0
+offset_left = -129.0
+offset_top = -138.0
+offset_right = 301.0
+offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.6, 0.6)
 theme_override_constants/separation = 20
 alignment = 1
 
@@ -90,6 +88,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="TimeLabel" type="Label" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -99,7 +98,7 @@ anchor_bottom = 0.5
 offset_left = -220.0
 offset_top = -34.0
 offset_right = 220.0
-offset_bottom = 16.0
+offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -116,15 +115,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -134.0
-offset_top = 46.0
-offset_right = 1206.0
-offset_bottom = 1386.0
+offset_left = -115.99997
+offset_top = -14.0
+offset_right = 1404.0
+offset_bottom = 1506.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.2, 0.2)
-theme_override_constants/h_separation = 20
-theme_override_constants/v_separation = 20
+scale = Vector2(0.15, 0.15)
+theme_override_constants/h_separation = 200
+theme_override_constants/v_separation = 200
 columns = 2
 
 [node name="RetryBtn" type="TextureButton" parent="Buttons"]
@@ -142,11 +141,7 @@ texture_hover = ExtResource("9_play_h")
 [node name="LevelSelectBtn" type="TextureButton" parent="Buttons"]
 layout_mode = 2
 texture_normal = ExtResource("10_ls_n")
-texture_pressed = ExtResource("11_ls_h")
-texture_hover = ExtResource("11_ls_h")
 
 [node name="HomeBtn" type="TextureButton" parent="Buttons"]
 layout_mode = 2
 texture_normal = ExtResource("12_home_n")
-texture_pressed = ExtResource("13_home_h")
-texture_hover = ExtResource("13_home_h")

@@ -7,11 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://crfvuoehmoos0" path="res://Assets/Tileset.png" id="5_5jdlp"]
 [ext_resource type="Texture2D" uid="uid://cu74mpr6j25mj" path="res://Assets/Game_Tile_Atlas_Fixed.png" id="6_k06q1"]
 [ext_resource type="Texture2D" uid="uid://bbyxlnpg3wnyj" path="res://Assets/Levels/Lvl0A.png" id="7_tnfg0"]
-[ext_resource type="Texture2D" uid="uid://dj113uj5u4ji8" path="res://Assets/Levels/Lvl0B.png" id="8_tahqn"]
+[ext_resource type="Texture2D" uid="uid://dmd86r4xv6t0b" path="res://Assets/Levels/Lvl0B.png" id="8_tahqn"]
 [ext_resource type="Texture2D" uid="uid://cwsgnxmxqa4n4" path="res://icon.svg" id="9_6l6nc"]
 [ext_resource type="PackedScene" uid="uid://bq76m7wcyf86r" path="res://Scene/exit.tscn" id="10_ccy2o"]
 [ext_resource type="PackedScene" uid="uid://b7j33gvbcmg2" path="res://Scene/spawn.tscn" id="11_tanl3"]
 [ext_resource type="PackedScene" uid="uid://dymjnlqmhegc8" path="res://Scene/character.tscn" id="12_8anlm"]
+[ext_resource type="Texture2D" uid="uid://cb280eupyswkx" path="res://Assets/UI/Component/PStar_UI.png" id="13_tndk4"]
+[ext_resource type="Texture2D" uid="uid://pfp6bp1lwott" path="res://Assets/UI/Component/GStar_UI.png" id="14_7r4in"]
 [ext_resource type="Texture2D" uid="uid://04cibq4xjrbo" path="res://Assets/UI/Button/01_Frame_Besi.png" id="20_cdbar_a"]
 [ext_resource type="Texture2D" uid="uid://cuvdsyfy64yx5" path="res://Assets/UI/Button/02_Isi_Menyala.png" id="21_cdbar_b"]
 [ext_resource type="Texture2D" uid="uid://orpejqglantg" path="res://Assets/UI/Button/03_Isi_Gelap.png" id="22_cdbar_c"]
@@ -85,10 +87,6 @@ size = Vector2(1792, 2816)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6l6nc"]
 size = Vector2(768, 2816)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_08prv"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o3pu7"]
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_557jy")
@@ -182,14 +180,17 @@ offset_left = 20.0
 offset_top = 20.0
 offset_right = 20.0
 offset_bottom = 20.0
-text = "REALITA A"
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("30_titan_one")
+text = "REALITA A"
+
 [node name="SwitchCooldownBar" type="TextureProgressBar" parent="UI"]
 offset_left = 20.0
 offset_top = 50.000008
 offset_right = 1485.0
 offset_bottom = 1218.0
-scale = Vector2(0.075, 0.075)
+scale = Vector2(0.05, 0.05)
 value = 100.0
 texture_under = ExtResource("20_cdbar_a")
 texture_over = ExtResource("21_cdbar_b")
@@ -209,6 +210,27 @@ render_target_update_mode = 0
 
 [node name="PipCamera" type="Camera2D" parent="UI/PiPViewport/SubViewport"]
 position = Vector2(17376, 433)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="Star1" type="TextureRect" parent="UI/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("13_tndk4")
+
+[node name="Star2" type="TextureRect" parent="UI/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("13_tndk4")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="UI/HBoxContainer"]
+layout_mode = 2
+value = 50.0
+texture_progress = ExtResource("14_7r4in")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(18122.5, 343.00006)
