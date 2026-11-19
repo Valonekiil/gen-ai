@@ -21,6 +21,7 @@ SignalBus="*res://autoload/SignalBus.gd"
 RoomManager="*res://autoload/RoomManager.gd"
 AudioManager="*res://autoload/AudioManager.gd"
 DebugConfig="*res://autoload/DebugConfig.gd"
+GameProgress="*res://autoload/GameProgress.gd"
 
 [input]
 

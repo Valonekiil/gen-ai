@@ -30,13 +30,8 @@ var _finished: bool = false
 var _hud_timer: Label = null
 var _star_icons: Array[TextureRect] = []
 
-# Urutan level siklik: level terakhir kembali ke level pertama
-const LEVEL_SEQUENCE := [
-	"res://levels/Lvl_0.tscn",
-	"res://levels/Lvl_1.tscn",
-	"res://levels/Lvl_2.tscn",
-	"res://levels/Lvl_3.tscn",
-]
+# Urutan level siklik sekarang di SignalBus (dipakai juga LevelComplete)
+const LEVEL_COMPLETE := "res://ui/LevelComplete.tscn"
 
 func _ready() -> void:
 	# Wiring RealityManager
@@ -96,12 +91,17 @@ func _on_exit_entered(body: Node) -> void:
 	_transitioning = true
 	_finished = true
 	level_stars = _compute_stars()
+	# Simpan hasil untuk scene LevelComplete (reusable di semua level)
+	SignalBus.last_completed_level = scene_file_path
+	SignalBus.last_completed_stars = level_stars
+	SignalBus.last_completed_time = elapsed
+	GameProgress.record_completion(scene_file_path, level_stars)
 	print("[Level] Selesai: ", scene_file_path, " bintang=", level_stars, " waktu=", _format_time(elapsed))
 	var sb := get_node_or_null("/root/SignalBus")
 	if sb:
 		sb.level_completed.emit(scene_file_path, level_stars)
 	_update_hud()
-	_go_to_next_level()
+	_go_to_level_complete()
 
 # --- Timer & Bintang: implementasi ---
 
@@ -197,11 +197,7 @@ func _spawn_star() -> void:
 	print("[Level] Bintang dipasang di realita ", reality, " cell ", cell)
 
 func _get_next_level_path() -> String:
-	var idx := LEVEL_SEQUENCE.find(scene_file_path)
-	# Scene di luar urutan (mis. Lvl_test) dianggap tidak punya level lanjutan -> mulai dari Lvl_0
-	if idx == -1:
-		return LEVEL_SEQUENCE[0]
-	return LEVEL_SEQUENCE[(idx + 1) % LEVEL_SEQUENCE.size()]
+	return SignalBus.next_level_path(scene_file_path)
 
 func _preload_next_level() -> void:
 	var st := ResourceLoader.load_threaded_get_status(_get_next_level_path())
@@ -209,12 +205,10 @@ func _preload_next_level() -> void:
 		return
 	ResourceLoader.load_threaded_request(_get_next_level_path())
 
-func _go_to_next_level() -> void:
-	var next_path := _get_next_level_path()
-	print("[Level] Memuat: ", next_path)
-	# Deferred: body_entered adalah physics callback, membuang scene di dalamnya
-	# menyebabkan error "Removing a CollisionObject node during a physics callback"
-	get_tree().call_deferred("change_scene_to_file", next_path)
+# Transisi ke scene LevelComplete, bukan langsung ke level berikutnya
+func _go_to_level_complete() -> void:
+	print("[Level] Memuat: ", LEVEL_COMPLETE)
+	get_tree().call_deferred("change_scene_to_file", LEVEL_COMPLETE)
 
 func _on_character_switched(new_active: String, _previous: String) -> void:
 	_set_reality_active(new_active)

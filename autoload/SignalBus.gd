@@ -18,3 +18,22 @@ signal hazard_entered
 signal star_collected
 # Level selesai: (level_id, jumlah bintang 0-3)
 signal level_completed(level_id: String, stars: int)
+
+# Urutan level siklik (dipakai LvlTest dan LevelComplete)
+const LEVEL_SEQUENCE := [
+	"res://levels/Lvl_0.tscn",
+	"res://levels/Lvl_1.tscn",
+	"res://levels/Lvl_2.tscn",
+	"res://levels/Lvl_3.tscn",
+]
+
+# Hasil level terakhir, dibaca scene LevelComplete (reusable untuk semua level)
+var last_completed_level: String = ""
+var last_completed_stars: int = 0
+var last_completed_time: float = 0.0
+
+static func next_level_path(from_level: String) -> String:
+	var idx := LEVEL_SEQUENCE.find(from_level)
+	if idx == -1:
+		return LEVEL_SEQUENCE[0]
+	return LEVEL_SEQUENCE[(idx + 1) % LEVEL_SEQUENCE.size()]

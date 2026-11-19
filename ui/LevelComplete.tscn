@@ -1,7 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://b5dvwa7ef7hbv"]
+[gd_scene load_steps=14 format=3 uid="uid://b5dvwa7ef7hbv"]
 
-[ext_resource type="Texture2D" uid="uid://bxoxrgb0c007p" path="res://Assets/UI/PausePanel.png" id="1_r12v2"]
-[ext_resource type="FontFile" uid="uid://r5kkxha2rdoa" path="res://Assets/TitanOne-Regular.ttf" id="2_j1d1i"]
+[ext_resource type="Script" uid="uid://bjhq22geydka1" path="res://ui/LevelComplete.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://bxoxrgb0c007p" path="res://Assets/UI/PausePanel.png" id="2_panel"]
+[ext_resource type="FontFile" uid="uid://r5kkxha2rdoa" path="res://Assets/TitanOne-Regular.ttf" id="3_font"]
+[ext_resource type="Texture2D" uid="uid://dhe20qh6mrmdg" path="res://Assets/UI/Component/GStar.png" id="4_gstar"]
+[ext_resource type="Texture2D" uid="uid://co3umwpaxjaot" path="res://Assets/UI/Component/PStar.png" id="5_pstar"]
+[ext_resource type="Texture2D" uid="uid://b28wtvjm1f4kt" path="res://Assets/UI/Button/RetryButton_normal.png" id="6_retry_n"]
+[ext_resource type="Texture2D" uid="uid://dhxse8bt8438h" path="res://Assets/UI/Button/RetryButton.png" id="7_retry_h"]
+[ext_resource type="Texture2D" uid="uid://dgyxhleaeybpy" path="res://Assets/UI/Button/PlayButton_normal.png" id="8_play_n"]
+[ext_resource type="Texture2D" uid="uid://bcoyaaoixww" path="res://Assets/UI/Button/PlayButton.png" id="9_play_h"]
+[ext_resource type="Texture2D" uid="uid://dfto2qa22yxt4" path="res://Assets/UI/Button/LevelSelectionButton_normal.png" id="10_ls_n"]
+[ext_resource type="Texture2D" uid="uid://d1d5m14cbqpx1" path="res://Assets/UI/Button/LevelSelectionButton.png" id="11_ls_h"]
+[ext_resource type="Texture2D" uid="uid://bypguw2fnrhh8" path="res://Assets/UI/Button/HomeButton_normal.png" id="12_home_n"]
+[ext_resource type="Texture2D" uid="uid://y7v03d1rfovq" path="res://Assets/UI/Button/HomeButton.png" id="13_home_h"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -10,6 +21,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_script")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -18,38 +30,123 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_r12v2")
+texture = ExtResource("2_panel")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="."]
+[node name="Title" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -72.0
-offset_top = 78.0
-offset_right = 72.0
-offset_bottom = 141.0
+offset_left = -320.0
+offset_top = 45.0
+offset_right = 320.0
+offset_bottom = 125.0
 grow_horizontal = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_fonts/font = ExtResource("2_j1d1i")
-theme_override_font_sizes/font_size = 25
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 42
 text = "Level
 Completed"
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-custom_minimum_size = Vector2(300, 375)
+[node name="Stars" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -170.0
-offset_right = 150.0
-offset_bottom = 230.0
+offset_left = -215.0
+offset_top = -184.0
+offset_right = 215.0
+offset_bottom = -54.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Star1" type="TextureRect" parent="Stars"]
+custom_minimum_size = Vector2(130, 130)
+layout_mode = 2
+texture = ExtResource("5_pstar")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star2" type="TextureRect" parent="Stars"]
+custom_minimum_size = Vector2(130, 130)
+layout_mode = 2
+texture = ExtResource("5_pstar")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Star3" type="TextureRect" parent="Stars"]
+custom_minimum_size = Vector2(130, 130)
+layout_mode = 2
+texture = ExtResource("5_pstar")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TimeLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -34.0
+offset_right = 220.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 30
+text = "WAKTU 00:00"
+horizontal_alignment = 1
+
+[node name="Buttons" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -134.0
+offset_top = 46.0
+offset_right = 1206.0
+offset_bottom = 1386.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.2, 0.2)
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="RetryBtn" type="TextureButton" parent="Buttons"]
+layout_mode = 2
+texture_normal = ExtResource("6_retry_n")
+texture_pressed = ExtResource("7_retry_h")
+texture_hover = ExtResource("7_retry_h")
+
+[node name="NextBtn" type="TextureButton" parent="Buttons"]
+layout_mode = 2
+texture_normal = ExtResource("8_play_n")
+texture_pressed = ExtResource("9_play_h")
+texture_hover = ExtResource("9_play_h")
+
+[node name="LevelSelectBtn" type="TextureButton" parent="Buttons"]
+layout_mode = 2
+texture_normal = ExtResource("10_ls_n")
+texture_pressed = ExtResource("11_ls_h")
+texture_hover = ExtResource("11_ls_h")
+
+[node name="HomeBtn" type="TextureButton" parent="Buttons"]
+layout_mode = 2
+texture_normal = ExtResource("12_home_n")
+texture_pressed = ExtResource("13_home_h")
+texture_hover = ExtResource("13_home_h")
