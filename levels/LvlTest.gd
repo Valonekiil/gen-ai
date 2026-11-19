@@ -17,6 +17,14 @@ extends Node2D
 
 var _transitioning: bool = false
 
+# Urutan level siklik: level terakhir kembali ke level pertama
+const LEVEL_SEQUENCE := [
+	"res://levels/Lvl_0.tscn",
+	"res://levels/Lvl_1.tscn",
+	"res://levels/Lvl_2.tscn",
+	"res://levels/Lvl_3.tscn",
+]
+
 func _ready() -> void:
 	# Wiring RealityManager
 	reality_manager.character_a = character
@@ -55,6 +63,12 @@ func _ready() -> void:
 	if exit_node:
 		exit_node.body_entered.connect(_on_exit_entered)
 
+	# Preload level berikutnya di background supaya transisi tidak lag
+	# (tekstur level ~17MB/lembar; load sinkron bikin freeze ~2-3 detik)
+	# Delay sebentar: load_threaded_request saat scene sedang diganti kadang gagal parse
+	var timer := get_tree().create_timer(0.5)
+	timer.timeout.connect(_preload_next_level)
+
 func _on_exit_entered(body: Node) -> void:
 	if _transitioning:
 		return
@@ -63,19 +77,25 @@ func _on_exit_entered(body: Node) -> void:
 	_transitioning = true
 	_go_to_next_level()
 
-func _go_to_next_level() -> void:
-	var current_path := scene_file_path
-	var next_path := ""
-	if current_path.ends_with("Lvl_1.tscn"):
-		next_path = "res://levels/Lvl_2.tscn"
-	elif current_path.ends_with("Lvl_2.tscn"):
-		next_path = "res://levels/Lvl_3.tscn"
-	if next_path == "":
-		print("[Level] Tidak ada level berikutnya")
-		_transitioning = false
+func _get_next_level_path() -> String:
+	var idx := LEVEL_SEQUENCE.find(scene_file_path)
+	# Scene di luar urutan (mis. Lvl_test) dianggap tidak punya level lanjutan -> mulai dari Lvl_0
+	if idx == -1:
+		return LEVEL_SEQUENCE[0]
+	return LEVEL_SEQUENCE[(idx + 1) % LEVEL_SEQUENCE.size()]
+
+func _preload_next_level() -> void:
+	var st := ResourceLoader.load_threaded_get_status(_get_next_level_path())
+	if st == ResourceLoader.THREAD_LOAD_IN_PROGRESS or st == ResourceLoader.THREAD_LOAD_LOADED:
 		return
+	ResourceLoader.load_threaded_request(_get_next_level_path())
+
+func _go_to_next_level() -> void:
+	var next_path := _get_next_level_path()
 	print("[Level] Memuat: ", next_path)
-	get_tree().change_scene_to_file(next_path)
+	# Deferred: body_entered adalah physics callback, membuang scene di dalamnya
+	# menyebabkan error "Removing a CollisionObject node during a physics callback"
+	get_tree().call_deferred("change_scene_to_file", next_path)
 
 func _on_character_switched(new_active: String, _previous: String) -> void:
 	_set_reality_active(new_active)

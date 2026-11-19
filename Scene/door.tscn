@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cdsre4yt3daux"]
 
 [ext_resource type="Texture2D" uid="uid://bqopfan2vu0lr" path="res://Assets/Game_Tile_Atlas_Fixed_REV.png" id="1_d5ka1"]
-[ext_resource type="Script" path="res://interactables/Door.gd" id="2_door01"]
+[ext_resource type="Script" uid="uid://b87lmuyanf8ct" path="res://interactables/Door.gd" id="2_door01"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t1p54"]
 size = Vector2(162, 256)
