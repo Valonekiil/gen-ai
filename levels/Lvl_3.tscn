@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://btbijairqkp6u"]
+[gd_scene load_steps=17 format=4 uid="uid://btbijairqkp6u"]
 
 [ext_resource type="Script" uid="uid://c7x421fmesvdt" path="res://levels/LvlTest.gd" id="1_kbxc3"]
 [ext_resource type="Script" uid="uid://e2neyto34nqq" path="res://core/RealityManager.gd" id="2_kn742"]
@@ -6,9 +6,12 @@
 [ext_resource type="Script" uid="uid://btm5oehp1nc3m" path="res://core/UIDirector.gd" id="4_7r5mp"]
 [ext_resource type="Texture2D" uid="uid://crfvuoehmoos0" path="res://Assets/Tileset.png" id="5_r4i6u"]
 [ext_resource type="Texture2D" uid="uid://cu74mpr6j25mj" path="res://Assets/Game_Tile_Atlas_Fixed.png" id="6_y8ll1"]
+[ext_resource type="Texture2D" uid="uid://04cibq4xjrbo" path="res://Assets/UI/Button/01_Frame_Besi.png" id="8_f044q"]
 [ext_resource type="PackedScene" uid="uid://dc3o0sgr57srf" path="res://Scene/Spike.tscn" id="8_kbxc3"]
+[ext_resource type="Texture2D" uid="uid://cuvdsyfy64yx5" path="res://Assets/UI/Button/02_Isi_Menyala.png" id="9_7r5mp"]
 [ext_resource type="PackedScene" uid="uid://bq76m7wcyf86r" path="res://Scene/exit.tscn" id="9_oe7eo"]
 [ext_resource type="PackedScene" uid="uid://b7j33gvbcmg2" path="res://Scene/spawn.tscn" id="10_boskh"]
+[ext_resource type="Texture2D" uid="uid://orpejqglantg" path="res://Assets/UI/Button/03_Isi_Gelap.png" id="10_r4i6u"]
 [ext_resource type="PackedScene" uid="uid://dymjnlqmhegc8" path="res://Scene/character.tscn" id="11_2apva"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4hhoj"]
@@ -143,12 +146,16 @@ offset_right = 20.0
 offset_bottom = 20.0
 text = "REALITA A"
 
-[node name="SwitchCooldownBar" type="ProgressBar" parent="UI"]
+[node name="SwitchCooldownBar" type="TextureProgressBar" parent="UI"]
 offset_left = 20.0
-offset_top = 50.0
-offset_right = 220.0
-offset_bottom = 77.0
-value = 100.0
+offset_top = 50.000008
+offset_right = 1485.0
+offset_bottom = 1218.0
+scale = Vector2(0.075, 0.075)
+value = 50.0
+texture_under = ExtResource("8_f044q")
+texture_over = ExtResource("9_7r5mp")
+texture_progress = ExtResource("10_r4i6u")
 
 [node name="PiPViewport" type="SubViewportContainer" parent="UI"]
 offset_left = 865.0

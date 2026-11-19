@@ -7,7 +7,7 @@ class_name UIDirector
 extends Node
 
 @export var reality_label: Label
-@export var cooldown_bar: ProgressBar
+@export var cooldown_bar: TextureProgressBar
 @export var reality_a_root: Node2D
 @export var reality_b_root: Node2D
 @export var reality_manager: RealityManager
