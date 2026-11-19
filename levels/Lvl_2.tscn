@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://4te12ne4p2u"]
+[gd_scene load_steps=33 format=4 uid="uid://4te12ne4p2u"]
 
 [ext_resource type="Script" path="res://levels/LvlTest.gd" id="1_j0s2s" uid="uid://c7x421fmesvdt"]
 [ext_resource type="Script" path="res://core/RealityManager.gd" id="2_432kf" uid="uid://e2neyto34nqq"]
@@ -61,6 +61,45 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_4hhoj")
 sources/2 = SubResource("TileSetAtlasSource_h60fj")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sh8hv"]
+size = Vector2(5888, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vppi4"]
+size = Vector2(256, 3072)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h1hxl"]
+size = Vector2(256, 1280)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a8xa2"]
+size = Vector2(256, 3072)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pr6ci"]
+size = Vector2(256, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jmrpj"]
+size = Vector2(512, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uxd2a"]
+size = Vector2(256, 1280)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_id6g1"]
+size = Vector2(2560, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fomj3"]
+size = Vector2(2560, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8eohs"]
+size = Vector2(5888, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hpviu"]
+size = Vector2(256, 3072)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3uajo"]
+size = Vector2(3072, 3072)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sfvew"]
+size = Vector2(2560, 256)
+
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_j0s2s")
 
@@ -97,6 +136,44 @@ zoom = Vector2(0.175, 0.175)
 position = Vector2(896, 128)
 texture = ExtResource("9_vppi4")
 
+[node name="WallsA" type="StaticBody2D" parent="RealityA"]
+
+[node name="Wall00" type="CollisionShape2D" parent="RealityA/WallsA"]
+position = Vector2(896, -1408)
+shape = SubResource("RectangleShape2D_sh8hv")
+
+[node name="Wall01" type="CollisionShape2D" parent="RealityA/WallsA"]
+position = Vector2(-1920, 256)
+shape = SubResource("RectangleShape2D_vppi4")
+
+[node name="Wall02" type="CollisionShape2D" parent="RealityA/WallsA"]
+position = Vector2(896, -640)
+shape = SubResource("RectangleShape2D_h1hxl")
+
+[node name="Wall03" type="CollisionShape2D" parent="RealityA/WallsA"]
+position = Vector2(3712, 256)
+shape = SubResource("RectangleShape2D_a8xa2")
+
+[node name="Wall04" type="CollisionShape2D" parent="RealityA/WallsA"]
+position = Vector2(640, -128)
+shape = SubResource("RectangleShape2D_pr6ci")
+
+[node name="Wall05" type="CollisionShape2D" parent="RealityA/WallsA"]
+position = Vector2(768, 384)
+shape = SubResource("RectangleShape2D_jmrpj")
+
+[node name="Wall06" type="CollisionShape2D" parent="RealityA/WallsA"]
+position = Vector2(896, 1152)
+shape = SubResource("RectangleShape2D_uxd2a")
+
+[node name="Wall07" type="CollisionShape2D" parent="RealityA/WallsA"]
+position = Vector2(-512, 1664)
+shape = SubResource("RectangleShape2D_id6g1")
+
+[node name="Wall08" type="CollisionShape2D" parent="RealityA/WallsA"]
+position = Vector2(2304, 1664)
+shape = SubResource("RectangleShape2D_fomj3")
+
 [node name="RealityB" type="Node2D" parent="."]
 visible = false
 
@@ -114,6 +191,25 @@ reality_manager = NodePath("../../RealityManager")
 [node name="LevelImageB" type="Sprite2D" parent="RealityB"]
 position = Vector2(896, 128)
 texture = ExtResource("12_a8xa2")
+
+[node name="WallsB" type="StaticBody2D" parent="RealityB"]
+collision_layer = 0
+
+[node name="Wall00" type="CollisionShape2D" parent="RealityB/WallsB"]
+position = Vector2(896, -1408)
+shape = SubResource("RectangleShape2D_8eohs")
+
+[node name="Wall01" type="CollisionShape2D" parent="RealityB/WallsB"]
+position = Vector2(-1920, 256)
+shape = SubResource("RectangleShape2D_hpviu")
+
+[node name="Wall02" type="CollisionShape2D" parent="RealityB/WallsB"]
+position = Vector2(2304, 256)
+shape = SubResource("RectangleShape2D_3uajo")
+
+[node name="Wall03" type="CollisionShape2D" parent="RealityB/WallsB"]
+position = Vector2(-512, 1664)
+shape = SubResource("RectangleShape2D_sfvew")
 
 [node name="UI" type="CanvasLayer" parent="."]
 

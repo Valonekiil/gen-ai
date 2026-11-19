@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dc3o0sgr57srf"]
 
 [ext_resource type="Script" uid="uid://da3h53mpnoqrf" path="res://interactables/Spike.gd" id="1_ia8si"]
-[ext_resource type="Texture2D" uid="uid://cu74mpr6j25mj" path="res://Assets/Game_Tile_Atlas_Fixed.png" id="1_tcxct"]
+[ext_resource type="Texture2D" uid="uid://bqopfan2vu0lr" path="res://Assets/Game_Tile_Atlas_Fixed_REV.png" id="1_tcxct"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ia8si"]
 size = Vector2(160, 160)
