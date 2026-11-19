@@ -19,7 +19,14 @@ func _process(delta: float) -> void:
 		_cooldown_timer -= delta
 
 func can_switch() -> bool:
-	return _cooldown_timer <= 0.0 and state in [State.RunningA, State.RunningB]
+	if _cooldown_timer > 0.0:
+		return false
+	if state not in [State.RunningA, State.RunningB]:
+		return false
+	# Realita target harus benar-benar bisa dimasuki (tidak ada tembok/collider)
+	var active := "A" if state == State.RunningA else "B"
+	var target := "B" if state == State.RunningA else "A"
+	return not _would_collide_with_terrain(_get_char(active), _get_terrain(target))
 
 func _would_collide_with_terrain(character: CharacterController, terrain: TileMapLayer) -> bool:
 	if not character or not terrain:
@@ -83,7 +90,7 @@ func _would_collide_with_terrain(character: CharacterController, terrain: TileMa
 	return false
 
 func request_switch() -> void:
-	if not can_switch():
+	if _cooldown_timer > 0.0 or state not in [State.RunningA, State.RunningB]:
 		return
 
 	var previous_active: String
