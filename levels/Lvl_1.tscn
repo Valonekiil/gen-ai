@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://c08hh8veqpcfe"]
+[gd_scene load_steps=45 format=4 uid="uid://c08hh8veqpcfe"]
 
 [ext_resource type="Script" uid="uid://c7x421fmesvdt" path="res://levels/LvlTest.gd" id="1_vdd6g"]
 [ext_resource type="Script" uid="uid://e2neyto34nqq" path="res://core/RealityManager.gd" id="2_eorqx"]
@@ -12,6 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://cvpk5ue5b5wto" path="res://Assets/Levels/Lvl1B.png" id="8_rpvk6"]
 [ext_resource type="PackedScene" uid="uid://bq76m7wcyf86r" path="res://Scene/exit.tscn" id="9_o3pu7"]
 [ext_resource type="PackedScene" uid="uid://b7j33gvbcmg2" path="res://Scene/spawn.tscn" id="10_dck5i"]
+[ext_resource type="Texture2D" uid="uid://04cibq4xjrbo" path="res://Assets/UI/Button/01_Frame_Besi.png" id="20_cdbar_a"]
+[ext_resource type="Texture2D" uid="uid://cuvdsyfy64yx5" path="res://Assets/UI/Button/02_Isi_Menyala.png" id="21_cdbar_b"]
+[ext_resource type="Texture2D" uid="uid://orpejqglantg" path="res://Assets/UI/Button/03_Isi_Gelap.png" id="22_cdbar_c"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4hhoj"]
 texture = ExtResource("5_dck5i")
@@ -285,15 +288,16 @@ offset_right = 20.0
 offset_bottom = 20.0
 text = "REALITA A"
 
-[node name="SwitchCooldownBar" type="ProgressBar" parent="UI"]
+[node name="SwitchCooldownBar" type="TextureProgressBar" parent="UI"]
 offset_left = 20.0
-offset_top = 50.0
-offset_right = 220.0
-offset_bottom = 77.0
-theme_override_styles/background = SubResource("StyleBoxFlat_08prv")
-theme_override_styles/fill = SubResource("StyleBoxFlat_o3pu7")
+offset_top = 50.000008
+offset_right = 1485.0
+offset_bottom = 1218.0
+scale = Vector2(0.075, 0.075)
 value = 100.0
-show_percentage = false
+texture_under = ExtResource("20_cdbar_a")
+texture_over = ExtResource("21_cdbar_b")
+texture_progress = ExtResource("22_cdbar_c")
 
 [node name="PiPViewport" type="SubViewportContainer" parent="UI"]
 visible = false

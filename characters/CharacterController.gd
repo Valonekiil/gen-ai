@@ -11,14 +11,23 @@ extends CharacterBody2D
 enum State { ACTIVE_CONTROLLED, INACTIVE_FROZEN, INACTIVE_ON_MOVING_SURFACE, REPOSITIONING, DEAD }
 enum Facing { UP, DOWN, LEFT, RIGHT }
 
+# Aset sprite menghadap (RIGHT memakai sprite LEFT + flip horizontal)
+const FACING_DOWN_PATH := "res://Assets/sprites/FacingDown.png"
+const FACING_TOP_PATH := "res://Assets/sprites/FacingTop.png"
+const FACING_LEFT_PATH := "res://Assets/sprites/FacingLeft.png"
+
 var state: State = State.ACTIVE_CONTROLLED
 var facing: Facing = Facing.DOWN
 var reality: String = "A"
 var input_enabled: bool = true
 
 var _last_axis: String = ""
+var _facing_textures: Dictionary = {}
 
 func _ready() -> void:
+	_facing_textures[Facing.DOWN] = load(FACING_DOWN_PATH)
+	_facing_textures[Facing.UP] = load(FACING_TOP_PATH)
+	_facing_textures[Facing.LEFT] = load(FACING_LEFT_PATH)
 	if not _has_sprite_child():
 		var sprite := Sprite2D.new()
 		sprite.name = "SpritePlaceholder"
@@ -27,6 +36,7 @@ func _ready() -> void:
 		var tex := ImageTexture.create_from_image(img)
 		sprite.texture = tex
 		add_child(sprite)
+	_update_facing_sprite()
 
 func _input(event: InputEvent) -> void:
 	if not input_enabled or state != State.ACTIVE_CONTROLLED:
@@ -53,7 +63,35 @@ func _physics_process(delta: float) -> void:
 		var new_facing := Grid.delta_to_facing(input_dir)
 		if new_facing != facing:
 			facing = new_facing
+			_update_facing_sprite()
 			get_node("/root/SignalBus").character_facing_changed.emit(reality, int(facing))
+
+# Ganti sprite sesuai arah hadap; RIGHT = sprite LEFT di-flip horizontal
+func _update_facing_sprite() -> void:
+	var sprite := _get_sprite()
+	if not sprite:
+		return
+	var tex: Texture2D = null
+	var flip := false
+	match facing:
+		Facing.UP:
+			tex = _facing_textures.get(Facing.UP)
+		Facing.LEFT:
+			tex = _facing_textures.get(Facing.LEFT)
+		Facing.RIGHT:
+			tex = _facing_textures.get(Facing.LEFT)
+			flip = true
+		_:
+			tex = _facing_textures.get(Facing.DOWN)
+	if tex:
+		sprite.texture = tex
+	sprite.flip_h = flip
+
+func _get_sprite() -> Sprite2D:
+	for child in get_children():
+		if child is Sprite2D:
+			return child
+	return null
 
 func _get_input_dir() -> Vector2i:
 	var dir := Vector2i.ZERO
