@@ -13,12 +13,12 @@
 [ext_resource type="PackedScene" uid="uid://b7j33gvbcmg2" path="res://Scene/spawn.tscn" id="10_a8xa2"]
 [ext_resource type="PackedScene" uid="uid://cdsre4yt3daux" path="res://Scene/door.tscn" id="12_73fpa"]
 [ext_resource type="Texture2D" uid="uid://bminy0ixn6eoh" path="res://Assets/Levels/Lvl2B.png" id="12_a8xa2"]
+[ext_resource type="Texture2D" uid="uid://cb280eupyswkx" path="res://Assets/UI/Component/PStar_UI.png" id="13_tndk4"]
+[ext_resource type="Texture2D" uid="uid://pfp6bp1lwott" path="res://Assets/UI/Component/GStar_UI.png" id="14_7r4in"]
 [ext_resource type="Texture2D" uid="uid://04cibq4xjrbo" path="res://Assets/UI/Button/01_Frame_Besi.png" id="20_cdbar_a"]
 [ext_resource type="Texture2D" uid="uid://cuvdsyfy64yx5" path="res://Assets/UI/Button/02_Isi_Menyala.png" id="21_cdbar_b"]
 [ext_resource type="Texture2D" uid="uid://orpejqglantg" path="res://Assets/UI/Button/03_Isi_Gelap.png" id="22_cdbar_c"]
 [ext_resource type="FontFile" uid="uid://r5kkxha2rdoa" path="res://Assets/TitanOne-Regular.ttf" id="30_titan_one"]
-[ext_resource type="Texture2D" uid="uid://bop8qgfekmsij" path="res://Assets/UI/Component/PStar_UI.png" id="13_tndk4"]
-[ext_resource type="Texture2D" uid="uid://b5lj74wh3mrc3" path="res://Assets/UI/Component/GStar_UI.png" id="14_7r4in"]
 [ext_resource type="Texture2D" uid="uid://bf407loek41h0" path="res://Assets/UI/Button/PauseButton_normal.png" id="40_pause_n"]
 [ext_resource type="Texture2D" uid="uid://c7wkl0hksy25" path="res://Assets/UI/Button/PauseButton.png" id="41_pause_h"]
 
@@ -136,6 +136,9 @@ texture = ExtResource("9_vppi4")
 [node name="Door" parent="RealityA" instance=ExtResource("12_73fpa")]
 position = Vector2(890, 138)
 
+[node name="Exit" parent="RealityA" instance=ExtResource("9_h1hxl")]
+position = Vector2(3454, 135)
+
 [node name="CameraA" type="Camera2D" parent="RealityA"]
 position = Vector2(888, 127)
 zoom = Vector2(0.175, 0.175)
@@ -221,8 +224,9 @@ offset_left = 20.0
 offset_top = 20.0
 offset_right = 20.0
 offset_bottom = 20.0
-text = "REALITA A"
 theme_override_fonts/font = ExtResource("30_titan_one")
+text = "REALITA A"
+
 [node name="SwitchCooldownBar" type="TextureProgressBar" parent="UI"]
 offset_left = 20.0
 offset_top = 50.000008
@@ -249,20 +253,6 @@ render_target_update_mode = 0
 [node name="PipCamera" type="Camera2D" parent="UI/PiPViewport/SubViewport"]
 position = Vector2(17376, 433)
 
-[node name="phcam" type="Camera2D" parent="."]
-visible = false
-position = Vector2(18331, 513)
-zoom = Vector2(0.05, 0.05)
-
-[node name="Exit" parent="." instance=ExtResource("9_h1hxl")]
-position = Vector2(3367, 81)
-
-[node name="Spawner" parent="." instance=ExtResource("10_a8xa2")]
-position = Vector2(-1540, 195)
-
-[node name="Character" parent="." instance=ExtResource("8_vppi4")]
-position = Vector2(-56, 434)
-
 [node name="HBoxContainer" type="HBoxContainer" parent="UI"]
 anchors_preset = 1
 anchor_left = 1.0
@@ -285,8 +275,7 @@ value = 50.0
 texture_progress = ExtResource("14_7r4in")
 
 [node name="PauseButton" type="TextureButton" parent="UI"]
-ignore_texture_size = true
-stretch_mode = 0
+anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -60.0
@@ -295,5 +284,18 @@ offset_right = -10.0
 offset_bottom = 165.0
 grow_horizontal = 0
 texture_normal = ExtResource("40_pause_n")
-texture_hover = ExtResource("41_pause_h")
 texture_pressed = ExtResource("41_pause_h")
+texture_hover = ExtResource("41_pause_h")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="phcam" type="Camera2D" parent="."]
+visible = false
+position = Vector2(18331, 513)
+zoom = Vector2(0.05, 0.05)
+
+[node name="Spawner" parent="." instance=ExtResource("10_a8xa2")]
+position = Vector2(-1540, 195)
+
+[node name="Character" parent="." instance=ExtResource("8_vppi4")]
+position = Vector2(-56, 434)
