@@ -1,0 +1,191 @@
+[gd_scene load_steps=14 format=3 uid="uid://buhox54e6gwgn"]
+
+[ext_resource type="Texture2D" uid="uid://dd54cj7a43eye" path="res://Assets/UI/Main_Menu_BG.jpg" id="1_rn8js"]
+[ext_resource type="Texture2D" uid="uid://cfwftn8afma5d" path="res://Assets/UI/Logo.png" id="2_nmrkx"]
+[ext_resource type="Texture2D" uid="uid://dgyxhleaeybpy" path="res://Assets/UI/Button/PlayButton_normal.png" id="3_nmrkx"]
+[ext_resource type="Texture2D" uid="uid://bcoyaaoixww" path="res://Assets/UI/Button/PlayButton.png" id="4_uwsby"]
+[ext_resource type="Texture2D" uid="uid://bkqqm07a8wy15" path="res://Assets/UI/Button/SettingButton_normal.png" id="5_uvwf2"]
+[ext_resource type="Texture2D" uid="uid://d1khlpuc08od" path="res://Assets/UI/Button/SettingButton.png" id="6_youui"]
+[ext_resource type="Texture2D" uid="uid://vcqol6s7w7bn" path="res://Assets/UI/Setting.jpeg" id="7_58pe3"]
+[ext_resource type="Texture2D" uid="uid://cuxi0368122pv" path="res://Assets/UI/Button/QuitButton_normal.png" id="7_uvwf2"]
+[ext_resource type="FontFile" uid="uid://r5kkxha2rdoa" path="res://Assets/TitanOne-Regular.ttf" id="8_g6r01"]
+[ext_resource type="Texture2D" uid="uid://cnhwtshbf86xm" path="res://Assets/UI/Button/LvlPanel.png" id="10_58pe3"]
+[ext_resource type="Texture2D" uid="uid://mamv6rx0pf0f" path="res://Assets/UI/Button/LockedLvl.png" id="11_g6r01"]
+[ext_resource type="PackedScene" uid="uid://cnmb4n6r4qqv1" path="res://ui/LvLButton.tscn" id="11_t3nb0"]
+[ext_resource type="Script" path="res://ui/MainMenu.gd" id="12_menu_script"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("12_menu_script")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_rn8js")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(350, 250)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 34.0
+offset_right = 200.0
+offset_bottom = 284.0
+grow_horizontal = 2
+texture = ExtResource("2_nmrkx")
+expand_mode = 1
+
+[node name="VBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -271.0
+offset_top = 55.0
+offset_right = 1909.0
+offset_bottom = 715.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+theme_override_constants/separation = 100
+
+[node name="PlayBtn" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_nmrkx")
+texture_pressed = ExtResource("4_uwsby")
+texture_hover = ExtResource("4_uwsby")
+
+[node name="SettingBtn" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("5_uvwf2")
+texture_pressed = ExtResource("6_youui")
+texture_hover = ExtResource("6_youui")
+
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("7_uvwf2")
+
+[node name="Settings" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Settings"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_58pe3")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Settings/TextureRect"]
+layout_mode = 0
+offset_left = 452.0
+offset_top = 97.0
+offset_right = 701.0
+offset_bottom = 155.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("8_g6r01")
+theme_override_font_sizes/font_size = 50
+text = "SETTINGS"
+
+[node name="LevelSelection" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="LevelSelection"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_58pe3")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="LevelSelection/TextureRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -120.5
+offset_top = 84.0
+offset_right = 120.5
+offset_bottom = 169.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("8_g6r01")
+theme_override_font_sizes/font_size = 35
+text = "Level
+Selection"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="LevelSelection/TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -332.0
+offset_top = -119.0
+offset_right = 335.0
+offset_bottom = 156.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 80
+theme_override_constants/v_separation = 75
+columns = 4
+
+[node name="TextureButton" type="TextureButton" parent="LevelSelection/TextureRect/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("10_58pe3")
+
+[node name="TextureButton2" parent="LevelSelection/TextureRect/GridContainer" instance=ExtResource("11_t3nb0")]
+layout_mode = 2
+
+[node name="TextureButton4" type="TextureButton" parent="LevelSelection/TextureRect/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("11_g6r01")
+
+[node name="TextureButton3" parent="LevelSelection/TextureRect/GridContainer" instance=ExtResource("11_t3nb0")]
+layout_mode = 2
+
+[node name="TextureButton7" parent="LevelSelection/TextureRect/GridContainer" instance=ExtResource("11_t3nb0")]
+layout_mode = 2
+
+[node name="TextureButton5" type="TextureButton" parent="LevelSelection/TextureRect/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("11_g6r01")
+
+[node name="TextureButton6" type="TextureButton" parent="LevelSelection/TextureRect/GridContainer"]
+layout_mode = 2
+texture_normal = ExtResource("11_g6r01")

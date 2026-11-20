@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://bnck7ys42pp22"]
+[gd_scene load_steps=17 format=4 uid="uid://bnck7ys42pp22"]
 
 [ext_resource type="Texture2D" uid="uid://crfvuoehmoos0" path="res://Assets/Tileset.png" id="1_3fg5n"]
 [ext_resource type="Texture2D" uid="uid://cwsgnxmxqa4n4" path="res://icon.svg" id="2_8so51"]
@@ -8,6 +8,10 @@
 [ext_resource type="Script" uid="uid://dmn1mcwsvvfmi" path="res://characters/CharacterController.gd" id="4_char"]
 [ext_resource type="Script" uid="uid://e2neyto34nqq" path="res://core/RealityManager.gd" id="5_rm"]
 [ext_resource type="Texture2D" uid="uid://cu74mpr6j25mj" path="res://Assets/Game_Tile_Atlas_Fixed.png" id="6_1gsn7"]
+[ext_resource type="Texture2D" uid="uid://04cibq4xjrbo" path="res://Assets/UI/Button/01_Frame_Besi.png" id="20_cdbar_a"]
+[ext_resource type="Texture2D" uid="uid://cuvdsyfy64yx5" path="res://Assets/UI/Button/02_Isi_Menyala.png" id="21_cdbar_b"]
+[ext_resource type="Texture2D" uid="uid://orpejqglantg" path="res://Assets/UI/Button/03_Isi_Gelap.png" id="22_cdbar_c"]
+[ext_resource type="FontFile" uid="uid://r5kkxha2rdoa" path="res://Assets/TitanOne-Regular.ttf" id="30_titan_one"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4hhoj"]
 texture = ExtResource("1_3fg5n")
@@ -110,13 +114,17 @@ offset_top = 20.0
 offset_right = 20.0
 offset_bottom = 20.0
 text = "REALITA A"
-
-[node name="SwitchCooldownBar" type="ProgressBar" parent="UI"]
+theme_override_fonts/font = ExtResource("30_titan_one")
+[node name="SwitchCooldownBar" type="TextureProgressBar" parent="UI"]
 offset_left = 20.0
-offset_top = 50.0
-offset_right = 220.0
-offset_bottom = 77.0
+offset_top = 50.000008
+offset_right = 1485.0
+offset_bottom = 1218.0
+scale = Vector2(0.075, 0.075)
 value = 100.0
+texture_under = ExtResource("20_cdbar_a")
+texture_over = ExtResource("21_cdbar_b")
+texture_progress = ExtResource("22_cdbar_c")
 
 [node name="PiPViewport" type="SubViewportContainer" parent="UI"]
 anchors_preset = 1

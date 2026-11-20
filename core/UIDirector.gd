@@ -7,10 +7,13 @@ class_name UIDirector
 extends Node
 
 @export var reality_label: Label
-@export var cooldown_bar: ProgressBar
+@export var cooldown_bar: TextureProgressBar
 @export var reality_a_root: Node2D
 @export var reality_b_root: Node2D
 @export var reality_manager: RealityManager
+
+# tekstur "over" simpan di sini supaya bisa di-hide/show tanpa hilang
+var _over_texture: Texture2D = null
 
 const COLOR_ACTIVE := Color(1, 1, 1)
 const COLOR_INACTIVE := Color(0.6, 0.6, 0.7)
@@ -46,8 +49,23 @@ func _update_ui(new_active: String) -> void:
 			reality_b_root.modulate = COLOR_ACTIVE
 
 func _process(delta: float) -> void:
-	if reality_manager and cooldown_bar:
-		var progress := 1.0
-		if reality_manager._cooldown_timer > 0.0:
-			progress = 1.0 - (reality_manager._cooldown_timer / 0.25)
-		cooldown_bar.value = progress * 100.0
+	if not cooldown_bar:
+		return
+
+	var timer := 0.0
+	var can_switch_now := true
+	if reality_manager:
+		timer = reality_manager._cooldown_timer
+		can_switch_now = reality_manager.can_switch()
+
+	# Bar terisi seiring cooldown berjalan; penuh saat cooldown selesai
+	var max_cd := RealityManager.SWITCH_COOLDOWN
+	var progress := 1.0
+	if timer > 0.0 and max_cd > 0.0:
+		progress = 1.0 - clamp(timer / max_cd, 0.0, 1.0)
+	cooldown_bar.value = progress * cooldown_bar.max_value
+
+	# texture_over hanya terlihat saat player bisa berpindah dimensi
+	if cooldown_bar.texture_over and _over_texture == null:
+		_over_texture = cooldown_bar.texture_over
+	cooldown_bar.texture_over = _over_texture if can_switch_now else null

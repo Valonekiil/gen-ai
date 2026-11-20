@@ -1,0 +1,101 @@
+[gd_scene load_steps=6 format=3 uid="uid://cqxtxw3vbys6q"]
+
+[ext_resource type="Texture2D" uid="uid://bxoxrgb0c007p" path="res://Assets/UI/PausePanel.png" id="1_bjo24"]
+[ext_resource type="FontFile" uid="uid://r5kkxha2rdoa" path="res://Assets/TitanOne-Regular.ttf" id="2_l8stq"]
+[ext_resource type="Texture2D" uid="uid://dgyxhleaeybpy" path="res://Assets/UI/Button/PlayButton_normal.png" id="3_cbifc"]
+[ext_resource type="Texture2D" uid="uid://b28wtvjm1f4kt" path="res://Assets/UI/Button/RetryButton_normal.png" id="4_yg08s"]
+[ext_resource type="Texture2D" uid="uid://lipk4ufh0pbf" path="res://Assets/UI/Button/LevelSelectionButton_normal.png" id="5_u864c"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_bjo24")
+expand_mode = 1
+
+[node name="Title" type="Label" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.5
+offset_top = 67.0
+offset_right = 100.5
+offset_bottom = 152.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("2_l8stq")
+theme_override_font_sizes/font_size = 28
+text = "Game
+Paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.5
+offset_top = -42.5
+offset_right = 100.5
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("2_l8stq")
+theme_override_font_sizes/font_size = 28
+text = "Game
+Paused"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Container" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.99997
+offset_top = -126.999985
+offset_right = 1383.0
+offset_bottom = 1693.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.175, 0.175)
+theme_override_constants/h_separation = 200
+theme_override_constants/v_separation = 400
+columns = 2
+
+[node name="Continue" type="TextureButton" parent="Container"]
+layout_mode = 2
+texture_normal = ExtResource("3_cbifc")
+
+[node name="Retry" type="TextureButton" parent="Container"]
+layout_mode = 2
+texture_normal = ExtResource("4_yg08s")
+
+[node name="Settings" type="TextureButton" parent="Container"]
+layout_mode = 2
+texture_normal = ExtResource("4_yg08s")
+
+[node name="LevelSelection" type="TextureButton" parent="Container"]
+layout_mode = 2
+texture_normal = ExtResource("5_u864c")
