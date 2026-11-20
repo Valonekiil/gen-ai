@@ -31,7 +31,21 @@ var _finished: bool = false
 @onready var _star1: TextureRect = $UI/HBoxContainer/Star1
 @onready var _star2: TextureRect = $UI/HBoxContainer/Star2
 @onready var _star3_bar: TextureProgressBar = $UI/HBoxContainer/TextureProgressBar
-@onready var _pause_button: TextureButton = $UI/PauseButton
+@onready var _pause_button: TextureButton = get_node_or_null("UI/PauseButton")
+
+# --- Dialog tutorial ---
+@onready var _char_text: TextureRect = get_node_or_null("Character/TextureRect")
+@onready var _char_dialog_label: Label = get_node_or_null("Character/TextureRect/Label")
+@onready var _char_e_label: Label = get_node_or_null("Character/TextureRect/Label3")
+const GAME_UI_NODES := ["RealityIndicator", "SwitchCooldownBar", "PiPViewport", "HBoxContainer", "PauseButton"]
+var _dialog_active: bool = false
+var _dialog_text: String = ""
+var _dialog_speed: float = 40.0
+var _dialog_shown: float = 0.0
+var _dialog_done: bool = false
+var _pause_enabled: bool = true
+var _gameplay_camera: Camera2D = null
+var _character_camera: Camera2D = null
 
 # Urutan level siklik sekarang di SignalBus (dipakai juga LevelComplete)
 const LEVEL_COMPLETE := "res://ui/LevelComplete.tscn"
@@ -82,6 +96,15 @@ func _ready() -> void:
 	if sb:
 		sb.star_collected.connect(_on_star_collected)
 
+	# Dialog tutorial: gelembung karakter default tersembunyi
+	_character_camera = character.get_node_or_null("Camera2D")
+	if _character_camera:
+		_character_camera.enabled = false
+	if _char_text:
+		_char_text.visible = false
+	if _char_e_label:
+		_char_e_label.visible = false
+
 	# Preload level berikutnya di background supaya transisi tidak lag
 	# (tekstur level ~17MB/lembar; load sinkron bikin freeze ~2-3 detik)
 	# Delay sebentar: load_threaded_request saat scene sedang diganti kadang gagal parse
@@ -111,6 +134,9 @@ func _on_exit_entered(body: Node) -> void:
 # --- Timer & Bintang: implementasi ---
 
 func _process(delta: float) -> void:
+	if _dialog_active:
+		_type_dialog(delta)
+		return
 	if _transitioning:
 		return
 	elapsed += delta
@@ -118,9 +144,13 @@ func _process(delta: float) -> void:
 
 # --- Pause ---
 func _input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_P:
-		get_viewport().set_input_as_handled()
-		_pause()
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.keycode == KEY_E and _dialog_active and _dialog_done:
+			get_viewport().set_input_as_handled()
+			_end_dialog()
+		elif event.keycode == KEY_P and _pause_enabled:
+			get_viewport().set_input_as_handled()
+			_pause()
 
 func _pause() -> void:
 	if _transitioning or get_tree().paused:
@@ -129,6 +159,70 @@ func _pause() -> void:
 	var paused: Control = load(PAUSED_SCENE).instantiate()
 	paused.process_mode = Node.PROCESS_MODE_ALWAYS
 	get_node("UI").add_child(paused)
+
+# --- Dialog tutorial ---
+func start_dialog(text: String, speed: float = 40.0) -> void:
+	if _dialog_active:
+		return
+	if not _char_text or not _char_dialog_label:
+		return
+	_dialog_active = true
+	_dialog_text = text
+	_dialog_speed = maxf(1.0, speed)
+	_dialog_shown = 0.0
+	_dialog_done = false
+	_char_dialog_label.text = ""
+	if _char_e_label:
+		_char_e_label.visible = false
+	_char_text.visible = true
+
+	# UI game ditutup semua
+	for n in GAME_UI_NODES:
+		var node := get_node_or_null("UI/" + n)
+		if node:
+			node.visible = false
+
+	# Kamera beralih ke kamera milik pemain
+	_gameplay_camera = get_viewport().get_camera_2d()
+	if _gameplay_camera:
+		_gameplay_camera.enabled = false
+	if _character_camera:
+		_character_camera.enabled = true
+		_character_camera.make_current()
+
+	# Input pause berhenti selama dialog
+	_pause_enabled = false
+	_type_dialog(0.0)
+
+func _type_dialog(delta: float) -> void:
+	if _dialog_done:
+		return
+	_dialog_shown += delta * _dialog_speed
+	var total := _dialog_text.length()
+	var count := mini(int(_dialog_shown), total)
+	_char_dialog_label.text = _dialog_text.substr(0, count)
+	if count >= total:
+		_dialog_done = true
+		_char_dialog_label.text = _dialog_text
+		if _char_e_label:
+			_char_e_label.visible = true
+
+func _end_dialog() -> void:
+	_dialog_active = false
+	if _char_text:
+		_char_text.visible = false
+	if _char_e_label:
+		_char_e_label.visible = false
+	for n in GAME_UI_NODES:
+		var node := get_node_or_null("UI/" + n)
+		if node:
+			node.visible = true
+	if _character_camera:
+		_character_camera.enabled = false
+	if _gameplay_camera:
+		_gameplay_camera.enabled = true
+		_gameplay_camera.make_current()
+	_pause_enabled = true
 
 func _on_star_collected() -> void:
 	if star_collected:
