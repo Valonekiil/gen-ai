@@ -13,8 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://b7j33gvbcmg2" path="res://Scene/spawn.tscn" id="10_a8xa2"]
 [ext_resource type="PackedScene" uid="uid://cdsre4yt3daux" path="res://Scene/door.tscn" id="12_73fpa"]
 [ext_resource type="Texture2D" uid="uid://bminy0ixn6eoh" path="res://Assets/Levels/Lvl2B.png" id="12_a8xa2"]
-[ext_resource type="Texture2D" uid="uid://cb280eupyswkx" path="res://Assets/UI/Component/PStar_UI.png" id="13_tndk4"]
-[ext_resource type="Texture2D" uid="uid://pfp6bp1lwott" path="res://Assets/UI/Component/GStar_UI.png" id="14_7r4in"]
+[ext_resource type="Texture2D" uid="uid://bop8qgfekmsij" path="res://Assets/UI/Component/PStar_UI.png" id="13_tndk4"]
+[ext_resource type="Texture2D" uid="uid://b5lj74wh3mrc3" path="res://Assets/UI/Component/GStar_UI.png" id="14_7r4in"]
 [ext_resource type="Texture2D" uid="uid://04cibq4xjrbo" path="res://Assets/UI/Button/01_Frame_Besi.png" id="20_cdbar_a"]
 [ext_resource type="Texture2D" uid="uid://cuvdsyfy64yx5" path="res://Assets/UI/Button/02_Isi_Menyala.png" id="21_cdbar_b"]
 [ext_resource type="Texture2D" uid="uid://orpejqglantg" path="res://Assets/UI/Button/03_Isi_Gelap.png" id="22_cdbar_c"]
@@ -122,6 +122,10 @@ reality_a_root = NodePath("../RealityA")
 reality_b_root = NodePath("../RealityB")
 reality_manager = NodePath("../RealityManager")
 
+[node name="MainCamera" type="Camera2D" parent="."]
+position = Vector2(895, 127)
+zoom = Vector2(0.198, 0.198)
+
 [node name="RealityA" type="Node2D" parent="."]
 
 [node name="TerrainA" type="TileMapLayer" parent="RealityA"]
@@ -138,10 +142,6 @@ position = Vector2(890, 138)
 
 [node name="Exit" parent="RealityA" instance=ExtResource("9_h1hxl")]
 position = Vector2(3454, 135)
-
-[node name="CameraA" type="Camera2D" parent="RealityA"]
-position = Vector2(888, 127)
-zoom = Vector2(0.175, 0.175)
 
 [node name="WallsA" type="StaticBody2D" parent="RealityA"]
 
@@ -221,10 +221,13 @@ shape = SubResource("RectangleShape2D_sfvew")
 
 [node name="RealityIndicator" type="Label" parent="UI"]
 offset_left = 20.0
-offset_top = 20.0
-offset_right = 20.0
-offset_bottom = 20.0
+offset_top = 8.0
+offset_right = 203.0
+offset_bottom = 49.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("30_titan_one")
+theme_override_font_sizes/font_size = 35
 text = "REALITA A"
 
 [node name="SwitchCooldownBar" type="TextureProgressBar" parent="UI"]
@@ -232,7 +235,7 @@ offset_left = 20.0
 offset_top = 50.000008
 offset_right = 1485.0
 offset_bottom = 1218.0
-scale = Vector2(0.075, 0.075)
+scale = Vector2(0.05, 0.05)
 value = 100.0
 texture_under = ExtResource("20_cdbar_a")
 texture_over = ExtResource("21_cdbar_b")
@@ -279,9 +282,9 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -60.0
-offset_top = 115.0
+offset_top = 83.0
 offset_right = -10.0
-offset_bottom = 165.0
+offset_bottom = 133.0
 grow_horizontal = 0
 texture_normal = ExtResource("40_pause_n")
 texture_pressed = ExtResource("41_pause_h")

@@ -44,6 +44,8 @@ var _dialog_speed: float = 40.0
 var _dialog_shown: float = 0.0
 var _dialog_done: bool = false
 var _pause_enabled: bool = true
+var _dialog_prev_input: bool = true
+var _preload_retried: bool = false
 var _gameplay_camera: Camera2D = null
 var _character_camera: Camera2D = null
 
@@ -192,6 +194,9 @@ func start_dialog(text: String, speed: float = 40.0) -> void:
 
 	# Input pause berhenti selama dialog
 	_pause_enabled = false
+	# Karakter diam selama dialog
+	_dialog_prev_input = character.input_enabled
+	character.set_input_enabled(false)
 	_type_dialog(0.0)
 
 func _type_dialog(delta: float) -> void:
@@ -223,6 +228,8 @@ func _end_dialog() -> void:
 		_gameplay_camera.enabled = true
 		_gameplay_camera.make_current()
 	_pause_enabled = true
+	# Karakter bisa bergerak lagi
+	character.set_input_enabled(_dialog_prev_input)
 
 func _on_star_collected() -> void:
 	if star_collected:
@@ -263,10 +270,20 @@ func _get_next_level_path() -> String:
 	return SignalBus.next_level_path(scene_file_path)
 
 func _preload_next_level() -> void:
-	var st := ResourceLoader.load_threaded_get_status(_get_next_level_path())
+	var path := _get_next_level_path()
+	var st := ResourceLoader.load_threaded_get_status(path)
 	if st == ResourceLoader.THREAD_LOAD_IN_PROGRESS or st == ResourceLoader.THREAD_LOAD_LOADED:
 		return
-	ResourceLoader.load_threaded_request(_get_next_level_path())
+	if st == ResourceLoader.THREAD_LOAD_FAILED:
+		# Kadang parse scene gagal saat load threaded (race); coba sekali lagi
+		if not _preload_retried:
+			_preload_retried = true
+			ResourceLoader.load_threaded_request(path)
+			get_tree().create_timer(1.5).timeout.connect(_preload_next_level)
+		return
+	ResourceLoader.load_threaded_request(path)
+	# Cek lagi belakang: kalau gagal, dicoba sekali di atas
+	get_tree().create_timer(1.5).timeout.connect(_preload_next_level)
 
 # Transisi ke scene LevelComplete, bukan langsung ke level berikutnya
 func _go_to_level_complete() -> void:

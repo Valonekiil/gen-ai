@@ -6,6 +6,7 @@ const SWITCH_COOLDOWN := 2.0
 
 var state: State = State.RunningA
 var _cooldown_timer: float = 0.0
+var _transition: RealityTransition
 
 @export var character_a: CharacterController
 @export var character_b: CharacterController
@@ -13,6 +14,10 @@ var _cooldown_timer: float = 0.0
 @export var camera_b: Camera2D
 @export var terrain_a: TileMapLayer
 @export var terrain_b: TileMapLayer
+
+func _ready() -> void:
+	_transition = RealityTransition.new()
+	add_child(_transition)
 
 func _process(delta: float) -> void:
 	if _cooldown_timer > 0.0:
@@ -116,6 +121,10 @@ func request_switch() -> void:
 	char.set_input_enabled(false)
 	char.state = CharacterController.State.INACTIVE_FROZEN
 
+	# VFX transisi: biru muda saat menuju B, oranye saat menuju A.
+	# Ring mulai dari posisi pemain; swap realitas dilakukan setelah layar tertutup penuh.
+	await _transition.play_in(_screen_uv(char), new_active)
+
 	var inactive_char := _get_char(new_active)
 	inactive_char.set_input_enabled(true)
 	inactive_char.state = CharacterController.State.ACTIVE_CONTROLLED
@@ -123,6 +132,20 @@ func request_switch() -> void:
 	get_node("/root/SignalBus").character_switched.emit(new_active, previous_active)
 
 	state = State.RunningA if new_active == "A" else State.RunningB
+
+	# Tunggu kamera realita tujuan aktif (layar masih tertutup), lalu ring
+	# menyusut ke posisi pemain di realita tujuan.
+	await get_tree().process_frame
+	await get_tree().process_frame
+	_transition.play_out(_screen_uv(inactive_char))
+
+## Posisi karakter di layar dalam UV (0..1), mengikuti kamera aktif.
+func _screen_uv(character: CharacterController) -> Vector2:
+	if not character:
+		return Vector2(0.5, 0.5)
+	var pos := character.get_global_transform_with_canvas().origin
+	var uv := pos / get_viewport().get_visible_rect().size
+	return uv.clamp(Vector2.ZERO, Vector2.ONE)
 
 func _get_char(reality: String) -> CharacterController:
 	if reality == "A":
