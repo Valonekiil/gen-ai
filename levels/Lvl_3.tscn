@@ -5,22 +5,22 @@
 [ext_resource type="Script" uid="uid://1bxlqm3gntw7" path="res://core/CameraDirector.gd" id="3_f044q"]
 [ext_resource type="Script" uid="uid://btm5oehp1nc3m" path="res://core/UIDirector.gd" id="4_7r5mp"]
 [ext_resource type="Texture2D" uid="uid://crfvuoehmoos0" path="res://Assets/Tileset.png" id="5_r4i6u"]
-[ext_resource type="Texture2D" uid="uid://jniis4slx6ha" path="res://Assets/Game_Tile_Atlas_Fixed.png" id="6_y8ll1"]
-[ext_resource type="Texture2D" uid="uid://ioyf4pywg33" path="res://Assets/Levels/Lvl2A.png" id="7_2apva"]
+[ext_resource type="Texture2D" uid="uid://cu74mpr6j25mj" path="res://Assets/Game_Tile_Atlas_Fixed.png" id="6_y8ll1"]
+[ext_resource type="Texture2D" uid="uid://dk1eh1drt8542" path="res://Assets/Levels/Lvl3A.png" id="7_2apva"]
 [ext_resource type="PackedScene" uid="uid://cdsre4yt3daux" path="res://Scene/door.tscn" id="8_4073y"]
-[ext_resource type="Texture2D" uid="uid://dapxvox1hgu1n" path="res://Assets/UI/Button/01_Frame_Besi.png" id="8_f044q"]
-[ext_resource type="Texture2D" uid="uid://j5kw1h864ytw" path="res://Assets/UI/Button/02_Isi_Menyala.png" id="9_7r5mp"]
+[ext_resource type="Texture2D" uid="uid://04cibq4xjrbo" path="res://Assets/UI/Button/01_Frame_Besi.png" id="8_f044q"]
+[ext_resource type="Texture2D" uid="uid://cuvdsyfy64yx5" path="res://Assets/UI/Button/02_Isi_Menyala.png" id="9_7r5mp"]
 [ext_resource type="PackedScene" uid="uid://bq76m7wcyf86r" path="res://Scene/exit.tscn" id="9_oe7eo"]
 [ext_resource type="PackedScene" uid="uid://b7j33gvbcmg2" path="res://Scene/spawn.tscn" id="10_boskh"]
-[ext_resource type="Texture2D" uid="uid://chqehnffjq8sj" path="res://Assets/UI/Button/03_Isi_Gelap.png" id="10_r4i6u"]
-[ext_resource type="Texture2D" uid="uid://cxb78dhgv4bv7" path="res://Assets/Levels/Lvl2B.png" id="10_t5kpf"]
+[ext_resource type="Texture2D" uid="uid://orpejqglantg" path="res://Assets/UI/Button/03_Isi_Gelap.png" id="10_r4i6u"]
+[ext_resource type="Texture2D" uid="uid://brt8et258bfcd" path="res://Assets/Levels/Lvl3B.png" id="10_t5kpf"]
 [ext_resource type="PackedScene" uid="uid://dymjnlqmhegc8" path="res://Scene/character.tscn" id="11_2apva"]
 [ext_resource type="PackedScene" uid="uid://bvjd8dugdtkss" path="res://Scene/button.tscn" id="11_l587j"]
-[ext_resource type="Texture2D" uid="uid://bkoaeaegtg0s" path="res://Assets/UI/Component/PStar_UI.png" id="13_tndk4"]
-[ext_resource type="Texture2D" uid="uid://ck3vr16l34t4g" path="res://Assets/UI/Component/GStar_UI.png" id="14_7r4in"]
-[ext_resource type="FontFile" uid="uid://b0onuipm86vdj" path="res://Assets/TitanOne-Regular.ttf" id="30_titan_one"]
-[ext_resource type="Texture2D" uid="uid://qj2ttfrb71s" path="res://Assets/UI/Button/PauseButton_normal.png" id="40_pause_n"]
-[ext_resource type="Texture2D" uid="uid://coer0cq03fel4" path="res://Assets/UI/Button/PauseButton.png" id="41_pause_h"]
+[ext_resource type="Texture2D" uid="uid://bop8qgfekmsij" path="res://Assets/UI/Component/PStar_UI.png" id="13_tndk4"]
+[ext_resource type="Texture2D" uid="uid://b5lj74wh3mrc3" path="res://Assets/UI/Component/GStar_UI.png" id="14_7r4in"]
+[ext_resource type="FontFile" uid="uid://r5kkxha2rdoa" path="res://Assets/TitanOne-Regular.ttf" id="30_titan_one"]
+[ext_resource type="Texture2D" uid="uid://bf407loek41h0" path="res://Assets/UI/Button/PauseButton_normal.png" id="40_pause_n"]
+[ext_resource type="Texture2D" uid="uid://c7wkl0hksy25" path="res://Assets/UI/Button/PauseButton.png" id="41_pause_h"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4hhoj"]
 texture = ExtResource("5_r4i6u")
@@ -66,44 +66,101 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_4hhoj")
 sources/2 = SubResource("TileSetAtlasSource_h60fj")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sh8hv"]
+[sub_resource type="RectangleShape2D" id="Rect_Lvl_3_A_00"]
 size = Vector2(5888, 256)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vppi4"]
-size = Vector2(256, 3072)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_h1hxl"]
+[sub_resource type="RectangleShape2D" id="Rect_Lvl_3_A_01"]
 size = Vector2(256, 1280)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a8xa2"]
-size = Vector2(256, 3072)
+[sub_resource type="RectangleShape2D" id="Rect_Lvl_3_A_02"]
+size = Vector2(3840, 256)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pr6ci"]
-size = Vector2(256, 256)
+[sub_resource type="RectangleShape2D" id="Rect_Lvl_3_A_03"]
+size = Vector2(256, 768)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jmrpj"]
+[sub_resource type="RectangleShape2D" id="Rect_Lvl_3_A_04"]
+size = Vector2(3072, 256)
+
+[sub_resource type="RectangleShape2D" id="Rect_Lvl_3_A_05"]
+size = Vector2(1280, 256)
+
+[sub_resource type="RectangleShape2D" id="Rect_Lvl_3_A_06"]
+size = Vector2(2048, 256)
+
+[sub_resource type="RectangleShape2D" id="Rect_Lvl_3_A_07"]
+size = Vector2(1024, 512)
+
+[sub_resource type="RectangleShape2D" id="Rect_Lvl_3_A_08"]
+size = Vector2(2304, 256)
+
+[sub_resource type="RectangleShape2D" id="Rect_Lvl_3_A_09"]
+size = Vector2(512, 1792)
+
+[sub_resource type="RectangleShape2D" id="Rect_Lvl_3_A_10"]
+size = Vector2(2560, 256)
+
+[sub_resource type="RectangleShape2D" id="Rect_Lvl_3_A_11"]
+size = Vector2(5120, 1024)
+
+[sub_resource type="RectangleShape2D" id="Rect_Lvl_3_A_12"]
+size = Vector2(256, 512)
+
+[sub_resource type="RectangleShape2D" id="Rect_Lvl_3_A_13"]
+size = Vector2(1536, 512)
+
+[sub_resource type="RectangleShape2D" id="Rect_Lvl_3_A_14"]
+size = Vector2(1280, 256)
+
+[sub_resource type="RectangleShape2D" id="Rect_Lvl_3_A_15"]
+size = Vector2(5888, 256)
+
+[sub_resource type="RectangleShape2D" id="Rect_Lvl_3_B_00"]
+size = Vector2(5888, 256)
+
+[sub_resource type="RectangleShape2D" id="Rect_Lvl_3_B_01"]
+size = Vector2(1536, 768)
+
+[sub_resource type="RectangleShape2D" id="Rect_Lvl_3_B_02"]
+size = Vector2(3072, 256)
+
+[sub_resource type="RectangleShape2D" id="Rect_Lvl_3_B_03"]
+size = Vector2(2816, 256)
+
+[sub_resource type="RectangleShape2D" id="Rect_Lvl_3_B_04"]
+size = Vector2(2304, 1024)
+
+[sub_resource type="RectangleShape2D" id="Rect_Lvl_3_B_05"]
+size = Vector2(256, 2048)
+
+[sub_resource type="RectangleShape2D" id="Rect_Lvl_3_B_06"]
+size = Vector2(2304, 768)
+
+[sub_resource type="RectangleShape2D" id="Rect_Lvl_3_B_07"]
+size = Vector2(2048, 256)
+
+[sub_resource type="RectangleShape2D" id="Rect_Lvl_3_B_08"]
+size = Vector2(1280, 256)
+
+[sub_resource type="RectangleShape2D" id="Rect_Lvl_3_B_09"]
 size = Vector2(512, 256)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uxd2a"]
-size = Vector2(256, 1280)
+[sub_resource type="RectangleShape2D" id="Rect_Lvl_3_B_10"]
+size = Vector2(1792, 256)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_id6g1"]
+[sub_resource type="RectangleShape2D" id="Rect_Lvl_3_B_11"]
+size = Vector2(2304, 256)
+
+[sub_resource type="RectangleShape2D" id="Rect_Lvl_3_B_12"]
+size = Vector2(1536, 768)
+
+[sub_resource type="RectangleShape2D" id="Rect_Lvl_3_B_13"]
 size = Vector2(2560, 256)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fomj3"]
-size = Vector2(2560, 256)
+[sub_resource type="RectangleShape2D" id="Rect_Lvl_3_B_14"]
+size = Vector2(2816, 512)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8eohs"]
+[sub_resource type="RectangleShape2D" id="Rect_Lvl_3_B_15"]
 size = Vector2(5888, 256)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hpviu"]
-size = Vector2(256, 3072)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3uajo"]
-size = Vector2(3072, 3072)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sfvew"]
-size = Vector2(2560, 256)
 
 [node name="Level1" type="Node2D" unique_id=901848050]
 script = ExtResource("1_kbxc3")
@@ -133,7 +190,6 @@ tile_map_data = PackedByteArray("AAD//wAAAgABAAAAAAAAAAAAAgABAAAAAAD+/wAAAgABAAA
 tile_set = SubResource("TileSet_1ueab")
 
 [node name="LevelImageA" type="Sprite2D" parent="RealityA" unique_id=574634067]
-visible = false
 position = Vector2(896, 128)
 texture = ExtResource("7_2apva")
 
@@ -157,44 +213,73 @@ reality_manager = NodePath("../../RealityManager")
 [node name="Exit" parent="RealityA" unique_id=722019124 instance=ExtResource("9_oe7eo")]
 position = Vector2(3197, -1119)
 
-[node name="WallsA" type="StaticBody2D" parent="RealityA" unique_id=1158740742]
+[node name="WallsA" type="StaticBody2D" parent="RealityA" unique_id=900000001]
 visible = false
 
-[node name="Wall00" type="CollisionShape2D" parent="RealityA/WallsA" unique_id=1064541675]
+[node name="Wall00" type="CollisionShape2D" parent="RealityA/WallsA" unique_id=900000002]
 position = Vector2(896, -1408)
-shape = SubResource("RectangleShape2D_sh8hv")
+shape = SubResource("Rect_Lvl_3_A_00")
 
-[node name="Wall01" type="CollisionShape2D" parent="RealityA/WallsA" unique_id=1305672732]
-position = Vector2(-1920, 256)
-shape = SubResource("RectangleShape2D_vppi4")
+[node name="Wall01" type="CollisionShape2D" parent="RealityA/WallsA" unique_id=900000003]
+position = Vector2(-1920, -640)
+shape = SubResource("Rect_Lvl_3_A_01")
 
-[node name="Wall02" type="CollisionShape2D" parent="RealityA/WallsA" unique_id=1449775383]
-position = Vector2(896, -640)
-shape = SubResource("RectangleShape2D_h1hxl")
+[node name="Wall02" type="CollisionShape2D" parent="RealityA/WallsA" unique_id=900000004]
+position = Vector2(896, -1152)
+shape = SubResource("Rect_Lvl_3_A_02")
 
-[node name="Wall03" type="CollisionShape2D" parent="RealityA/WallsA" unique_id=585217212]
-position = Vector2(3712, 256)
-shape = SubResource("RectangleShape2D_a8xa2")
+[node name="Wall03" type="CollisionShape2D" parent="RealityA/WallsA" unique_id=900000005]
+position = Vector2(3712, -896)
+shape = SubResource("Rect_Lvl_3_A_03")
 
-[node name="Wall04" type="CollisionShape2D" parent="RealityA/WallsA" unique_id=1118667794]
-position = Vector2(640, -128)
-shape = SubResource("RectangleShape2D_pr6ci")
+[node name="Wall04" type="CollisionShape2D" parent="RealityA/WallsA" unique_id=900000006]
+position = Vector2(1280, -896)
+shape = SubResource("Rect_Lvl_3_A_04")
 
-[node name="Wall05" type="CollisionShape2D" parent="RealityA/WallsA" unique_id=763196057]
-position = Vector2(768, 384)
-shape = SubResource("RectangleShape2D_jmrpj")
+[node name="Wall05" type="CollisionShape2D" parent="RealityA/WallsA" unique_id=900000007]
+position = Vector2(-384, -640)
+shape = SubResource("Rect_Lvl_3_A_05")
 
-[node name="Wall06" type="CollisionShape2D" parent="RealityA/WallsA" unique_id=1758585346]
-position = Vector2(896, 1152)
-shape = SubResource("RectangleShape2D_uxd2a")
+[node name="Wall06" type="CollisionShape2D" parent="RealityA/WallsA" unique_id=900000008]
+position = Vector2(1792, -640)
+shape = SubResource("Rect_Lvl_3_A_06")
 
-[node name="Wall07" type="CollisionShape2D" parent="RealityA/WallsA" unique_id=1199628852]
-position = Vector2(-512, 1664)
-shape = SubResource("RectangleShape2D_id6g1")
+[node name="Wall07" type="CollisionShape2D" parent="RealityA/WallsA" unique_id=900000009]
+position = Vector2(-512, -256)
+shape = SubResource("Rect_Lvl_3_A_07")
 
-[node name="Wall08" type="CollisionShape2D" parent="RealityA/WallsA" unique_id=693576458]
-position = Vector2(2304, 1664)
-shape = SubResource("RectangleShape2D_fomj3")
+[node name="Wall08" type="CollisionShape2D" parent="RealityA/WallsA" unique_id=900000010]
+position = Vector2(1920, -384)
+shape = SubResource("Rect_Lvl_3_A_08")
+
+[node name="Wall09" type="CollisionShape2D" parent="RealityA/WallsA" unique_id=900000011]
+position = Vector2(3584, 384)
+shape = SubResource("Rect_Lvl_3_A_09")
+
+[node name="Wall10" type="CollisionShape2D" parent="RealityA/WallsA" unique_id=900000012]
+position = Vector2(1792, -128)
+shape = SubResource("Rect_Lvl_3_A_10")
+
+[node name="Wall11" type="CollisionShape2D" parent="RealityA/WallsA" unique_id=900000013]
+position = Vector2(512, 512)
+shape = SubResource("Rect_Lvl_3_A_11")
+
+[node name="Wall12" type="CollisionShape2D" parent="RealityA/WallsA" unique_id=900000014]
+position = Vector2(-1920, 1280)
+shape = SubResource("Rect_Lvl_3_A_12")
+
+[node name="Wall13" type="CollisionShape2D" parent="RealityA/WallsA" unique_id=900000015]
+position = Vector2(-256, 1280)
+shape = SubResource("Rect_Lvl_3_A_13")
+
+[node name="Wall14" type="CollisionShape2D" parent="RealityA/WallsA" unique_id=900000016]
+position = Vector2(3200, 1408)
+shape = SubResource("Rect_Lvl_3_A_14")
+
+[node name="Wall15" type="CollisionShape2D" parent="RealityA/WallsA" unique_id=900000017]
+position = Vector2(896, 1664)
+shape = SubResource("Rect_Lvl_3_A_15")
+
 
 [node name="RealityB" type="Node2D" parent="." unique_id=982724659]
 
@@ -203,7 +288,6 @@ tile_map_data = PackedByteArray("AAD4//v/AgABAAEAAAD4//z/AgABAAEAAAD4//3/AgABAAE
 tile_set = SubResource("TileSet_1ueab")
 
 [node name="LevelImageB" type="Sprite2D" parent="RealityB" unique_id=1972396158]
-visible = false
 position = Vector2(896, 128)
 texture = ExtResource("10_t5kpf")
 
@@ -215,25 +299,74 @@ position = Vector2(2946, 384)
 target_door_path = NodePath("../../RealityA/Door1")
 reality_manager = NodePath("../../RealityManager")
 
-[node name="WallsB" type="StaticBody2D" parent="RealityB" unique_id=422836939]
+[node name="WallsB" type="StaticBody2D" parent="RealityB" unique_id=900000018]
 visible = false
 collision_layer = 0
 
-[node name="Wall00" type="CollisionShape2D" parent="RealityB/WallsB" unique_id=1357011451]
+[node name="Wall00" type="CollisionShape2D" parent="RealityB/WallsB" unique_id=900000019]
 position = Vector2(896, -1408)
-shape = SubResource("RectangleShape2D_8eohs")
+shape = SubResource("Rect_Lvl_3_B_00")
 
-[node name="Wall01" type="CollisionShape2D" parent="RealityB/WallsB" unique_id=1939510054]
-position = Vector2(-1920, 256)
-shape = SubResource("RectangleShape2D_hpviu")
+[node name="Wall01" type="CollisionShape2D" parent="RealityB/WallsB" unique_id=900000020]
+position = Vector2(-1280, -896)
+shape = SubResource("Rect_Lvl_3_B_01")
 
-[node name="Wall02" type="CollisionShape2D" parent="RealityB/WallsB" unique_id=1957632525]
-position = Vector2(2304, 256)
-shape = SubResource("RectangleShape2D_3uajo")
+[node name="Wall02" type="CollisionShape2D" parent="RealityB/WallsB" unique_id=900000021]
+position = Vector2(2304, -1152)
+shape = SubResource("Rect_Lvl_3_B_02")
 
-[node name="Wall03" type="CollisionShape2D" parent="RealityB/WallsB" unique_id=1918108457]
-position = Vector2(-512, 1664)
-shape = SubResource("RectangleShape2D_sfvew")
+[node name="Wall03" type="CollisionShape2D" parent="RealityB/WallsB" unique_id=900000022]
+position = Vector2(2432, -896)
+shape = SubResource("Rect_Lvl_3_B_03")
+
+[node name="Wall04" type="CollisionShape2D" parent="RealityB/WallsB" unique_id=900000023]
+position = Vector2(2688, -256)
+shape = SubResource("Rect_Lvl_3_B_04")
+
+[node name="Wall05" type="CollisionShape2D" parent="RealityB/WallsB" unique_id=900000024]
+position = Vector2(-1920, 512)
+shape = SubResource("Rect_Lvl_3_B_05")
+
+[node name="Wall06" type="CollisionShape2D" parent="RealityB/WallsB" unique_id=900000025]
+position = Vector2(128, -128)
+shape = SubResource("Rect_Lvl_3_B_06")
+
+[node name="Wall07" type="CollisionShape2D" parent="RealityB/WallsB" unique_id=900000026]
+position = Vector2(0, 384)
+shape = SubResource("Rect_Lvl_3_B_07")
+
+[node name="Wall08" type="CollisionShape2D" parent="RealityB/WallsB" unique_id=900000027]
+position = Vector2(2176, 384)
+shape = SubResource("Rect_Lvl_3_B_08")
+
+[node name="Wall09" type="CollisionShape2D" parent="RealityB/WallsB" unique_id=900000028]
+position = Vector2(3584, 384)
+shape = SubResource("Rect_Lvl_3_B_09")
+
+[node name="Wall10" type="CollisionShape2D" parent="RealityB/WallsB" unique_id=900000029]
+position = Vector2(-128, 640)
+shape = SubResource("Rect_Lvl_3_B_10")
+
+[node name="Wall11" type="CollisionShape2D" parent="RealityB/WallsB" unique_id=900000030]
+position = Vector2(2688, 640)
+shape = SubResource("Rect_Lvl_3_B_11")
+
+[node name="Wall12" type="CollisionShape2D" parent="RealityB/WallsB" unique_id=900000031]
+position = Vector2(-256, 1152)
+shape = SubResource("Rect_Lvl_3_B_12")
+
+[node name="Wall13" type="CollisionShape2D" parent="RealityB/WallsB" unique_id=900000032]
+position = Vector2(2560, 896)
+shape = SubResource("Rect_Lvl_3_B_13")
+
+[node name="Wall14" type="CollisionShape2D" parent="RealityB/WallsB" unique_id=900000033]
+position = Vector2(2432, 1280)
+shape = SubResource("Rect_Lvl_3_B_14")
+
+[node name="Wall15" type="CollisionShape2D" parent="RealityB/WallsB" unique_id=900000034]
+position = Vector2(896, 1664)
+shape = SubResource("Rect_Lvl_3_B_15")
+
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=527003164]
 

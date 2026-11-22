@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://buhox54e6gwgn"]
+[gd_scene load_steps=16 format=3 uid="uid://buhox54e6gwgn"]
 
 [ext_resource type="Texture2D" uid="uid://dd54cj7a43eye" path="res://Assets/UI/Main_Menu_BG.jpg" id="1_rn8js"]
 [ext_resource type="Texture2D" uid="uid://cfwftn8afma5d" path="res://Assets/UI/Logo.png" id="2_nmrkx"]
@@ -7,12 +7,14 @@
 [ext_resource type="Texture2D" uid="uid://bkqqm07a8wy15" path="res://Assets/UI/Button/SettingButton_normal.png" id="5_uvwf2"]
 [ext_resource type="Texture2D" uid="uid://d1khlpuc08od" path="res://Assets/UI/Button/SettingButton.png" id="6_youui"]
 [ext_resource type="Texture2D" uid="uid://vcqol6s7w7bn" path="res://Assets/UI/Setting.jpeg" id="7_58pe3"]
-[ext_resource type="Texture2D" uid="uid://cuxi0368122pv" path="res://Assets/UI/Button/QuitButton_normal.png" id="7_uvwf2"]
+[ext_resource type="Texture2D" uid="uid://crt7pwa4muk5e" path="res://Assets/UI/Button/QuitButton_normal.png" id="7_uvwf2"]
 [ext_resource type="FontFile" uid="uid://r5kkxha2rdoa" path="res://Assets/TitanOne-Regular.ttf" id="8_g6r01"]
-[ext_resource type="Texture2D" uid="uid://cnhwtshbf86xm" path="res://Assets/UI/Button/LvlPanel.png" id="10_58pe3"]
-[ext_resource type="Texture2D" uid="uid://mamv6rx0pf0f" path="res://Assets/UI/Button/LockedLvl.png" id="11_g6r01"]
+[ext_resource type="Texture2D" uid="uid://darldvid0ddsv" path="res://Assets/UI/Button/LvlPanel.png" id="10_58pe3"]
+[ext_resource type="Texture2D" uid="uid://hfurhdjh6uxm" path="res://Assets/UI/Button/LockedLvl.png" id="11_g6r01"]
+[ext_resource type="Texture2D" uid="uid://4bfppl1e88p0" path="res://Assets/UI/reimport/RetryButton_normal.png" id="11_gie3v"]
 [ext_resource type="PackedScene" uid="uid://cnmb4n6r4qqv1" path="res://ui/LvLButton.tscn" id="11_t3nb0"]
-[ext_resource type="Script" path="res://ui/MainMenu.gd" id="12_menu_script"]
+[ext_resource type="Texture2D" uid="uid://dxlj6pvh40gp2" path="res://Assets/UI/reimport/RetryButton.png" id="12_dms6u"]
+[ext_resource type="Script" uid="uid://bitvtdfifvxni" path="res://ui/MainMenu.gd" id="12_menu_script"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -80,7 +82,6 @@ layout_mode = 2
 texture_normal = ExtResource("7_uvwf2")
 
 [node name="Settings" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -111,7 +112,82 @@ theme_override_fonts/font = ExtResource("8_g6r01")
 theme_override_font_sizes/font_size = 50
 text = "SETTINGS"
 
+[node name="Label" type="Label" parent="Settings"]
+layout_mode = 0
+offset_left = 345.0
+offset_top = 217.0
+offset_right = 487.0
+offset_bottom = 258.0
+theme_override_fonts/font = ExtResource("8_g6r01")
+theme_override_font_sizes/font_size = 35
+text = "Volume"
+
+[node name="Container1" type="HBoxContainer" parent="Settings"]
+layout_mode = 0
+offset_left = 345.0
+offset_top = 291.0
+offset_right = 813.0
+offset_bottom = 331.0
+
+[node name="Label" type="Label" parent="Settings/Container1"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_g6r01")
+theme_override_font_sizes/font_size = 30
+text = "Music"
+
+[node name="HSlider" type="HSlider" parent="Settings/Container1"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+
+[node name="Container2" type="HBoxContainer" parent="Settings"]
+layout_mode = 0
+offset_left = 344.0
+offset_top = 339.0
+offset_right = 813.0
+offset_bottom = 379.0
+
+[node name="Label" type="Label" parent="Settings/Container2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_g6r01")
+theme_override_font_sizes/font_size = 30
+text = "Sfx"
+
+[node name="HSlider" type="HSlider" parent="Settings/Container2"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+
+[node name="Container3" type="HBoxContainer" parent="Settings"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -108.5
+offset_top = -185.0
+offset_right = 108.5
+offset_bottom = -144.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="Settings/Container3"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_g6r01")
+theme_override_font_sizes/font_size = 35
+text = "Reset data:"
+
+[node name="TextureButton" type="TextureButton" parent="Settings/Container3"]
+layout_mode = 2
+texture_normal = ExtResource("11_gie3v")
+texture_pressed = ExtResource("12_dms6u")
+texture_hover = ExtResource("12_dms6u")
+
 [node name="LevelSelection" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

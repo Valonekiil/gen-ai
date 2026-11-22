@@ -20,14 +20,28 @@ func _ready() -> void:
 		_off_sprite.visible = true
 	body_entered.connect(_on_body_entered)
 
+# Cari realita tempat tombol ini berada (lewat ancestor bernama RealityA/RealityB)
+func _get_reality() -> String:
+	var n: Node = self
+	while n:
+		var nm := String(n.name)
+		if nm == "RealityA" or nm == "RealityB":
+			return nm.substr(7, 1)
+		n = n.get_parent()
+	return ""
+
 func _on_body_entered(body: Node) -> void:
 	if pressed:
 		return
 	if not (body is CharacterController):
 		return
-	# Hanya aktif di realita kedua (B)
-	if reality_manager and reality_manager.state != RealityManager.State.RunningB:
-		return
+	# Tombol hanya merespons saat realita tempatnya sedang aktif
+	var reality := _get_reality()
+	if reality_manager:
+		if reality == "A" and reality_manager.state != RealityManager.State.RunningA:
+			return
+		if reality == "B" and reality_manager.state != RealityManager.State.RunningB:
+			return
 	pressed = true
 	if _off_sprite:
 		_off_sprite.visible = false
@@ -38,4 +52,4 @@ func _on_body_entered(body: Node) -> void:
 		var door := get_node_or_null(target_door_path)
 		if door and door.has_method("open_door"):
 			door.open_door()
-	print("[Button] Ditekan")
+	print("[Button] Ditekan di realita ", reality)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=4 uid="uid://btbijairqkp6u"]
+[gd_scene load_steps=45 format=4 uid="uid://brpitq3vl2avo"]
 
 [ext_resource type="Script" uid="uid://c7x421fmesvdt" path="res://levels/LvlTest.gd" id="1_kbxc3"]
 [ext_resource type="Script" uid="uid://e2neyto34nqq" path="res://core/RealityManager.gd" id="2_kn742"]
@@ -18,8 +18,8 @@
 [ext_resource type="Texture2D" uid="uid://b5lj74wh3mrc3" path="res://Assets/UI/Component/GStar_UI.png" id="14_7r4in"]
 [ext_resource type="Texture2D" uid="uid://bf407loek41h0" path="res://Assets/UI/Button/PauseButton_normal.png" id="40_pause_n"]
 [ext_resource type="Texture2D" uid="uid://c7wkl0hksy25" path="res://Assets/UI/Button/PauseButton.png" id="41_pause_h"]
-[ext_resource type="Texture2D" uid="uid://8ffd51r1lr6t" path="res://Assets/Levels/Lvl3A.png" id="50_lvl3a"]
-[ext_resource type="Texture2D" uid="uid://de81dnxf6wgdt" path="res://Assets/Levels/Lvl3B.png" id="51_lvl3b"]
+[ext_resource type="Texture2D" uid="uid://dco0u661w5om7" path="res://Assets/Levels/Lvl4A.png" id="50_lvl3a"]
+[ext_resource type="Texture2D" uid="uid://b2nyeqniy2pxb" path="res://Assets/Levels/Lvl4B.png" id="51_lvl3b"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4hhoj"]
 texture = ExtResource("5_r4i6u")

@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://crfvuoehmoos0" path="res://Assets/Tileset.png" id="5_u181w"]
 [ext_resource type="Texture2D" uid="uid://cu74mpr6j25mj" path="res://Assets/Game_Tile_Atlas_Fixed.png" id="6_ryxe6"]
 [ext_resource type="Texture2D" uid="uid://bbyxlnpg3wnyj" path="res://Assets/Levels/Lvl0A.png" id="7_dxd5g"]
-[ext_resource type="Texture2D" uid="uid://dmd86r4xv6t0b" path="res://Assets/Levels/Lvl0B.png" id="8_4rofw"]
+[ext_resource type="Texture2D" uid="uid://dj113uj5u4ji8" path="res://Assets/Levels/Lvl0B.png" id="8_4rofw"]
 [ext_resource type="FontFile" uid="uid://r5kkxha2rdoa" path="res://Assets/TitanOne-Regular.ttf" id="9_ao6ib"]
 [ext_resource type="Texture2D" uid="uid://04cibq4xjrbo" path="res://Assets/UI/Button/01_Frame_Besi.png" id="10_h5g5a"]
 [ext_resource type="Texture2D" uid="uid://cuvdsyfy64yx5" path="res://Assets/UI/Button/02_Isi_Menyala.png" id="11_sjk28"]
