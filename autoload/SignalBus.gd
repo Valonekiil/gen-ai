@@ -25,6 +25,8 @@ const LEVEL_SEQUENCE := [
 	"res://levels/Lvl_1.tscn",
 	"res://levels/Lvl_2.tscn",
 	"res://levels/Lvl_3.tscn",
+	"res://levels/Lvl_4.tscn",
+	"res://levels/Lvl_5.tscn",
 ]
 
 # Hasil level terakhir, dibaca scene LevelComplete (reusable untuk semua level)

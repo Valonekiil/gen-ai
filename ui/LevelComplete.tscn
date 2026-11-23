@@ -8,8 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://dhxse8bt8438h" path="res://Assets/UI/Button/RetryButton.png" id="7_retry_h"]
 [ext_resource type="Texture2D" uid="uid://dgyxhleaeybpy" path="res://Assets/UI/Button/PlayButton_normal.png" id="8_play_n"]
 [ext_resource type="Texture2D" uid="uid://bcoyaaoixww" path="res://Assets/UI/Button/PlayButton.png" id="9_play_h"]
-[ext_resource type="Texture2D" uid="uid://lipk4ufh0pbf" path="res://Assets/UI/Button/LevelSelectionButton_normal.png" id="10_ls_n"]
-[ext_resource type="Texture2D" uid="uid://1ql73uuisowx" path="res://Assets/UI/Button/HomeButton_normal.png" id="12_home_n"]
+[ext_resource type="Texture2D" uid="uid://dfto2qa22yxt4" path="res://Assets/UI/Button/LevelSelectionButton_normal.png" id="10_ls_n"]
+[ext_resource type="Texture2D" uid="uid://bypguw2fnrhh8" path="res://Assets/UI/Button/HomeButton_normal.png" id="12_home_n"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
