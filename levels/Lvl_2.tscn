@@ -14,14 +14,15 @@
 [ext_resource type="PackedScene" uid="uid://ctre82aoxbwfh" path="res://Scene/Star.tscn" id="10_uxd2a"]
 [ext_resource type="PackedScene" uid="uid://cdsre4yt3daux" path="res://Scene/door.tscn" id="12_73fpa"]
 [ext_resource type="Texture2D" uid="uid://bminy0ixn6eoh" path="res://Assets/Levels/Lvl2B.png" id="12_a8xa2"]
-[ext_resource type="Texture2D" uid="uid://cb280eupyswkx" path="res://Assets/UI/Component/PStar_UI.png" id="13_tndk4"]
-[ext_resource type="Texture2D" uid="uid://pfp6bp1lwott" path="res://Assets/UI/Component/GStar_UI.png" id="14_7r4in"]
+[ext_resource type="Texture2D" uid="uid://bop8qgfekmsij" path="res://Assets/UI/Component/PStar_UI.png" id="13_tndk4"]
+[ext_resource type="Texture2D" uid="uid://b5lj74wh3mrc3" path="res://Assets/UI/Component/GStar_UI.png" id="14_7r4in"]
 [ext_resource type="Texture2D" uid="uid://04cibq4xjrbo" path="res://Assets/UI/Button/01_Frame_Besi.png" id="20_cdbar_a"]
 [ext_resource type="Texture2D" uid="uid://cuvdsyfy64yx5" path="res://Assets/UI/Button/02_Isi_Menyala.png" id="21_cdbar_b"]
 [ext_resource type="Texture2D" uid="uid://orpejqglantg" path="res://Assets/UI/Button/03_Isi_Gelap.png" id="22_cdbar_c"]
 [ext_resource type="FontFile" uid="uid://r5kkxha2rdoa" path="res://Assets/TitanOne-Regular.ttf" id="30_titan_one"]
 [ext_resource type="Texture2D" uid="uid://bf407loek41h0" path="res://Assets/UI/Button/PauseButton_normal.png" id="40_pause_n"]
 [ext_resource type="Texture2D" uid="uid://c7wkl0hksy25" path="res://Assets/UI/Button/PauseButton.png" id="41_pause_h"]
+[ext_resource type="Script" uid="uid://bqmwe4cvwqkok" path="res://levels/DialogArea.gd" id="60_dialog"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4hhoj"]
 texture = ExtResource("5_l1j8m")
@@ -105,6 +106,9 @@ size = Vector2(3072, 3072)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sfvew"]
 size = Vector2(2560, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dialog"]
+size = Vector2(240, 240)
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_j0s2s")
@@ -306,3 +310,21 @@ position = Vector2(-1540, 195)
 
 [node name="Character" parent="." instance=ExtResource("8_vppi4")]
 position = Vector2(-56, 434)
+
+[node name="DialSpawn" type="Area2D" parent="RealityA"]
+position = Vector2(-1540, 195)
+script = ExtResource("60_dialog")
+dialog_text = "Pintunya terkunci. Tombolnya tidak ada di realitas ini."
+once_only = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RealityA/DialSpawn"]
+shape = SubResource("RectangleShape2D_dialog")
+
+[node name="DialButton" type="Area2D" parent="RealityB"]
+position = Vector2(151, 1000)
+script = ExtResource("60_dialog")
+dialog_text = "Pijak tombol ini. Mungkin pintu di realitas awal akan terbuka "
+once_only = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RealityB/DialButton"]
+shape = SubResource("RectangleShape2D_dialog")

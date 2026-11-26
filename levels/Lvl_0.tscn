@@ -7,15 +7,15 @@
 [ext_resource type="Texture2D" uid="uid://crfvuoehmoos0" path="res://Assets/Tileset.png" id="5_5jdlp"]
 [ext_resource type="Texture2D" uid="uid://cu74mpr6j25mj" path="res://Assets/Game_Tile_Atlas_Fixed.png" id="6_k06q1"]
 [ext_resource type="Texture2D" uid="uid://bbyxlnpg3wnyj" path="res://Assets/Levels/Lvl0A.png" id="7_tnfg0"]
-[ext_resource type="Texture2D" uid="uid://dmd86r4xv6t0b" path="res://Assets/Levels/Lvl0B.png" id="8_tahqn"]
+[ext_resource type="Texture2D" uid="uid://dj113uj5u4ji8" path="res://Assets/Levels/Lvl0B.png" id="8_tahqn"]
 [ext_resource type="Texture2D" uid="uid://cwsgnxmxqa4n4" path="res://icon.svg" id="9_6l6nc"]
 [ext_resource type="Script" uid="uid://bqmwe4cvwqkok" path="res://levels/DialogArea.gd" id="9_6vwgl"]
 [ext_resource type="PackedScene" uid="uid://bq76m7wcyf86r" path="res://Scene/exit.tscn" id="10_ccy2o"]
 [ext_resource type="PackedScene" uid="uid://ctre82aoxbwfh" path="res://Scene/Star.tscn" id="11_fg4ka"]
 [ext_resource type="PackedScene" uid="uid://b7j33gvbcmg2" path="res://Scene/spawn.tscn" id="11_tanl3"]
 [ext_resource type="PackedScene" uid="uid://dymjnlqmhegc8" path="res://Scene/character.tscn" id="12_8anlm"]
-[ext_resource type="Texture2D" uid="uid://cb280eupyswkx" path="res://Assets/UI/Component/PStar_UI.png" id="13_tndk4"]
-[ext_resource type="Texture2D" uid="uid://pfp6bp1lwott" path="res://Assets/UI/Component/GStar_UI.png" id="14_7r4in"]
+[ext_resource type="Texture2D" uid="uid://bop8qgfekmsij" path="res://Assets/UI/Component/PStar_UI.png" id="13_tndk4"]
+[ext_resource type="Texture2D" uid="uid://b5lj74wh3mrc3" path="res://Assets/UI/Component/GStar_UI.png" id="14_7r4in"]
 [ext_resource type="Texture2D" uid="uid://04cibq4xjrbo" path="res://Assets/UI/Button/01_Frame_Besi.png" id="20_cdbar_a"]
 [ext_resource type="Texture2D" uid="uid://cuvdsyfy64yx5" path="res://Assets/UI/Button/02_Isi_Menyala.png" id="21_cdbar_b"]
 [ext_resource type="Texture2D" uid="uid://orpejqglantg" path="res://Assets/UI/Button/03_Isi_Gelap.png" id="22_cdbar_c"]
@@ -96,6 +96,9 @@ size = Vector2(1792, 2816)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6l6nc"]
 size = Vector2(768, 2816)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dialog"]
+size = Vector2(240, 240)
+
 [node name="Level2" type="Node2D"]
 script = ExtResource("1_557jy")
 
@@ -156,7 +159,8 @@ shape = SubResource("RectangleShape2D_5jdlp")
 [node name="Dial1" type="Area2D" parent="RealityA"]
 position = Vector2(-36, 145)
 script = ExtResource("9_6vwgl")
-once_only = true
+dialog_text = "Jalan tertutup. Jika icon menyala, kamu bisa menekanTab untuk berganti realitas."
+once_only = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RealityA/Dial1"]
 shape = SubResource("CapsuleShape2D_jcv0k")
@@ -283,4 +287,22 @@ zoom = Vector2(0.05, 0.05)
 position = Vector2(-1540, 195)
 
 [node name="Character" parent="." instance=ExtResource("12_8anlm")]
-position = Vector2(-56, 434)
+position = Vector2(-1540, 195)
+
+[node name="DialSpawn" type="Area2D" parent="RealityA"]
+position = Vector2(-1540, 195)
+script = ExtResource("9_6vwgl")
+dialog_text = "Gunakan WASD untuk bergerak. Carilah Teleporter kuning untuk menyelesaikan level"
+once_only = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RealityA/DialSpawn"]
+shape = SubResource("RectangleShape2D_dialog")
+
+[node name="DialBack" type="Area2D" parent="RealityB"]
+position = Vector2(2304, 0)
+script = ExtResource("9_6vwgl")
+dialog_text = "Akses balik ke realitas awal ada di sini. Tekan Tab, lalu menuju teleporter."
+once_only = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RealityB/DialBack"]
+shape = SubResource("RectangleShape2D_dialog")

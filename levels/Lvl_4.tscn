@@ -14,13 +14,14 @@
 [ext_resource type="PackedScene" uid="uid://ctre82aoxbwfh" path="res://Scene/Star.tscn" id="10_byq0c"]
 [ext_resource type="Texture2D" uid="uid://orpejqglantg" path="res://Assets/UI/Button/03_Isi_Gelap.png" id="10_r4i6u"]
 [ext_resource type="PackedScene" uid="uid://dymjnlqmhegc8" path="res://Scene/character.tscn" id="11_2apva"]
-[ext_resource type="Texture2D" uid="uid://cb280eupyswkx" path="res://Assets/UI/Component/PStar_UI.png" id="13_tndk4"]
-[ext_resource type="Texture2D" uid="uid://pfp6bp1lwott" path="res://Assets/UI/Component/GStar_UI.png" id="14_7r4in"]
+[ext_resource type="Texture2D" uid="uid://bop8qgfekmsij" path="res://Assets/UI/Component/PStar_UI.png" id="13_tndk4"]
+[ext_resource type="Texture2D" uid="uid://b5lj74wh3mrc3" path="res://Assets/UI/Component/GStar_UI.png" id="14_7r4in"]
 [ext_resource type="FontFile" uid="uid://r5kkxha2rdoa" path="res://Assets/TitanOne-Regular.ttf" id="30_titan_one"]
 [ext_resource type="Texture2D" uid="uid://bf407loek41h0" path="res://Assets/UI/Button/PauseButton_normal.png" id="40_pause_n"]
 [ext_resource type="Texture2D" uid="uid://c7wkl0hksy25" path="res://Assets/UI/Button/PauseButton.png" id="41_pause_h"]
 [ext_resource type="Texture2D" uid="uid://dco0u661w5om7" path="res://Assets/Levels/Lvl4A.png" id="50_lvl3a"]
 [ext_resource type="Texture2D" uid="uid://b2nyeqniy2pxb" path="res://Assets/Levels/Lvl4B.png" id="51_lvl3b"]
+[ext_resource type="Script" uid="uid://bqmwe4cvwqkok" path="res://levels/DialogArea.gd" id="60_dialog"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4hhoj"]
 texture = ExtResource("5_r4i6u")
@@ -128,6 +129,9 @@ size = Vector2(2560, 768)
 
 [sub_resource type="RectangleShape2D" id="Rect3B_r12"]
 size = Vector2(5888, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dialog"]
+size = Vector2(240, 240)
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_kbxc3")
@@ -396,3 +400,21 @@ position = Vector2(-1540, 195)
 
 [node name="Character" parent="." instance=ExtResource("11_2apva")]
 position = Vector2(-56, 434)
+
+[node name="DialSpawn" type="Area2D" parent="RealityA"]
+position = Vector2(-1540, 195)
+script = ExtResource("60_dialog")
+dialog_text = "Pintu keluar tidak selalu berada di realitas yang sama"
+once_only = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RealityA/DialSpawn"]
+shape = SubResource("RectangleShape2D_dialog")
+
+[node name="DialSpike" type="Area2D" parent="RealityB"]
+position = Vector2(-1024, -512)
+script = ExtResource("60_dialog")
+dialog_text = "Duri itu muncul dan hilang secara bergantian. Tunggu sampai hilang, lalu lewati."
+once_only = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RealityB/DialSpike"]
+shape = SubResource("RectangleShape2D_dialog")
