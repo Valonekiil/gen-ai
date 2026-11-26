@@ -59,16 +59,19 @@ func _check_overlap_now() -> void:
 	var hits := get_world_2d().direct_space_state.intersect_shape(params, 16)
 	for hit in hits:
 		if hit.collider is CharacterController:
-			_lose()
+			_lose(hit.collider)
 			return
 
 func _on_body_entered(body: Node2D) -> void:
 	if not _is_visible:
 		return
 	if body is CharacterController:
-		_lose()
+		_lose(body)
 
-func _lose() -> void:
+func _lose(character: CharacterController) -> void:
+	# Sudah mati (mis. kena spike lain) -> abaikan
+	if character.state == CharacterController.State.DEAD:
+		return
 	# Suara kena spike + suara kalah, keduanya bersifat 2D di posisi spike
 	AudioManager.play_sfx_2d("SpikePop", global_position)
 	AudioManager.play_sfx_2d("Death", global_position)
@@ -76,7 +79,15 @@ func _lose() -> void:
 	set_process(false)
 	set_deferred("monitoring", false)
 	collision_shape.set_deferred("disabled", true)
-	print("[Spike] Pemain kalah — reload scene")
-	# Reload scene saat ini (mempermudah testing)
+	print("[Spike] Pemain kalah — putar VFX kematian lalu reload scene")
+
+	# Bekukan pemain selama VFX berjalan
+	character.set_input_enabled(false)
+	character.state = CharacterController.State.DEAD
+
+	# VFX kematian (merah, ring dari posisi pemain). Reset scene baru dilakukan
+	# setelah VFX selesai dan layar tertutup penuh.
+	await TransitionFX.play_in(RealityTransition.screen_uv(character), "DEATH")
+
 	if get_tree().current_scene:
-		get_tree().call_deferred("reload_current_scene")
+		get_tree().reload_current_scene()

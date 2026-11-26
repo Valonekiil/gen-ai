@@ -23,6 +23,7 @@ AudioManager="*res://autoload/AudioManager.gd"
 DebugConfig="*res://autoload/DebugConfig.gd"
 GameProgress="*res://autoload/GameProgress.gd"
 Settings="*res://autoload/Settings.gd"
+TransitionFX="*res://vfx/reality_transition.gd"
 
 [input]
 

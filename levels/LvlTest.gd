@@ -52,6 +52,9 @@ const LEVEL_COMPLETE := "res://ui/LevelComplete.tscn"
 const PAUSED_SCENE := "res://ui/Paused.tscn"
 
 func _ready() -> void:
+	# VFX spawn: layar ditutup lebih dulu, lalu ring menyusut ke posisi karakter
+	TransitionFX.play_spawn(character)
+
 	# Wiring RealityManager
 	reality_manager.character_a = character
 	reality_manager.character_b = character

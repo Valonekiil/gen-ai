@@ -16,8 +16,8 @@ var _transition: RealityTransition
 @export var terrain_b: TileMapLayer
 
 func _ready() -> void:
-	_transition = RealityTransition.new()
-	add_child(_transition)
+	# Memakai satu instance VFX global (autoload) agar konsisten dengan spawn & kematian
+	_transition = get_node("/root/TransitionFX") as RealityTransition
 
 func _process(delta: float) -> void:
 	if _cooldown_timer > 0.0:
