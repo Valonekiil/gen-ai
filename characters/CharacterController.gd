@@ -25,6 +25,9 @@ var _last_axis: String = ""
 var _facing_textures: Dictionary = {}
 
 func _ready() -> void:
+	var listener := get_node_or_null("AudioListener2D") as AudioListener2D
+	if listener:
+		listener.make_current()
 	_facing_textures[Facing.DOWN] = load(FACING_DOWN_PATH)
 	_facing_textures[Facing.UP] = load(FACING_TOP_PATH)
 	_facing_textures[Facing.LEFT] = load(FACING_LEFT_PATH)

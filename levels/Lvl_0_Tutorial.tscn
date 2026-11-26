@@ -190,6 +190,9 @@ shape = SubResource("RectangleShape2D_6l6nc")
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="RealityIndicator" type="Label" parent="UI"]
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.55)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
 offset_left = 20.0
 offset_top = 20.0
 offset_right = 20.0
@@ -209,21 +212,6 @@ value = 100.0
 texture_under = ExtResource("10_h5g5a")
 texture_over = ExtResource("11_sjk28")
 texture_progress = ExtResource("12_afk02")
-
-[node name="PiPViewport" type="SubViewportContainer" parent="UI"]
-visible = false
-offset_left = 865.0
-offset_right = 2017.0
-offset_bottom = 648.0
-scale = Vector2(0.25, 0.25)
-
-[node name="SubViewport" type="SubViewport" parent="UI/PiPViewport"]
-handle_input_locally = false
-size = Vector2i(1152, 648)
-render_target_update_mode = 0
-
-[node name="PipCamera" type="Camera2D" parent="UI/PiPViewport/SubViewport"]
-position = Vector2(17376, 433)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI"]
 anchors_preset = 1

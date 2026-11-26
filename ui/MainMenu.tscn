@@ -109,6 +109,8 @@ texture = ExtResource("7_58pe3")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="Settings/TextureRect"]
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
 layout_mode = 0
 offset_left = 452.0
 offset_top = 97.0
@@ -122,6 +124,11 @@ theme_override_font_sizes/font_size = 50
 text = "SETTINGS"
 
 [node name="Label" type="Label" parent="Settings"]
+theme_override_colors/font_outline_color = Color(0.12, 0.08, 0.05, 0.92)
+theme_override_constants/outline_size = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.55)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
 layout_mode = 0
 offset_left = 345.0
 offset_top = 209.0
@@ -139,6 +146,11 @@ offset_right = 813.0
 offset_bottom = 305.0
 
 [node name="Label" type="Label" parent="Settings/Container1"]
+theme_override_colors/font_outline_color = Color(0.12, 0.08, 0.05, 0.92)
+theme_override_constants/outline_size = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.55)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
 layout_mode = 2
 theme_override_fonts/font = ExtResource("8_g6r01")
 theme_override_font_sizes/font_size = 30
@@ -185,6 +197,11 @@ offset_right = 813.0
 offset_bottom = 353.0
 
 [node name="Label" type="Label" parent="Settings/Container2"]
+theme_override_colors/font_outline_color = Color(0.12, 0.08, 0.05, 0.92)
+theme_override_constants/outline_size = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.55)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
 layout_mode = 2
 theme_override_fonts/font = ExtResource("8_g6r01")
 theme_override_font_sizes/font_size = 30
@@ -224,6 +241,11 @@ theme_override_styles/slider = SubResource("StyleBoxFlat_lkb1r")
 value = 50.0
 
 [node name="FullscreenLabel" type="Label" parent="Settings"]
+theme_override_colors/font_outline_color = Color(0.12, 0.08, 0.05, 0.92)
+theme_override_constants/outline_size = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.55)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
 layout_mode = 0
 offset_left = 345.0
 offset_top = 375.0
@@ -260,6 +282,11 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="Label" type="Label" parent="Settings/Container3"]
+theme_override_colors/font_outline_color = Color(0.12, 0.08, 0.05, 0.92)
+theme_override_constants/outline_size = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.55)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
 layout_mode = 2
 theme_override_fonts/font = ExtResource("8_g6r01")
 theme_override_font_sizes/font_size = 35
@@ -303,6 +330,8 @@ texture = ExtResource("7_58pe3")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="LevelSelection/TextureRect"]
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5

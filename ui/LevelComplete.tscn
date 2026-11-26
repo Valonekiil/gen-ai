@@ -31,6 +31,9 @@ texture = ExtResource("2_panel")
 expand_mode = 1
 
 [node name="Title" type="Label" parent="."]
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.55)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -88,6 +91,9 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="TimeLabel" type="Label" parent="."]
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.55)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
 visible = false
 layout_mode = 1
 anchors_preset = 8

@@ -11,8 +11,6 @@ extends Node2D
 @onready var character: CharacterBody2D = $Character
 @onready var spawn: Node2D = $Spawner
 @onready var reality_manager: Node = $RealityManager
-@onready var pip_viewport: SubViewport = $UI/PiPViewport/SubViewport
-@onready var pip_camera: Camera2D = $UI/PiPViewport/SubViewport/PipCamera
 @onready var phcam: Camera2D = $phcam
 
 var _transitioning: bool = false
@@ -37,7 +35,7 @@ var _finished: bool = false
 @onready var _char_text: TextureRect = get_node_or_null("Character/TextureRect")
 @onready var _char_dialog_label: Label = get_node_or_null("Character/TextureRect/Label")
 @onready var _char_e_label: Label = get_node_or_null("Character/TextureRect/Label3")
-const GAME_UI_NODES := ["RealityIndicator", "SwitchCooldownBar", "PiPViewport", "HBoxContainer", "PauseButton"]
+const GAME_UI_NODES := ["RealityIndicator", "SwitchCooldownBar", "HBoxContainer", "PauseButton"]
 var _dialog_active: bool = false
 var _dialog_text: String = ""
 var _dialog_speed: float = 40.0
@@ -76,9 +74,6 @@ func _ready() -> void:
 	var sb := get_node_or_null("/root/SignalBus")
 	if sb:
 		sb.character_switched.connect(_on_character_switched)
-	pip_viewport.world_2d = get_viewport().world_2d
-	pip_camera.global_position = phcam.global_position
-	pip_camera.zoom = phcam.zoom
 
 	# Wiring Button -> Door (Lvl 2)
 	var door_node := get_node_or_null("Door")
@@ -87,10 +82,20 @@ func _ready() -> void:
 		button_node.target_door_path = door_node.get_path()
 		button_node.reality_manager = reality_manager
 
-	# Exit transition
-	var exit_node := get_node_or_null("Exit")
+	# Exit transition: node Exit bisa berada di root, RealityA, atau RealityB
+	var exit_node: Node = get_node_or_null("Exit")
+	if exit_node == null:
+		exit_node = get_node_or_null("RealityA/Exit")
+	if exit_node == null:
+		exit_node = get_node_or_null("RealityB/Exit")
 	if exit_node:
-		exit_node.body_entered.connect(_on_exit_entered)
+		var target: Node = exit_node
+		target.body_entered.connect(func(body: Node) -> void:
+			# Jangan selesaikan level kalau realitas si Exit sedang non-aktif
+			if not target.is_visible_in_tree():
+				return
+			_on_exit_entered(body)
+		)
 
 	# Timer & bintang
 	_update_hud()

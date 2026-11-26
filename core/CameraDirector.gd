@@ -1,37 +1,12 @@
 # CameraDirector.gd
-# class_name CameraDirector — swap active camera, mirror PiP camera (Splitbound)
+# class_name CameraDirector — swap active camera (Splitbound)
 # S1-06: Arsitektur §11.2; Mekanik v2.0 §2.5
 
 class_name CameraDirector
 extends Node
 
-@export var pip_camera: Camera2D
 @export var camera_a: Camera2D
 @export var camera_b: Camera2D
 
-func _ready() -> void:
-	get_node("/root/SignalBus").character_switched.connect(_on_character_switched)
-
-func _on_character_switched(new_active: String, _previous: String) -> void:
-	var inactive_camera: Camera2D = _get_inactive_camera(new_active)
-
-	# Mirror kamera realita inactive ke PiP (hanya jika pip_camera sudah di-set)
-	if pip_camera and inactive_camera:
-		pip_camera.global_position = inactive_camera.global_position
-		pip_camera.limit_left = inactive_camera.limit_left
-		pip_camera.limit_right = inactive_camera.limit_right
-		pip_camera.limit_top = inactive_camera.limit_top
-		pip_camera.limit_bottom = inactive_camera.limit_bottom
-		pip_camera.zoom = inactive_camera.zoom
-
-	# Set custom camera untuk SubViewport agar PiP tampil
-	var sub_viewport := get_node_or_null("../UI/PiPViewport/SubViewport")
-	if sub_viewport and pip_camera:
-		sub_viewport.use_custom_camera = true
-		sub_viewport.custom_camera = pip_camera
-
-
-func _get_inactive_camera(new_active: String) -> Camera2D:
-	if new_active == "A":
-		return camera_b
-	return camera_a
+# PiP dihapus: kamera realita tidak lagi dicerminkan ke SubViewport.
+# Ekspor camera_a/camera_b tetap ada untuk kompatibilitas scene lama.

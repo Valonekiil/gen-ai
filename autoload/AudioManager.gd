@@ -16,15 +16,20 @@ const SFX := {
 	"UIRealitySwitch": "res://assets/audio/UIRealitySwitch.wav",
 	"UIResonance": "res://assets/audio/UIResonance.wav",
 	"UISwitch": "res://assets/audio/UISwitch.wav",
+	"SpikePop": "res://assets/audio/SpikePop.wav",
+	"Death": "res://assets/audio/Death.wav",
 }
 
 const FADE_DURATION := 0.8
+# Efek 2D: makin jauh dari pemain makin pelan, di luar radius hampir senyap
+const SFX_2D_MAX_DISTANCE := 900.0
 
 var _music_menu: AudioStreamPlayer
 var _music_a: AudioStreamPlayer
 var _music_b: AudioStreamPlayer
 var _current_music: AudioStreamPlayer = null
 var _sfx_pool: Array[AudioStreamPlayer] = []
+var _sfx2d_pool: Array[AudioStreamPlayer2D] = []
 var _dialog_player: AudioStreamPlayer = null
 var _fade_index: int = 0
 
@@ -40,6 +45,17 @@ func _ready() -> void:
 		p.bus = "SFX"
 		add_child(p)
 		_sfx_pool.append(p)
+
+	# Pool 2D untuk SFX bertempat (spike dll) di bus SFX
+	for i in range(6):
+		var p2 := AudioStreamPlayer2D.new()
+		p2.name = "Sfx2D_%02d" % i
+		p2.bus = "SFX"
+		p2.max_distance = SFX_2D_MAX_DISTANCE
+		p2.attenuation = 1.0
+		p2.panning_strength = 1.0
+		add_child(p2)
+		_sfx2d_pool.append(p2)
 
 	# Player khusus dialog (loop) di bus SFX
 	_dialog_player = AudioStreamPlayer.new()
@@ -109,6 +125,21 @@ func play_sfx(name: String) -> void:
 			p.play()
 			return
 
+# SFX bertempat: hanya terdengar jelas di dekat posisi sumbernya
+func play_sfx_2d(name: String, world_pos: Vector2) -> void:
+	var path: String = SFX.get(name, "")
+	if path == "":
+		return
+	var stream := load(path) as AudioStream
+	if stream == null:
+		return
+	for p in _sfx2d_pool:
+		if not p.playing:
+			p.stream = stream
+			p.global_position = world_pos
+			p.play()
+			return
+
 # Dialog: loop selama teks diketik, stop saat selesai
 func start_dialog_sfx() -> void:
 	if _dialog_player and not _dialog_player.playing:
@@ -124,6 +155,9 @@ func _exit_tree() -> void:
 			p.stop()
 			p.stream = null
 	for p in _sfx_pool:
+		p.stop()
+		p.stream = null
+	for p in _sfx2d_pool:
 		p.stop()
 		p.stream = null
 	if _dialog_player:

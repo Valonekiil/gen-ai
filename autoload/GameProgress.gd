@@ -35,7 +35,8 @@ func record_completion(level_path: String, stars_earned: int) -> void:
 	var idx := SignalBus.LEVEL_SEQUENCE.find(level_path)
 	if idx == -1:
 		return
-	max_unlocked = maxi(max_unlocked, idx + 1)
+	# Jangan sampai melewati index level terakhir yang ada
+	max_unlocked = maxi(max_unlocked, mini(idx + 1, SignalBus.LEVEL_SEQUENCE.size() - 1))
 	level_stars[level_path] = maxi(stars_for(level_path), stars_earned)
 	save_progress()
 

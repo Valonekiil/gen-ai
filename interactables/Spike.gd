@@ -10,6 +10,7 @@ extends Area2D
 
 var _is_visible: bool = true
 var _time_left: float = 0.0
+var _initialized: bool = false
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
@@ -36,6 +37,11 @@ func _apply_state(value: bool) -> void:
 	set_deferred("monitoring", value)
 	collision_shape.set_deferred("disabled", not value)
 	if value:
+		# Pop hanya saat transisi OFF->ON (bukan saat scene baru dimuat),
+		# dan hanya jika realitas spike ini sedang aktif.
+		if _initialized and is_visible_in_tree():
+			AudioManager.play_sfx_2d("SpikePop", global_position)
+		_initialized = true
 		# Saat spike muncul, pemain yang sudah di area langsung kalah
 		_check_overlap_now()
 
@@ -63,6 +69,9 @@ func _on_body_entered(body: Node2D) -> void:
 		_lose()
 
 func _lose() -> void:
+	# Suara kena spike + suara kalah, keduanya bersifat 2D di posisi spike
+	AudioManager.play_sfx_2d("SpikePop", global_position)
+	AudioManager.play_sfx_2d("Death", global_position)
 	# Cegah trigger berulang
 	set_process(false)
 	set_deferred("monitoring", false)

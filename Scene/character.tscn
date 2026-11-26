@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dymjnlqmhegc8"]
+[gd_scene load_steps=7 format=3 uid="uid://dymjnlqmhegc8"]
 
 [ext_resource type="Script" uid="uid://dmn1mcwsvvfmi" path="res://characters/CharacterController.gd" id="1_b6o27"]
 [ext_resource type="Texture2D" uid="uid://dbb6ndqntlcuv" path="res://Assets/sprites/FacingDown.png" id="2_tgux0"]
 [ext_resource type="Texture2D" uid="uid://dmiknoynrjnko" path="res://Assets/UI/Bubble.png" id="3_tgux0"]
 [ext_resource type="FontFile" uid="uid://r5kkxha2rdoa" path="res://Assets/TitanOne-Regular.ttf" id="4_46cb6"]
+[ext_resource type="FontFile" uid="uid://s05ksimsc1bf" path="res://Assets/ShareTechMono-Regular.ttf" id="5_dialog_font"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_46cb6"]
 size = Vector2(200, 200)
@@ -19,6 +20,8 @@ texture = ExtResource("2_tgux0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_46cb6")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.5, 0.5)
@@ -36,6 +39,9 @@ scale = Vector2(0.6, 0.6)
 texture = ExtResource("3_tgux0")
 
 [node name="Label" type="Label" parent="TextureRect"]
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.55)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
 custom_minimum_size = Vector2(680, 320)
 layout_mode = 1
 anchors_preset = 8
@@ -49,16 +55,19 @@ offset_right = 367.0
 offset_bottom = 131.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 0.30980393, 0.10980392, 1)
+theme_override_colors/font_color = Color(0.08, 0.1, 0.1, 1)
+theme_override_colors/font_outline_color = Color(1, 0.94, 0.82, 1)
 theme_override_constants/outline_size = 7
-theme_override_fonts/font = ExtResource("4_46cb6")
+theme_override_fonts/font = ExtResource("5_dialog_font")
 theme_override_font_sizes/font_size = 50
 text = "HAHAHAHHAHAHAHAHAH ASDASDADSASDADAD ADASDASDASDASDASD ASDASDASDASD ASDaSAA
 ASDASDASDSADSADSADa"
 autowrap_mode = 2
 
 [node name="Label3" type="Label" parent="TextureRect"]
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.55)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
