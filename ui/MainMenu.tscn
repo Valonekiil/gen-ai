@@ -160,6 +160,16 @@ layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 4
 
+[node name="FullscreenCheck" type="CheckButton" parent="Settings"]
+layout_mode = 0
+offset_left = 345.0
+offset_top = 387.0
+offset_right = 813.0
+offset_bottom = 427.0
+theme_override_fonts/font = ExtResource("8_g6r01")
+theme_override_font_sizes/font_size = 30
+text = "Fullscreen"
+
 [node name="Container3" type="HBoxContainer" parent="Settings"]
 layout_mode = 1
 anchors_preset = 7

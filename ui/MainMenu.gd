@@ -1,6 +1,5 @@
 # MainMenu.gd
-# Menu utama: tombol Play membuka panel Level Selection,
-# tombol Setting membuka panel Settings (volume + reset data).
+# Menu utama: Play -> Level Selection, Setting -> panel Settings, power -> quit.
 extends Control
 
 const LVL_BUTTON := "res://ui/LvLButton.tscn"
@@ -9,19 +8,20 @@ const LVL_BUTTON := "res://ui/LvLButton.tscn"
 @onready var grid: GridContainer = $LevelSelection/TextureRect/GridContainer
 @onready var play_btn: TextureButton = $VBoxContainer/PlayBtn
 @onready var setting_btn: TextureButton = $VBoxContainer/SettingBtn
+@onready var quit_btn: TextureButton = $VBoxContainer/TextureButton
 @onready var settings_panel: Control = $Settings
 @onready var music_slider: HSlider = $Settings/Container1/HSlider
 @onready var sfx_slider: HSlider = $Settings/Container2/HSlider
+@onready var fullscreen_check: CheckButton = $Settings/FullscreenCheck
 @onready var reset_btn: TextureButton = $Settings/Container3/TextureButton
 
 func _ready() -> void:
-	# Panel level selection & settings disembunyikan dulu
 	level_selection.visible = false
 	settings_panel.visible = false
 	play_btn.pressed.connect(_on_play)
 	setting_btn.pressed.connect(_on_setting)
+	quit_btn.pressed.connect(_on_quit)
 
-	# Slider volume: 0..1, diisi dari Settings lalu disambungkan
 	for s in [music_slider, sfx_slider]:
 		s.min_value = 0.0
 		s.max_value = 1.0
@@ -31,23 +31,39 @@ func _ready() -> void:
 	music_slider.value_changed.connect(_on_music_changed)
 	sfx_slider.value_changed.connect(_on_sfx_changed)
 
+	fullscreen_check.button_pressed = Settings.fullscreen
+	fullscreen_check.toggled.connect(_on_fullscreen_toggled)
+
 	reset_btn.pressed.connect(_on_reset_data)
 	_build_level_grid()
 
+	# BGM menu utama
+	AudioManager.play_menu_bgm()
+
 func _on_play() -> void:
+	AudioManager.play_sfx("UIClick")
 	level_selection.visible = true
 	settings_panel.visible = false
 
 func _on_setting() -> void:
+	AudioManager.play_sfx("UIClick")
 	settings_panel.visible = not settings_panel.visible
 	if settings_panel.visible:
 		level_selection.visible = false
+
+func _on_quit() -> void:
+	AudioManager.play_sfx("UIClick")
+	get_tree().quit()
 
 func _on_music_changed(value: float) -> void:
 	Settings.set_music_volume(value)
 
 func _on_sfx_changed(value: float) -> void:
 	Settings.set_sfx_volume(value)
+
+func _on_fullscreen_toggled(pressed: bool) -> void:
+	Settings.set_fullscreen(pressed)
+	AudioManager.play_sfx("UISwitch")
 
 func _on_reset_data() -> void:
 	var dlg := ConfirmationDialog.new()

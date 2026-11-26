@@ -16,7 +16,6 @@ func _ready() -> void:
 	var stars := SignalBus.last_completed_stars
 	var elapsed := SignalBus.last_completed_time
 
-	# Bintang 1..3: emas jika didapat, abu jika tidak
 	var filled: Texture2D = load(STAR_FILLED)
 	var empty: Texture2D = load(STAR_EMPTY)
 	for i in stars_row.get_child_count():
@@ -26,7 +25,6 @@ func _ready() -> void:
 
 	time_label.text = "WAKTU %s" % _format_time(elapsed)
 
-	# Tombol navigasi
 	$Buttons/RetryBtn.pressed.connect(_on_retry)
 	$Buttons/NextBtn.pressed.connect(_on_next)
 	$Buttons/LevelSelectBtn.pressed.connect(_on_level_select)
@@ -36,15 +34,22 @@ func _format_time(t: float) -> String:
 	var total := int(max(0.0, t))
 	return "%02d:%02d" % [total / 60, total % 60]
 
+func _click() -> void:
+	AudioManager.play_sfx("UIClick")
+
 func _on_retry() -> void:
+	_click()
 	get_tree().change_scene_to_file(SignalBus.last_completed_level)
 
 func _on_next() -> void:
+	_click()
 	get_tree().change_scene_to_file(SignalBus.next_level_path(SignalBus.last_completed_level))
 
 func _on_home() -> void:
+	_click()
 	get_tree().change_scene_to_file(MAIN_MENU)
 
 # Belum ada scene pemilih level -> kembali ke menu utama
 func _on_level_select() -> void:
+	_click()
 	get_tree().change_scene_to_file(MAIN_MENU)

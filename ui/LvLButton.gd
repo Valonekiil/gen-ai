@@ -34,4 +34,5 @@ func configure() -> void:
 func _on_pressed() -> void:
 	if disabled:
 		return
+	AudioManager.play_sfx("UIClick")
 	get_tree().change_scene_to_file(level_path)
