@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://buhox54e6gwgn"]
+[gd_scene load_steps=23 format=3 uid="uid://buhox54e6gwgn"]
 
 [ext_resource type="Texture2D" uid="uid://dd54cj7a43eye" path="res://Assets/UI/Main_Menu_BG.jpg" id="1_rn8js"]
 [ext_resource type="Texture2D" uid="uid://cfwftn8afma5d" path="res://Assets/UI/Logo.png" id="2_nmrkx"]
@@ -7,24 +7,22 @@
 [ext_resource type="Texture2D" uid="uid://bkqqm07a8wy15" path="res://Assets/UI/Button/SettingButton_normal.png" id="5_uvwf2"]
 [ext_resource type="Texture2D" uid="uid://d1khlpuc08od" path="res://Assets/UI/Button/SettingButton.png" id="6_youui"]
 [ext_resource type="Texture2D" uid="uid://vcqol6s7w7bn" path="res://Assets/UI/Setting.jpeg" id="7_58pe3"]
-[ext_resource type="Texture2D" uid="uid://crt7pwa4muk5e" path="res://Assets/UI/Button/QuitButton_normal.png" id="7_uvwf2"]
+[ext_resource type="Texture2D" uid="uid://cuxi0368122pv" path="res://Assets/UI/Button/QuitButton_normal.png" id="7_uvwf2"]
 [ext_resource type="FontFile" uid="uid://r5kkxha2rdoa" path="res://Assets/TitanOne-Regular.ttf" id="8_g6r01"]
-[ext_resource type="Texture2D" uid="uid://darldvid0ddsv" path="res://Assets/UI/Button/LvlPanel.png" id="10_58pe3"]
-[ext_resource type="Texture2D" uid="uid://hfurhdjh6uxm" path="res://Assets/UI/Button/LockedLvl.png" id="11_g6r01"]
-[ext_resource type="Texture2D" uid="uid://4bfppl1e88p0" path="res://Assets/UI/reimport/RetryButton_normal.png" id="11_gie3v"]
+[ext_resource type="Texture2D" uid="uid://cnhwtshbf86xm" path="res://Assets/UI/Button/LvlPanel.png" id="10_58pe3"]
+[ext_resource type="Texture2D" uid="uid://mamv6rx0pf0f" path="res://Assets/UI/Button/LockedLvl.png" id="11_g6r01"]
 [ext_resource type="PackedScene" uid="uid://cnmb4n6r4qqv1" path="res://ui/LvLButton.tscn" id="11_t3nb0"]
-[ext_resource type="Texture2D" uid="uid://dxlj6pvh40gp2" path="res://Assets/UI/reimport/RetryButton.png" id="12_dms6u"]
 [ext_resource type="Script" uid="uid://bitvtdfifvxni" path="res://ui/MainMenu.gd" id="12_menu_script"]
+[ext_resource type="Texture2D" uid="uid://b28wtvjm1f4kt" path="res://Assets/UI/Button/RetryButton_normal.png" id="15_eo13l"]
+[ext_resource type="Texture2D" uid="uid://dhxse8bt8438h" path="res://Assets/UI/Button/RetryButton.png" id="16_33mum"]
 [ext_resource type="Texture2D" uid="uid://d1eenuaequ3nb" path="res://Assets/UI/Button/Tombol_Off.png" id="52_TOff"]
 [ext_resource type="Texture2D" uid="uid://f44pasqh5q8n" path="res://Assets/UI/Button/Tombol_On.png" id="53_TOn"]
-[ext_resource type="Texture2D" uid="uid://dos4we3mn3rfw" path="res://Assets/UI/Button/Slider_HSlider.png" id="54_slider_ui"]
-[ext_resource type="Texture2D" uid="uid://4iky18137t22" path="res://Assets/UI/Button/Pointer_HSlider.png" id="55_pointer_ui"]
-
+[ext_resource type="Texture2D" uid="uid://cfq26hf160o6e" path="res://Assets/UI/Button/Slider_HSlider.png" id="54_slider_ui"]
+[ext_resource type="Texture2D" uid="uid://bwfsjr23unc0s" path="res://Assets/UI/Button/Pointer_HSlider.png" id="55_pointer_ui"]
 [ext_resource type="Texture2D" uid="uid://dh8so88imk136" path="res://Assets/UI/Button/Left_Arrow_Button.png" id="56_arrow"]
 [ext_resource type="Texture2D" uid="uid://cd2tbs7tywqst" path="res://Assets/UI/Button/Left_Arrow_Button_normal.png" id="57_arrow_dark"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lkb1r"]
-
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -92,6 +90,7 @@ layout_mode = 2
 texture_normal = ExtResource("7_uvwf2")
 
 [node name="Settings" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -253,10 +252,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -108.5
-offset_top = -185.0
-offset_right = 108.5
-offset_bottom = -144.0
+offset_left = -183.0
+offset_top = -219.0
+offset_right = 184.0
+offset_bottom = -69.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -268,9 +267,10 @@ text = "Reset data:"
 
 [node name="TextureButton" type="TextureButton" parent="Settings/Container3"]
 layout_mode = 2
-texture_normal = ExtResource("11_gie3v")
-texture_pressed = ExtResource("12_dms6u")
-texture_hover = ExtResource("12_dms6u")
+texture_normal = ExtResource("15_eo13l")
+texture_pressed = ExtResource("16_33mum")
+texture_hover = ExtResource("16_33mum")
+stretch_mode = 5
 
 [node name="BackBtn" type="TextureButton" parent="Settings"]
 layout_mode = 0
@@ -278,14 +278,13 @@ offset_left = 60.0
 offset_top = 60.0
 offset_right = 140.0
 offset_bottom = 140.0
-ignore_texture_size = true
 texture_normal = ExtResource("57_arrow_dark")
 texture_pressed = ExtResource("56_arrow")
 texture_hover = ExtResource("56_arrow")
+ignore_texture_size = true
 stretch_mode = 5
 
 [node name="LevelSelection" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -370,8 +369,8 @@ offset_left = 60.0
 offset_top = 60.0
 offset_right = 140.0
 offset_bottom = 140.0
-ignore_texture_size = true
 texture_normal = ExtResource("57_arrow_dark")
 texture_pressed = ExtResource("56_arrow")
 texture_hover = ExtResource("56_arrow")
+ignore_texture_size = true
 stretch_mode = 5

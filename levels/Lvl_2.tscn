@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://4te12ne4p2u"]
+[gd_scene load_steps=39 format=4 uid="uid://4te12ne4p2u"]
 
 [ext_resource type="Script" uid="uid://c7x421fmesvdt" path="res://levels/LvlTest.gd" id="1_j0s2s"]
 [ext_resource type="Script" uid="uid://e2neyto34nqq" path="res://core/RealityManager.gd" id="2_432kf"]
@@ -11,10 +11,11 @@
 [ext_resource type="PackedScene" uid="uid://bq76m7wcyf86r" path="res://Scene/exit.tscn" id="9_h1hxl"]
 [ext_resource type="Texture2D" uid="uid://df7g4my8sxwdc" path="res://Assets/Levels/Lvl2A.png" id="9_vppi4"]
 [ext_resource type="PackedScene" uid="uid://b7j33gvbcmg2" path="res://Scene/spawn.tscn" id="10_a8xa2"]
+[ext_resource type="PackedScene" uid="uid://ctre82aoxbwfh" path="res://Scene/Star.tscn" id="10_uxd2a"]
 [ext_resource type="PackedScene" uid="uid://cdsre4yt3daux" path="res://Scene/door.tscn" id="12_73fpa"]
 [ext_resource type="Texture2D" uid="uid://bminy0ixn6eoh" path="res://Assets/Levels/Lvl2B.png" id="12_a8xa2"]
-[ext_resource type="Texture2D" uid="uid://bop8qgfekmsij" path="res://Assets/UI/Component/PStar_UI.png" id="13_tndk4"]
-[ext_resource type="Texture2D" uid="uid://b5lj74wh3mrc3" path="res://Assets/UI/Component/GStar_UI.png" id="14_7r4in"]
+[ext_resource type="Texture2D" uid="uid://cb280eupyswkx" path="res://Assets/UI/Component/PStar_UI.png" id="13_tndk4"]
+[ext_resource type="Texture2D" uid="uid://pfp6bp1lwott" path="res://Assets/UI/Component/GStar_UI.png" id="14_7r4in"]
 [ext_resource type="Texture2D" uid="uid://04cibq4xjrbo" path="res://Assets/UI/Button/01_Frame_Besi.png" id="20_cdbar_a"]
 [ext_resource type="Texture2D" uid="uid://cuvdsyfy64yx5" path="res://Assets/UI/Button/02_Isi_Menyala.png" id="21_cdbar_b"]
 [ext_resource type="Texture2D" uid="uid://orpejqglantg" path="res://Assets/UI/Button/03_Isi_Gelap.png" id="22_cdbar_c"]
@@ -180,6 +181,9 @@ shape = SubResource("RectangleShape2D_id6g1")
 [node name="Wall08" type="CollisionShape2D" parent="RealityA/WallsA"]
 position = Vector2(2304, 1664)
 shape = SubResource("RectangleShape2D_fomj3")
+
+[node name="Star" parent="RealityA" instance=ExtResource("10_uxd2a")]
+position = Vector2(644, -1150)
 
 [node name="RealityB" type="Node2D" parent="."]
 visible = false

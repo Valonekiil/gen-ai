@@ -4,13 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://ywfm2mylun82" path="res://Assets/sprites/Star.png" id="2_ehl5q"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yl2q1"]
-radius = 40.0
+radius = 50.159744
 
 [node name="Star" type="Area2D"]
 script = ExtResource("1_3cru4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.75, 0.75)
 texture = ExtResource("2_ehl5q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

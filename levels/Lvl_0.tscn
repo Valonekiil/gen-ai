@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://dcmlewpjeik66"]
+[gd_scene load_steps=36 format=4 uid="uid://dcmlewpjeik66"]
 
 [ext_resource type="Script" uid="uid://c7x421fmesvdt" path="res://levels/LvlTest.gd" id="1_557jy"]
 [ext_resource type="Script" uid="uid://e2neyto34nqq" path="res://core/RealityManager.gd" id="2_f24jn"]
@@ -7,13 +7,15 @@
 [ext_resource type="Texture2D" uid="uid://crfvuoehmoos0" path="res://Assets/Tileset.png" id="5_5jdlp"]
 [ext_resource type="Texture2D" uid="uid://cu74mpr6j25mj" path="res://Assets/Game_Tile_Atlas_Fixed.png" id="6_k06q1"]
 [ext_resource type="Texture2D" uid="uid://bbyxlnpg3wnyj" path="res://Assets/Levels/Lvl0A.png" id="7_tnfg0"]
-[ext_resource type="Texture2D" uid="uid://dj113uj5u4ji8" path="res://Assets/Levels/Lvl0B.png" id="8_tahqn"]
+[ext_resource type="Texture2D" uid="uid://dmd86r4xv6t0b" path="res://Assets/Levels/Lvl0B.png" id="8_tahqn"]
 [ext_resource type="Texture2D" uid="uid://cwsgnxmxqa4n4" path="res://icon.svg" id="9_6l6nc"]
+[ext_resource type="Script" uid="uid://bqmwe4cvwqkok" path="res://levels/DialogArea.gd" id="9_6vwgl"]
 [ext_resource type="PackedScene" uid="uid://bq76m7wcyf86r" path="res://Scene/exit.tscn" id="10_ccy2o"]
+[ext_resource type="PackedScene" uid="uid://ctre82aoxbwfh" path="res://Scene/Star.tscn" id="11_fg4ka"]
 [ext_resource type="PackedScene" uid="uid://b7j33gvbcmg2" path="res://Scene/spawn.tscn" id="11_tanl3"]
 [ext_resource type="PackedScene" uid="uid://dymjnlqmhegc8" path="res://Scene/character.tscn" id="12_8anlm"]
-[ext_resource type="Texture2D" uid="uid://bop8qgfekmsij" path="res://Assets/UI/Component/PStar_UI.png" id="13_tndk4"]
-[ext_resource type="Texture2D" uid="uid://b5lj74wh3mrc3" path="res://Assets/UI/Component/GStar_UI.png" id="14_7r4in"]
+[ext_resource type="Texture2D" uid="uid://cb280eupyswkx" path="res://Assets/UI/Component/PStar_UI.png" id="13_tndk4"]
+[ext_resource type="Texture2D" uid="uid://pfp6bp1lwott" path="res://Assets/UI/Component/GStar_UI.png" id="14_7r4in"]
 [ext_resource type="Texture2D" uid="uid://04cibq4xjrbo" path="res://Assets/UI/Button/01_Frame_Besi.png" id="20_cdbar_a"]
 [ext_resource type="Texture2D" uid="uid://cuvdsyfy64yx5" path="res://Assets/UI/Button/02_Isi_Menyala.png" id="21_cdbar_b"]
 [ext_resource type="Texture2D" uid="uid://orpejqglantg" path="res://Assets/UI/Button/03_Isi_Gelap.png" id="22_cdbar_c"]
@@ -77,6 +79,10 @@ size = Vector2(256, 2816)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5jdlp"]
 size = Vector2(1792, 2816)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jcv0k"]
+radius = 55.0
+height = 2670.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k06q1"]
 size = Vector2(5888, 256)
@@ -147,8 +153,15 @@ shape = SubResource("RectangleShape2D_4w060")
 position = Vector2(1408, 128)
 shape = SubResource("RectangleShape2D_5jdlp")
 
+[node name="Dial1" type="Area2D" parent="RealityA"]
+position = Vector2(-36, 145)
+script = ExtResource("9_6vwgl")
+once_only = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RealityA/Dial1"]
+shape = SubResource("CapsuleShape2D_jcv0k")
+
 [node name="RealityB" type="Node2D" parent="."]
-visible = false
 
 [node name="TerrainB" type="TileMapLayer" parent="RealityB"]
 visible = false
@@ -158,6 +171,9 @@ tile_set = SubResource("TileSet_1ueab")
 [node name="LevelImageB" type="Sprite2D" parent="RealityB"]
 position = Vector2(896, 128)
 texture = ExtResource("8_tahqn")
+
+[node name="Star" parent="RealityB" instance=ExtResource("11_fg4ka")]
+position = Vector2(1408, -631)
 
 [node name="WallsB" type="StaticBody2D" parent="RealityB"]
 collision_layer = 0
