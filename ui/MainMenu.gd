@@ -14,6 +14,8 @@ const LVL_BUTTON := "res://ui/LvLButton.tscn"
 @onready var sfx_slider: HSlider = $Settings/Container2/SliderWrap/HSlider
 @onready var fullscreen_toggle: TextureButton = $Settings/FullscreenToggle
 @onready var reset_btn: TextureButton = $Settings/Container3/TextureButton
+@onready var settings_back: TextureButton = $Settings/BackBtn
+@onready var level_back: TextureButton = $LevelSelection/BackBtn
 
 func _ready() -> void:
 	level_selection.visible = false
@@ -34,6 +36,8 @@ func _ready() -> void:
 	fullscreen_toggle.button_pressed = Settings.fullscreen
 	fullscreen_toggle.toggled.connect(_on_fullscreen_toggled)
 
+	settings_back.pressed.connect(_on_settings_back)
+	level_back.pressed.connect(_on_level_back)
 	reset_btn.pressed.connect(_on_reset_data)
 	_build_level_grid()
 
@@ -54,6 +58,14 @@ func _on_setting() -> void:
 func _on_quit() -> void:
 	AudioManager.play_sfx("UIClick")
 	get_tree().quit()
+
+func _on_settings_back() -> void:
+	AudioManager.play_sfx("UIClick")
+	settings_panel.visible = false
+
+func _on_level_back() -> void:
+	AudioManager.play_sfx("UIClick")
+	level_selection.visible = false
 
 func _on_music_changed(value: float) -> void:
 	Settings.set_music_volume(value)

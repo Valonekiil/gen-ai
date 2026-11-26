@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://buhox54e6gwgn"]
+[gd_scene load_steps=25 format=3 uid="uid://buhox54e6gwgn"]
 
 [ext_resource type="Texture2D" uid="uid://dd54cj7a43eye" path="res://Assets/UI/Main_Menu_BG.jpg" id="1_rn8js"]
 [ext_resource type="Texture2D" uid="uid://cfwftn8afma5d" path="res://Assets/UI/Logo.png" id="2_nmrkx"]
@@ -20,7 +20,11 @@
 [ext_resource type="Texture2D" uid="uid://dos4we3mn3rfw" path="res://Assets/UI/Button/Slider_HSlider.png" id="54_slider_ui"]
 [ext_resource type="Texture2D" uid="uid://4iky18137t22" path="res://Assets/UI/Button/Pointer_HSlider.png" id="55_pointer_ui"]
 
+[ext_resource type="Texture2D" uid="uid://dh8so88imk136" path="res://Assets/UI/Button/Left_Arrow_Button.png" id="56_arrow"]
+[ext_resource type="Texture2D" uid="uid://cd2tbs7tywqst" path="res://Assets/UI/Button/Left_Arrow_Button_normal.png" id="57_arrow_dark"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lkb1r"]
+
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -268,6 +272,18 @@ texture_normal = ExtResource("11_gie3v")
 texture_pressed = ExtResource("12_dms6u")
 texture_hover = ExtResource("12_dms6u")
 
+[node name="BackBtn" type="TextureButton" parent="Settings"]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 60.0
+offset_right = 140.0
+offset_bottom = 140.0
+ignore_texture_size = true
+texture_normal = ExtResource("57_arrow_dark")
+texture_pressed = ExtResource("56_arrow")
+texture_hover = ExtResource("56_arrow")
+stretch_mode = 5
+
 [node name="LevelSelection" type="Control" parent="."]
 visible = false
 layout_mode = 1
@@ -347,3 +363,15 @@ texture_normal = ExtResource("11_g6r01")
 [node name="TextureButton6" type="TextureButton" parent="LevelSelection/TextureRect/GridContainer"]
 layout_mode = 2
 texture_normal = ExtResource("11_g6r01")
+
+[node name="BackBtn" type="TextureButton" parent="LevelSelection"]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 60.0
+offset_right = 140.0
+offset_bottom = 140.0
+ignore_texture_size = true
+texture_normal = ExtResource("57_arrow_dark")
+texture_pressed = ExtResource("56_arrow")
+texture_hover = ExtResource("56_arrow")
+stretch_mode = 5
