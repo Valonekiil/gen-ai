@@ -20,9 +20,9 @@ func _ready() -> void:
 		_off_sprite.visible = true
 	body_entered.connect(_on_body_entered)
 
-# Cari realita tempat tombol ini berada (lewat ancestor bernama RealityA/RealityB)
-func _get_reality() -> String:
-	var n: Node = self
+# Cari realita tempat node berada (lewat ancestor bernama RealityA/RealityB)
+func _reality_of(node: Node) -> String:
+	var n: Node = node
 	while n:
 		var nm := String(n.name)
 		if nm == "RealityA" or nm == "RealityB":
@@ -35,8 +35,7 @@ func _on_body_entered(body: Node) -> void:
 		return
 	if not (body is CharacterController):
 		return
-	# Tombol hanya merespons saat realita tempatnya sedang aktif
-	var reality := _get_reality()
+	var reality := _reality_of(self)
 	if reality_manager:
 		if reality == "A" and reality_manager.state != RealityManager.State.RunningA:
 			return
@@ -47,9 +46,13 @@ func _on_body_entered(body: Node) -> void:
 		_off_sprite.visible = false
 	if _on_sprite:
 		_on_sprite.visible = true
-	# Buka pintu target
+
 	if target_door_path != NodePath(""):
 		var door := get_node_or_null(target_door_path)
 		if door and door.has_method("open_door"):
 			door.open_door()
+			# Resonansi hanya kalau tombol & pintu beda dimensi; sama -> UIDoor
+			var door_reality := _reality_of(door)
+			var sfx := "UIDoor" if door_reality == "" or door_reality == reality else "UIResonance"
+			AudioManager.play_sfx(sfx)
 	print("[Button] Ditekan di realita ", reality)

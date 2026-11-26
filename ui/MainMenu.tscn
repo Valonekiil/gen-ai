@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://buhox54e6gwgn"]
+[gd_scene load_steps=21 format=3 uid="uid://buhox54e6gwgn"]
 
 [ext_resource type="Texture2D" uid="uid://dd54cj7a43eye" path="res://Assets/UI/Main_Menu_BG.jpg" id="1_rn8js"]
 [ext_resource type="Texture2D" uid="uid://cfwftn8afma5d" path="res://Assets/UI/Logo.png" id="2_nmrkx"]
@@ -15,6 +15,12 @@
 [ext_resource type="PackedScene" uid="uid://cnmb4n6r4qqv1" path="res://ui/LvLButton.tscn" id="11_t3nb0"]
 [ext_resource type="Texture2D" uid="uid://dxlj6pvh40gp2" path="res://Assets/UI/reimport/RetryButton.png" id="12_dms6u"]
 [ext_resource type="Script" uid="uid://bitvtdfifvxni" path="res://ui/MainMenu.gd" id="12_menu_script"]
+[ext_resource type="Texture2D" uid="uid://d1eenuaequ3nb" path="res://Assets/UI/Button/Tombol_Off.png" id="52_TOff"]
+[ext_resource type="Texture2D" uid="uid://f44pasqh5q8n" path="res://Assets/UI/Button/Tombol_On.png" id="53_TOn"]
+[ext_resource type="Texture2D" uid="uid://dos4we3mn3rfw" path="res://Assets/UI/Button/Slider_HSlider.png" id="54_slider_ui"]
+[ext_resource type="Texture2D" uid="uid://4iky18137t22" path="res://Assets/UI/Button/Pointer_HSlider.png" id="55_pointer_ui"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lkb1r"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -115,9 +121,9 @@ text = "SETTINGS"
 [node name="Label" type="Label" parent="Settings"]
 layout_mode = 0
 offset_left = 345.0
-offset_top = 217.0
+offset_top = 209.0
 offset_right = 487.0
-offset_bottom = 258.0
+offset_bottom = 250.0
 theme_override_fonts/font = ExtResource("8_g6r01")
 theme_override_font_sizes/font_size = 35
 text = "Volume"
@@ -125,9 +131,9 @@ text = "Volume"
 [node name="Container1" type="HBoxContainer" parent="Settings"]
 layout_mode = 0
 offset_left = 345.0
-offset_top = 291.0
+offset_top = 265.0
 offset_right = 813.0
-offset_bottom = 331.0
+offset_bottom = 305.0
 
 [node name="Label" type="Label" parent="Settings/Container1"]
 layout_mode = 2
@@ -135,18 +141,45 @@ theme_override_fonts/font = ExtResource("8_g6r01")
 theme_override_font_sizes/font_size = 30
 text = "Music"
 
-[node name="HSlider" type="HSlider" parent="Settings/Container1"]
-custom_minimum_size = Vector2(250, 0)
+[node name="SliderWrap" type="Control" parent="Settings/Container1"]
+custom_minimum_size = Vector2(250, 40)
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 4
 
+[node name="Track" type="TextureRect" parent="Settings/Container1/SliderWrap"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("54_slider_ui")
+expand_mode = 1
+
+[node name="HSlider" type="HSlider" parent="Settings/Container1/SliderWrap"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 38.0
+offset_top = -4.0
+offset_right = -37.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_icons/grabber = ExtResource("55_pointer_ui")
+theme_override_icons/grabber_highlight = ExtResource("55_pointer_ui")
+theme_override_styles/slider = SubResource("StyleBoxFlat_lkb1r")
+value = 50.0
+
 [node name="Container2" type="HBoxContainer" parent="Settings"]
 layout_mode = 0
 offset_left = 344.0
-offset_top = 339.0
+offset_top = 313.0
 offset_right = 813.0
-offset_bottom = 379.0
+offset_bottom = 353.0
 
 [node name="Label" type="Label" parent="Settings/Container2"]
 layout_mode = 2
@@ -154,21 +187,60 @@ theme_override_fonts/font = ExtResource("8_g6r01")
 theme_override_font_sizes/font_size = 30
 text = "Sfx"
 
-[node name="HSlider" type="HSlider" parent="Settings/Container2"]
-custom_minimum_size = Vector2(250, 0)
+[node name="SliderWrap" type="Control" parent="Settings/Container2"]
+custom_minimum_size = Vector2(250, 40)
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 4
 
-[node name="FullscreenCheck" type="CheckButton" parent="Settings"]
+[node name="Track" type="TextureRect" parent="Settings/Container2/SliderWrap"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("54_slider_ui")
+expand_mode = 1
+
+[node name="HSlider" type="HSlider" parent="Settings/Container2/SliderWrap"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 38.0
+offset_top = -4.0
+offset_right = -37.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_icons/grabber = ExtResource("55_pointer_ui")
+theme_override_icons/grabber_highlight = ExtResource("55_pointer_ui")
+theme_override_styles/slider = SubResource("StyleBoxFlat_lkb1r")
+value = 50.0
+
+[node name="FullscreenLabel" type="Label" parent="Settings"]
 layout_mode = 0
 offset_left = 345.0
-offset_top = 387.0
-offset_right = 813.0
-offset_bottom = 427.0
+offset_top = 375.0
+offset_right = 514.0
+offset_bottom = 415.0
 theme_override_fonts/font = ExtResource("8_g6r01")
 theme_override_font_sizes/font_size = 30
 text = "Fullscreen"
+
+[node name="FullscreenToggle" type="TextureButton" parent="Settings"]
+layout_mode = 0
+offset_left = 628.0
+offset_top = 363.0
+offset_right = 748.0
+offset_bottom = 423.0
+toggle_mode = true
+texture_normal = ExtResource("52_TOff")
+texture_pressed = ExtResource("53_TOn")
+ignore_texture_size = true
+stretch_mode = 5
 
 [node name="Container3" type="HBoxContainer" parent="Settings"]
 layout_mode = 1

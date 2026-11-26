@@ -10,9 +10,9 @@ const LVL_BUTTON := "res://ui/LvLButton.tscn"
 @onready var setting_btn: TextureButton = $VBoxContainer/SettingBtn
 @onready var quit_btn: TextureButton = $VBoxContainer/TextureButton
 @onready var settings_panel: Control = $Settings
-@onready var music_slider: HSlider = $Settings/Container1/HSlider
-@onready var sfx_slider: HSlider = $Settings/Container2/HSlider
-@onready var fullscreen_check: CheckButton = $Settings/FullscreenCheck
+@onready var music_slider: HSlider = $Settings/Container1/SliderWrap/HSlider
+@onready var sfx_slider: HSlider = $Settings/Container2/SliderWrap/HSlider
+@onready var fullscreen_toggle: TextureButton = $Settings/FullscreenToggle
 @onready var reset_btn: TextureButton = $Settings/Container3/TextureButton
 
 func _ready() -> void:
@@ -31,8 +31,8 @@ func _ready() -> void:
 	music_slider.value_changed.connect(_on_music_changed)
 	sfx_slider.value_changed.connect(_on_sfx_changed)
 
-	fullscreen_check.button_pressed = Settings.fullscreen
-	fullscreen_check.toggled.connect(_on_fullscreen_toggled)
+	fullscreen_toggle.button_pressed = Settings.fullscreen
+	fullscreen_toggle.toggled.connect(_on_fullscreen_toggled)
 
 	reset_btn.pressed.connect(_on_reset_data)
 	_build_level_grid()

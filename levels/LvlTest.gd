@@ -70,6 +70,7 @@ func _ready() -> void:
 	# Initial state: A aktif, B mati
 	_set_reality_active("A")
 	character.position = spawn.position
+	AudioManager.play_reality_bgm("A")
 
 	# Listen to switch
 	var sb := get_node_or_null("/root/SignalBus")
@@ -120,6 +121,7 @@ func _on_exit_entered(body: Node) -> void:
 		return
 	_transitioning = true
 	_finished = true
+	AudioManager.play_sfx("UILevelCompleted")
 	level_stars = _compute_stars()
 	# Simpan hasil untuk scene LevelComplete (reusable di semua level)
 	SignalBus.last_completed_level = scene_file_path
@@ -157,6 +159,7 @@ func _input(event: InputEvent) -> void:
 func _pause() -> void:
 	if _transitioning or get_tree().paused:
 		return
+	AudioManager.play_sfx("UIClick")
 	get_tree().paused = true
 	var paused: Control = load(PAUSED_SCENE).instantiate()
 	paused.process_mode = Node.PROCESS_MODE_ALWAYS
@@ -169,6 +172,7 @@ func start_dialog(text: String, speed: float = 40.0) -> void:
 	if not _char_text or not _char_dialog_label:
 		return
 	_dialog_active = true
+	AudioManager.start_dialog_sfx()
 	_dialog_text = text
 	_dialog_speed = maxf(1.0, speed)
 	_dialog_shown = 0.0
@@ -208,12 +212,14 @@ func _type_dialog(delta: float) -> void:
 	_char_dialog_label.text = _dialog_text.substr(0, count)
 	if count >= total:
 		_dialog_done = true
+		AudioManager.stop_dialog_sfx()
 		_char_dialog_label.text = _dialog_text
 		if _char_e_label:
 			_char_e_label.visible = true
 
 func _end_dialog() -> void:
 	_dialog_active = false
+	AudioManager.stop_dialog_sfx()
 	if _char_text:
 		_char_text.visible = false
 	if _char_e_label:
@@ -292,6 +298,8 @@ func _go_to_level_complete() -> void:
 
 func _on_character_switched(new_active: String, _previous: String) -> void:
 	_set_reality_active(new_active)
+	AudioManager.play_reality_bgm(new_active)
+	AudioManager.play_sfx("UIRealitySwitch")
 
 func _set_reality_active(active: String) -> void:
 	var a_active := active == "A"
