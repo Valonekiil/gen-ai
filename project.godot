@@ -11,9 +11,9 @@ config_version=5
 [application]
 
 config/name="Splitbound"
-run/main_scene="res://Main.tscn"
+run/main_scene="uid://buhox54e6gwgn"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://rxu1rx8kjqx3"
 
 [autoload]
 

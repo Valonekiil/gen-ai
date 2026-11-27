@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://b5dvwa7ef7hbv"]
 
-[ext_resource type="Script" path="res://ui/LevelComplete.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://bjhq22geydka1" path="res://ui/LevelComplete.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://bxoxrgb0c007p" path="res://Assets/UI/PausePanel.png" id="2_panel"]
 [ext_resource type="FontFile" uid="uid://r5kkxha2rdoa" path="res://Assets/TitanOne-Regular.ttf" id="3_font"]
 [ext_resource type="Texture2D" uid="uid://co3umwpaxjaot" path="res://Assets/UI/Component/PStar.png" id="5_pstar"]
@@ -8,8 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://dhxse8bt8438h" path="res://Assets/UI/Button/RetryButton.png" id="7_retry_h"]
 [ext_resource type="Texture2D" uid="uid://dgyxhleaeybpy" path="res://Assets/UI/Button/PlayButton_normal.png" id="8_play_n"]
 [ext_resource type="Texture2D" uid="uid://bcoyaaoixww" path="res://Assets/UI/Button/PlayButton.png" id="9_play_h"]
-[ext_resource type="Texture2D" uid="uid://dfto2qa22yxt4" path="res://Assets/UI/Button/LevelSelectionButton_normal.png" id="10_ls_n"]
-[ext_resource type="Texture2D" uid="uid://bypguw2fnrhh8" path="res://Assets/UI/Button/HomeButton_normal.png" id="12_home_n"]
+[ext_resource type="Texture2D" uid="uid://lipk4ufh0pbf" path="res://Assets/UI/Button/LevelSelectionButton_normal.png" id="10_ls_n"]
+[ext_resource type="Texture2D" uid="uid://1ql73uuisowx" path="res://Assets/UI/Button/HomeButton_normal.png" id="12_home_n"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -31,9 +31,6 @@ texture = ExtResource("2_panel")
 expand_mode = 1
 
 [node name="Title" type="Label" parent="."]
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.55)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -43,7 +40,10 @@ offset_top = 67.0
 offset_right = 100.5
 offset_bottom = 152.0
 grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.55)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("3_font")
 theme_override_font_sizes/font_size = 28
@@ -91,9 +91,6 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="TimeLabel" type="Label" parent="."]
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.55)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -107,7 +104,10 @@ offset_right = 220.0
 offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.55)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("3_font")
 theme_override_font_sizes/font_size = 30
@@ -137,6 +137,7 @@ layout_mode = 2
 texture_normal = ExtResource("6_retry_n")
 texture_pressed = ExtResource("7_retry_h")
 texture_hover = ExtResource("7_retry_h")
+stretch_mode = 5
 
 [node name="NextBtn" type="TextureButton" parent="Buttons"]
 layout_mode = 2
