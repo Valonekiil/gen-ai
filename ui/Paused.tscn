@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dgyxhleaeybpy" path="res://Assets/UI/Button/PlayButton_normal.png" id="3_cbifc"]
 [ext_resource type="Texture2D" uid="uid://b28wtvjm1f4kt" path="res://Assets/UI/Button/RetryButton_normal.png" id="4_yg08s"]
 [ext_resource type="Texture2D" uid="uid://bcoyaaoixww" path="res://Assets/UI/Button/PlayButton.png" id="5_n1332"]
-[ext_resource type="Texture2D" uid="uid://lipk4ufh0pbf" path="res://Assets/UI/Button/LevelSelectionButton_normal.png" id="5_u864c"]
+[ext_resource type="Texture2D" uid="uid://dfto2qa22yxt4" path="res://Assets/UI/Button/LevelSelectionButton_normal.png" id="5_u864c"]
 [ext_resource type="Script" uid="uid://fsttml3pndr0" path="res://ui/Paused.gd" id="6_script"]
 [ext_resource type="Texture2D" uid="uid://dhxse8bt8438h" path="res://Assets/UI/Button/RetryButton.png" id="7_8hmwd"]
 [ext_resource type="Texture2D" uid="uid://bkqqm07a8wy15" path="res://Assets/UI/Button/SettingButton_normal.png" id="8_cdfn8"]

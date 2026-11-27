@@ -299,10 +299,18 @@ func _preload_next_level() -> void:
 	# Cek lagi belakang: kalau gagal, dicoba sekali di atas
 	get_tree().create_timer(1.5).timeout.connect(_preload_next_level)
 
-# Transisi ke scene LevelComplete, bukan langsung ke level berikutnya
+# Tampilkan hasil sebagai overlay di atas level yang masih berjalan.
+# Tidak pakai change_scene_to_file: level tetap terlihat di belakang panel,
+# jadi tidak ada transisi ke latar polos.
 func _go_to_level_complete() -> void:
-	print("[Level] Memuat: ", LEVEL_COMPLETE)
-	get_tree().call_deferred("change_scene_to_file", LEVEL_COMPLETE)
+	print("[Level] Menampilkan overlay: ", LEVEL_COMPLETE)
+	var results: Control = load(LEVEL_COMPLETE).instantiate()
+	results.process_mode = Node.PROCESS_MODE_ALWAYS
+	var ui: Node = get_node_or_null("UI")
+	if ui:
+		ui.add_child(results)
+	else:
+		add_child(results)
 
 func _on_character_switched(new_active: String, _previous: String) -> void:
 	_set_reality_active(new_active)

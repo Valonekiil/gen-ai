@@ -78,15 +78,7 @@ func _on_fullscreen_toggled(pressed: bool) -> void:
 	AudioManager.play_sfx("UISwitch")
 
 func _on_reset_data() -> void:
-	var dlg := ConfirmationDialog.new()
-	dlg.dialog_text = "Hapus semua progres level?"
-	add_child(dlg)
-	dlg.confirmed.connect(_do_reset)
-	dlg.confirmed.connect(dlg.queue_free)
-	dlg.canceled.connect(dlg.queue_free)
-	dlg.popup_centered()
-
-func _do_reset() -> void:
+	# Langsung reset tanpa dialog konfirmasi.
 	GameProgress.reset_all()
 	_build_level_grid()
 
